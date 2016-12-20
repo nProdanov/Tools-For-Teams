@@ -1,0 +1,38 @@
+<div class="container">
+    <div class="col-md-10 col-md-offset-1">
+        <div class="well form-horizontal">
+            <h3>{{profile.nickname}}</h3>
+            <img [src]="profile.picture" alt="Profile image">
+        </div>
+        <form class="form-horizontal" method="post" action="">
+            <div class="form-group" hidden="hidden"><label class="col-md-2 control-label">Username:</label>
+                <div class="col-md-8"><input class="form-control" id="username" type="text" name="username" readonly="readonly" /></div>
+                <p>Is manager: {{profile.isManager}}</p>
+            </div>
+            <div class="form-group"><label class="col-md-2 control-label">Email:</label>
+                <div class="col-md-8"><input class="form-control" id="email" type="text" name="email" /></div>
+            </div>
+            <div class="form-group"><label class="col-md-2 control-label"> First Name:</label>
+                <div class="col-md-8"><input class="form-control" id="firstName" type="text" name="firstName" /></div>
+            </div>
+            <div class="form-group"><label class="col-md-2 control-label">Last Name:</label>
+                <div class="col-md-8"><input class="form-control" id="lastName" type="text" name="lastName" /></div>
+            </div>
+            <div class="form-group"><label class="col-md-2 control-label">Image URL:</label>
+                <div class="col-md-8"><input class="form-control" id="profileImg" type="text" name="profileImageUrl" /></div>
+            </div>
+            <div class="form-group"><label class="col-md-2 control-label">Password:</label>
+                <div class="col-md-8"><input class="form-control" id="password" type="password" name="password" /></div>
+            </div>
+            <div class="form-group"><label class="col-md-2 control-label">Confirm Password:</label>
+                <div class="col-md-8"><input class="form-control" id="confirmPassword" type="password" name="confirmPassword" /></div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-10 col-md-offset-2 add-spacing-after">
+                    <button class="btn btn-success" id="save-changes" type="submit">Save Changes</button>
+                    <a class="btn btn-primary" href="#">Cancel</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

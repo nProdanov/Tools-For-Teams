@@ -1,0 +1,26 @@
+extends ../_layout
+
+block styles
+    link(rel="stylesheet", type="text/css", href="/static/css/chat.css")
+
+block headScripts
+    script(src="/socket.io/socket.io.js")
+
+block content
+    #main-chat.container
+        .row
+            .panel.panel-default
+                .panel-heading Chat
+                .panel-body
+                    #message-container.container.scrollable-chat-menu
+                        each answer in answers
+                            .row.message-bubble
+                                p.text-muted #{answer.user}
+                                span #{answer.answer}
+                                div sent #{answer.datetime}
+                    .chat-message-botom
+                        .input-group
+                            input.form-control(id="m" type='text')
+                            span.input-group-btn
+                                button.btn.btn-success(id="sendMsg" type='button') Send
+    script(type="text/javascript", src="/static/js/chat.js")

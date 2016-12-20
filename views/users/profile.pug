@@ -1,0 +1,39 @@
+.container
+    .col-md-10.col-md-offset-1
+        .well.form-horizontal
+        form(method="post", action="", class='form-horizontal')
+            .form-group(hidden)
+                label.col-md-2.control-label Username:           
+                .col-md-8
+                    input.form-control(id="username", type='text' name='username' readonly)
+    
+            .form-group
+                label.col-md-2.control-label Email:           
+                .col-md-8
+                    input.form-control(id="email" type='text' name='email')
+            
+            .form-group
+                label.col-md-2.control-label  First Name:           
+                .col-md-8
+                    input.form-control(id="firstName" type='text' name='firstName')
+            
+            .form-group
+                label.col-md-2.control-label Last Name:           
+                .col-md-8
+                    input.form-control(id="lastName" type='text' name='lastName')
+            .form-group
+                    label.col-md-2.control-label Image URL:
+                    .col-md-8
+                        input.form-control(id="profileImg" type='text' name='profileImageUrl')
+            .form-group
+                label.col-md-2.control-label Password:           
+                .col-md-8
+                    input.form-control(id="password" type='password' name='password')
+            .form-group
+                label.col-md-2.control-label Confirm Password:           
+                .col-md-8
+                    input.form-control(id="confirmPassword" type='password' name='confirmPassword')
+            .form-group
+                .col-md-10.col-md-offset-2.add-spacing-after
+                    button.btn.btn-success(id="save-changes" type="submit") Save Changes
+                    a.btn.btn-primary(href="#") Cancel

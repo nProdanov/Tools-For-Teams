@@ -1,0 +1,274 @@
+html,
+body {
+    height: 100%;
+}
+
+body {
+    width: 90%;
+    position: absolute;
+    padding-left: 5%;
+    background: #9EA4AB;
+    font-family: sans-serif;
+}
+
+#content {
+    background: #ECF0F1;
+    width: 100%;
+    height: auto;
+    min-height: 80%;
+    margin-top: -20px;
+}
+
+.add-spacing-before {
+    padding-top: 4%;
+}
+
+.add-spacing-after {
+    padding-bottom: 4%;
+}
+
+.home-main-img {
+    margin-left: 0px;
+    width: 100%;
+    height: 300px;
+    background: url("../img/backgroung-img1.jpg");
+}
+
+.country-names {
+    font-size: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    text-decoration: none;
+    color: #2C3E50;
+    font-weight: bold;
+}
+
+.country-info {
+    width: 90%;
+    padding-left: 8%;
+    margin: 0;
+    text-align: justify;
+}
+
+.country-info :first-letter {
+    font-size: 30px;
+    padding-left: 1%;
+    font-family: Georgia;
+}
+
+.flags {
+    text-decoration: none;
+}
+
+.flag-img {
+    width: 120px;
+    height: 80px;
+    border: 1px solid gray;
+}
+
+.country-img {
+    width: 80%;
+    height: 500px;
+    padding-bottom: 50px;
+}
+
+.country-name {
+    font-size: 28px;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+.table-country-details {
+    padding-bottom: 50px;
+}
+
+.home-img {
+    width: 200px;
+    height: 200px;
+}
+
+.home-info {
+    padding-bottom: 50px;
+}
+
+.home-link-title {
+    font-size: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    text-decoration: none;
+}
+
+#profile-image {
+    width: 150px;
+    height: 150px;
+}
+
+.fade-in-out {
+    margin-top: 25px;
+    margin-bottom: 25px;
+    font-size: 30px;
+    text-align: center;
+    opacity: 1;
+    animation: fade 3s linear;
+    -webkit-animation-duration: 3s;
+    animation-duration: 3s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+    -webkit-animation-name: fadeOut;
+    animation-name: fadeOut;
+}
+
+.correct {
+    color: green;
+}
+
+.incorrect {
+    color: red
+}
+
+@-webkit-keyframes fadeOut {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+.red-text {
+    color: red;
+}
+
+.answers-item {
+    list-style: none;
+}
+
+#question {
+    padding-top: 0.3%;
+    padding-bottom: 2%;
+}
+
+.answer-wrap {
+    padding-top: 0.1%;
+}
+
+.profile-info {
+    padding: 5%;
+}
+
+.search-bar {
+    display: inline-block
+}
+
+#search-input {
+    float: left
+}
+
+.panel-footer {
+    border-color: transparent;
+    color: #ffffff;
+    background-color: #1a242f;
+    border-radius: 4px;
+    height: 100px;
+}
+
+.radio-label {
+    margin-right: 5px;
+}
+
+.chat-content {
+    width: 200px;
+    height: 200px;
+    background-color: white;
+}
+
+.text-shadow {
+    text-shadow: 1px 1px #2C3E50;
+}
+
+.profile-info-center {
+    padding-left: 40%;
+}
+
+.scrollable-menu {
+    height: auto;
+    max-height: 200px;
+    overflow-x: hidden;
+}
+
+.color-change {
+    color: #128F76;
+}
+
+table {
+    table-layout: auto
+}
+
+.table-col-width {
+    width: 30%;
+}
+
+.instructions-header {
+    padding-left: 4%
+}
+
+.game-img-globe {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 13%;
+}
+
+.guess-the-country {
+    text-align: justify;
+    padding-top: 13px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 90%;
+}
+
+.game-img-test {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 13%;
+}
+
+.test-your-knowledge {
+    text-align: justify;
+    padding-top: 13px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 90%;
+}
+
+.footer-main-styles {
+    float: left;
+}
+
+.home-btn {
+    margin-top: -55px;
+    padding-right: 10px;
+}
+
+.spacing-left {
+    margin-right: 10px;
+}
+
+.more-game-img {
+    width: 400px;
+    height: 250px;
+}
+
+.more-games-name {
+    font-size: 24px;
+}
