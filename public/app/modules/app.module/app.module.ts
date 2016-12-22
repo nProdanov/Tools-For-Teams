@@ -14,6 +14,7 @@ import { SuperheroesListPage } from '../../pages/superheroes-list/superheroes-li
 import { FactionsListPage } from '../../pages/factions-list/factions-list.page';
 import { ProfilePage } from '../../pages/profile/profile.page';
 import { NewProjectPage } from '../../pages/new-project/new-project.page';
+import { LoginPage } from '../../pages/login/login.page';
 
 //  Services
 import { SuperheroesService } from '../../services/superheroes.service/superheroes.service';
@@ -34,7 +35,8 @@ import { ProjectService } from '../../services/project.service/project.service';
     SuperheroesListPage,
     FactionsListPage,
     ProfilePage,
-    NewProjectPage
+    NewProjectPage,
+    LoginPage
   ],
   bootstrap: [AppComponent],
   providers: [

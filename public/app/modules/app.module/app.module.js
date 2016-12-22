@@ -21,6 +21,7 @@ var superheroes_list_page_1 = require('../../pages/superheroes-list/superheroes-
 var factions_list_page_1 = require('../../pages/factions-list/factions-list.page');
 var profile_page_1 = require('../../pages/profile/profile.page');
 var new_project_page_1 = require('../../pages/new-project/new-project.page');
+var login_page_1 = require('../../pages/login/login.page');
 //  Services
 var superheroes_service_1 = require('../../services/superheroes.service/superheroes.service');
 var factions_service_1 = require('../../services/fractions.service/factions-service');
@@ -43,7 +44,8 @@ var AppModule = (function () {
                 superheroes_list_page_1.SuperheroesListPage,
                 factions_list_page_1.FactionsListPage,
                 profile_page_1.ProfilePage,
-                new_project_page_1.NewProjectPage
+                new_project_page_1.NewProjectPage,
+                login_page_1.LoginPage
             ],
             bootstrap: [app_component_1.AppComponent],
             providers: [
