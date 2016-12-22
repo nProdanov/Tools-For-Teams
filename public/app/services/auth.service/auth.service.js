@@ -57,7 +57,7 @@ var Auth = (function () {
             }
         });
     };
-    Auth.prototype.signUp = function (username, password, name, picture, email, company) {
+    Auth.prototype.signUp = function (username, password, name, picture, company) {
         var _this = this;
         this.auth0.signup({
             connection: 'Username-Password-Authentication',
@@ -75,12 +75,13 @@ var Auth = (function () {
                     }
                     var user = {
                         id: profile.user_id,
-                        username: username,
+                        username: profile.nickname,
                         name: name,
                         picture: picture || profile.picture,
-                        email: email,
+                        email: profile.email,
                         company: company
                     };
+                    console.log(profile);
                     _this.userService.saveUser(user).subscribe(function () {
                         console.log('User registered!');
                     });
@@ -98,10 +99,10 @@ var Auth = (function () {
         return angular2_jwt_1.tokenNotExpired();
     };
     Auth = __decorate([
-        core_1.Injectable(), 
+        core_1.Injectable(),
         __metadata('design:paramtypes', [router_1.Router, user_service_1.UserService])
     ], Auth);
     return Auth;
-}());
+} ());
 exports.Auth = Auth;
 //# sourceMappingURL=auth.service.js.map

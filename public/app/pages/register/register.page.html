@@ -3,7 +3,7 @@
     <div class="col-md-6">
       <form>
         <div class="form-group">
-          <label for="name">Username</label>
+          <label for="name">Email</label>
           <input type="text" class="form-control" #username placeholder="yours@example.com">
         </div>
         <div class="form-group">
@@ -19,14 +19,10 @@
           <input type="picture" class="form-control" #picture placeholder="link to your picture">
         </div>
         <div class="form-group">
-          <label for="email">Email</label>
-          <input type="email" class="form-control" #email placeholder="your email">
-        </div>
-        <div class="form-group">
           <label for="company">Company</label>
           <input type="company" class="form-control" #company placeholder="your company">
         </div>
-        <button type="submit" class="btn btn-default" (click)="auth.signUp(username.value, password.value, name.value, picture.value, email.value, company.value)">Sign Up</button>
+        <button type="submit" class="btn btn-default" (click)="auth.signUp(username.value, password.value, name.value, picture.value, company.value)">Sign Up</button>
       </form>
     </div>
   </div>

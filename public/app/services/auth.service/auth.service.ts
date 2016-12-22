@@ -62,7 +62,7 @@ export class Auth {
     });
   }
 
-  public signUp(username: string, password: string, name: string, picture: string, email: string, company: string) {
+  public signUp(username: string, password: string, name: string, picture: string, company: string) {
     this.auth0.signup({
       connection: 'Username-Password-Authentication',
       responseType: 'token',
@@ -82,10 +82,11 @@ export class Auth {
             username: username,
             name: name,
             picture: picture || profile.picture,
-            email: email,
+            email: 'email',
             company: company
           };
 
+          console.log(profile);
           this.userService.saveUser(user).subscribe(() => {
             console.log('User registered!');
           });
