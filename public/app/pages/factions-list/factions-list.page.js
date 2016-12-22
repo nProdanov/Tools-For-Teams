@@ -27,9 +27,10 @@ var FactionsListPage = (function () {
             moduleId: module.id,
             templateUrl: './factions-list.page.html'
         }), 
-        __metadata('design:paramtypes', [factions_service_1.FactionsService])
+        __metadata('design:paramtypes', [(typeof (_a = typeof factions_service_1.FactionsService !== 'undefined' && factions_service_1.FactionsService) === 'function' && _a) || Object])
     ], FactionsListPage);
     return FactionsListPage;
+    var _a;
 }());
 exports.FactionsListPage = FactionsListPage;
 //# sourceMappingURL=factions-list.page.js.map

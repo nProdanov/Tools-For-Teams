@@ -60,16 +60,22 @@ export class Auth {
       responseType: 'token',
       email: username,
       password: password,
-    }, function (err: any, profile: any) {
+    }, function (err: any, signUpObj: any) {
       if (err) {
         alert("something went wrong: " + err.message);
+      } else {
+        this.auth0.getProfile(signUpObj.idToken, (err: any, profile: any) => {
+          if (err) {
+            console.log(err);
+          }
+
+          //
+        });
       }
-      console.log(profile);
     });
   };
 
   logout() {
-    console.log('here');
     localStorage.removeItem('profile');
     localStorage.removeItem('id_token');
 

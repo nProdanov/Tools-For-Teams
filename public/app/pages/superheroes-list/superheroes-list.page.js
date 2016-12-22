@@ -27,9 +27,10 @@ var SuperheroesListPage = (function () {
             moduleId: module.id,
             templateUrl: './superheroes-list.page.html'
         }), 
-        __metadata('design:paramtypes', [superheroes_service_1.SuperheroesService])
+        __metadata('design:paramtypes', [(typeof (_a = typeof superheroes_service_1.SuperheroesService !== 'undefined' && superheroes_service_1.SuperheroesService) === 'function' && _a) || Object])
     ], SuperheroesListPage);
     return SuperheroesListPage;
+    var _a;
 }());
 exports.SuperheroesListPage = SuperheroesListPage;
 //# sourceMappingURL=superheroes-list.page.js.map

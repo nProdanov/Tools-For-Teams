@@ -3,8 +3,6 @@ import { Routes } from '@angular/router';
 import { AuthGuard } from '../services/auth-guard.service/auth.guard.service';
 
 export const appRoutes: Routes = [
-    { path: 'superheroes-list', component: pages.superheroes },
-    { path: 'factions-list', component: pages.factions },
     { path: 'login', component: pages.login },
     { path: 'login-callback', redirectTo: '/', pathMatch: 'full' },
     { path: 'profile', component: pages.profile, canActivate: [AuthGuard] },

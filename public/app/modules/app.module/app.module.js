@@ -17,14 +17,10 @@ var routes_1 = require('../../config/routes');
 var angular2_jwt_1 = require('angular2-jwt');
 var app_component_1 = require('../../components/app.component/app.component');
 //  Pages
-var superheroes_list_page_1 = require('../../pages/superheroes-list/superheroes-list.page');
-var factions_list_page_1 = require('../../pages/factions-list/factions-list.page');
 var profile_page_1 = require('../../pages/profile/profile.page');
 var new_project_page_1 = require('../../pages/new-project/new-project.page');
 var login_page_1 = require('../../pages/login/login.page');
 //  Services
-var superheroes_service_1 = require('../../services/superheroes.service/superheroes.service');
-var factions_service_1 = require('../../services/fractions.service/factions-service');
 var auth_guard_service_1 = require('../../services/auth-guard.service/auth.guard.service');
 var auth_service_1 = require('../../services/auth.service/auth.service');
 var project_service_1 = require('../../services/project.service/project.service');
@@ -41,16 +37,12 @@ var AppModule = (function () {
             ],
             declarations: [
                 app_component_1.AppComponent,
-                superheroes_list_page_1.SuperheroesListPage,
-                factions_list_page_1.FactionsListPage,
                 profile_page_1.ProfilePage,
                 new_project_page_1.NewProjectPage,
                 login_page_1.LoginPage
             ],
             bootstrap: [app_component_1.AppComponent],
             providers: [
-                superheroes_service_1.SuperheroesService,
-                factions_service_1.FactionsService,
                 auth_service_1.Auth,
                 angular2_jwt_1.AUTH_PROVIDERS,
                 auth_guard_service_1.AuthGuard,

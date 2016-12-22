@@ -13,7 +13,6 @@ var auth_service_1 = require('../../services/auth.service/auth.service');
 var LoginPage = (function () {
     function LoginPage(auth) {
         this.auth = auth;
-        console.log('here');
     }
     LoginPage = __decorate([
         core_1.Component({

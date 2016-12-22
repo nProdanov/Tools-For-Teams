@@ -59,16 +59,22 @@ var Auth = (function () {
             responseType: 'token',
             email: username,
             password: password,
-        }, function (err, profile) {
+        }, function (err, signUpObj) {
             if (err) {
                 alert("something went wrong: " + err.message);
             }
-            console.log(profile);
+            else {
+                this.auth0.getProfile(signUpObj.idToken, function (err, profile) {
+                    if (err) {
+                        console.log(err);
+                    }
+                    //
+                });
+            }
         });
     };
     ;
     Auth.prototype.logout = function () {
-        console.log('here');
         localStorage.removeItem('profile');
         localStorage.removeItem('id_token');
         this.router.navigateByUrl('/');

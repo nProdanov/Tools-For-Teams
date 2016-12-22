@@ -7,6 +7,5 @@ import { Auth } from '../../services/auth.service/auth.service';
 })
 export class LoginPage {
     constructor(private auth: Auth) { 
-        console.log('here');
     }
 };
