@@ -3,9 +3,9 @@ import { Auth } from '../../services/auth.service/auth.service';
 
 @Component({
     moduleId: module.id,
-    templateUrl: './login.page.html'
+    templateUrl: './register.page.html'
 })
-export class LoginPage {
+export class RegisterPage {
     constructor(private auth: Auth) {
     }
 };

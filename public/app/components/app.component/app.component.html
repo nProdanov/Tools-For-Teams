@@ -15,6 +15,7 @@
             <div class="nav navbar-nav navbar-right">
                 <a class="btn btn-default" routerLink="/new-project" *ngIf="service.authenticated()">New Project</a>
                 <a class="btn btn-default" routerLink="/login" *ngIf="!service.authenticated()">Login</a>
+                <a class="btn btn-default" routerLink="/register" *ngIf="!service.authenticated()">Register</a>
                 <a class="btn btn-default" (click)="service.logout()" *ngIf="service.authenticated()">Logout</a>
             </div>
         </div>
@@ -23,3 +24,4 @@
 <h1>Home page</h1>
 <router-outlet>
 </router-outlet>
+<footer>App footer</footer>

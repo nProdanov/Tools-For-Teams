@@ -20,10 +20,12 @@ var app_component_1 = require('../../components/app.component/app.component');
 var profile_page_1 = require('../../pages/profile/profile.page');
 var new_project_page_1 = require('../../pages/new-project/new-project.page');
 var login_page_1 = require('../../pages/login/login.page');
+var register_page_1 = require('../../pages/register/register.page');
 //  Services
 var auth_guard_service_1 = require('../../services/auth-guard.service/auth.guard.service');
 var auth_service_1 = require('../../services/auth.service/auth.service');
 var project_service_1 = require('../../services/project.service/project.service');
+var user_service_1 = require('../../services/user.service/user.service');
 var AppModule = (function () {
     function AppModule() {
     }
@@ -39,14 +41,16 @@ var AppModule = (function () {
                 app_component_1.AppComponent,
                 profile_page_1.ProfilePage,
                 new_project_page_1.NewProjectPage,
-                login_page_1.LoginPage
+                login_page_1.LoginPage,
+                register_page_1.RegisterPage
             ],
             bootstrap: [app_component_1.AppComponent],
             providers: [
                 auth_service_1.Auth,
                 angular2_jwt_1.AUTH_PROVIDERS,
                 auth_guard_service_1.AuthGuard,
-                project_service_1.ProjectService
+                project_service_1.ProjectService,
+                user_service_1.UserService
             ]
         }), 
         __metadata('design:paramtypes', [])

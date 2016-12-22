@@ -13,11 +13,13 @@ import { AppComponent } from '../../components/app.component/app.component';
 import { ProfilePage } from '../../pages/profile/profile.page';
 import { NewProjectPage } from '../../pages/new-project/new-project.page';
 import { LoginPage } from '../../pages/login/login.page';
+import { RegisterPage } from '../../pages/register/register.page';
 
 //  Services
 import { AuthGuard } from '../../services/auth-guard.service/auth.guard.service';
 import { Auth } from '../../services/auth.service/auth.service';
 import { ProjectService } from '../../services/project.service/project.service';
+import { UserService } from '../../services/user.service/user.service';
 
 @NgModule({
   imports: [
@@ -30,14 +32,16 @@ import { ProjectService } from '../../services/project.service/project.service';
     AppComponent,
     ProfilePage,
     NewProjectPage,
-    LoginPage
+    LoginPage,
+    RegisterPage
   ],
   bootstrap: [AppComponent],
   providers: [
     Auth,
     AUTH_PROVIDERS,
     AuthGuard,
-    ProjectService
+    ProjectService,
+    UserService
   ]
 })
 export class AppModule { }

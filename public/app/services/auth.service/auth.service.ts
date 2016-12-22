@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { tokenNotExpired } from 'angular2-jwt';
 import { Router } from '@angular/router';
+import { UserService } from '../user.service/user.service';
 
 declare var Auth0: any;
 
@@ -14,9 +15,12 @@ export class Auth {
   });
 
   private router: Router;
+  private userService: UserService;
 
-  constructor(router: Router) {
+  constructor(router: Router, userService: UserService) {
     this.router = router;
+    this.userService = userService;
+
     var result = this.auth0.parseHash(window.location.hash);
     if (result && result.idToken) {
       localStorage.setItem('id_token', result.idToken);
@@ -41,7 +45,9 @@ export class Auth {
       email: username,
       password: password,
     }, function (err: any) {
-      if (err) alert("something went wrong: " + err.message);
+      if (err) {
+        alert('something went wrong: ' + err.message);
+      }
     });
 
   }
@@ -50,26 +56,39 @@ export class Auth {
     this.auth0.login({
       connection: 'google-oauth2'
     }, function (err: any) {
-      if (err) alert("something went wrong: " + err.message);
+      if (err) {
+        alert('something went wrong: ' + err.message);
+      }
     });
   }
 
-  public signUp(username: string, password: string) {
+  public signUp(username: string, password: string, name: string, picture: string, email: string, company: string) {
     this.auth0.signup({
       connection: 'Username-Password-Authentication',
       responseType: 'token',
       email: username,
       password: password,
-    }, function (err: any, signUpObj: any) {
+    }, (err: any, signUpObj: any) => {
       if (err) {
-        alert("something went wrong: " + err.message);
+        alert('something went wrong: ' + err.message);
       } else {
-        this.auth0.getProfile(signUpObj.idToken, (err: any, profile: any) => {
+        this.auth0.getProfile(signUpObj.idToken, (error: any, profile: any) => {
           if (err) {
             console.log(err);
           }
 
-          //
+          let user = {
+            id: profile.user_id,
+            username: username,
+            name: name,
+            picture: picture || profile.picture,
+            email: email,
+            company: company
+          };
+
+          this.userService.saveUser(user).subscribe(() => {
+            console.log('User registered!');
+          });
         });
       }
     });

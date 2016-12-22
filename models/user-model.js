@@ -9,33 +9,10 @@ module.exports = modelRegistrator.register("User", {
         type: String,
         unique: true
     },
-    username: {
-        type: String,
-        unique: true
-    },
-    salt: String,
-    hashPass: String,
-    firstName: {
-        type: String,
-        required: requiredMessage
-    },
-    lastName: {
-        type: String
-    },
-    email: {
-        type: String
-    },
-    profileImgURL: {
-        type: String
-    },
-    guessTheCountryScore: {
-        type: Number,
-        default: 0
-    },
-    testYourKnowledgeScore: {
-        type: Number,
-        default: 0
-    },
-    isAdmin: Boolean,
-    facebookId: String
+    username: String,
+    name: String,
+    picture: String,
+    email: String,
+    company: String,
+    isManager: false
 });

@@ -11,8 +11,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var angular2_jwt_1 = require('angular2-jwt');
 var router_1 = require('@angular/router');
+var user_service_1 = require('../user.service/user.service');
 var Auth = (function () {
-    function Auth(router) {
+    function Auth(router, userService) {
         this.auth0 = new Auth0({
             domain: 'toolsforteams.eu.auth0.com',
             clientID: 'wFe7CwezBHRXTHI7ZTCK3Jp7x4PWLqrK',
@@ -20,6 +21,7 @@ var Auth = (function () {
             callbackURL: 'http://localhost:3001/login-callback'
         });
         this.router = router;
+        this.userService = userService;
         var result = this.auth0.parseHash(window.location.hash);
         if (result && result.idToken) {
             localStorage.setItem('id_token', result.idToken);
@@ -41,19 +43,22 @@ var Auth = (function () {
             email: username,
             password: password,
         }, function (err) {
-            if (err)
-                alert("something went wrong: " + err.message);
+            if (err) {
+                alert('something went wrong: ' + err.message);
+            }
         });
     };
     Auth.prototype.googleLogin = function () {
         this.auth0.login({
             connection: 'google-oauth2'
         }, function (err) {
-            if (err)
-                alert("something went wrong: " + err.message);
+            if (err) {
+                alert('something went wrong: ' + err.message);
+            }
         });
     };
-    Auth.prototype.signUp = function (username, password) {
+    Auth.prototype.signUp = function (username, password, name, picture, email, company) {
+        var _this = this;
         this.auth0.signup({
             connection: 'Username-Password-Authentication',
             responseType: 'token',
@@ -61,14 +66,24 @@ var Auth = (function () {
             password: password,
         }, function (err, signUpObj) {
             if (err) {
-                alert("something went wrong: " + err.message);
+                alert('something went wrong: ' + err.message);
             }
             else {
-                this.auth0.getProfile(signUpObj.idToken, function (err, profile) {
+                _this.auth0.getProfile(signUpObj.idToken, function (error, profile) {
                     if (err) {
                         console.log(err);
                     }
-                    //
+                    var user = {
+                        id: profile.user_id,
+                        username: username,
+                        name: name,
+                        picture: picture || profile.picture,
+                        email: email,
+                        company: company
+                    };
+                    _this.userService.saveUser(user).subscribe(function () {
+                        console.log('User registered!');
+                    });
                 });
             }
         });
@@ -84,7 +99,7 @@ var Auth = (function () {
     };
     Auth = __decorate([
         core_1.Injectable(), 
-        __metadata('design:paramtypes', [router_1.Router])
+        __metadata('design:paramtypes', [router_1.Router, user_service_1.UserService])
     ], Auth);
     return Auth;
 }());

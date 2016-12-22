@@ -4,6 +4,7 @@ var auth_guard_service_1 = require('../services/auth-guard.service/auth.guard.se
 exports.appRoutes = [
     { path: 'login', component: index_1.pages.login },
     { path: 'login-callback', redirectTo: '/', pathMatch: 'full' },
+    { path: 'register', component: index_1.pages.register },
     { path: 'profile', component: index_1.pages.profile, canActivate: [auth_guard_service_1.AuthGuard] },
     { path: 'new-project', component: index_1.pages.newProject, canActivate: [auth_guard_service_1.AuthGuard] }
 ];
