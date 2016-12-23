@@ -94,7 +94,8 @@ var Auth = (function () {
                         company: company
                     };
                     _this.userService.saveUser(user).subscribe(function () {
-                        console.log('User registered!');
+                        console.log('User registered');
+                        _this.router.navigateByUrl('/login');
                     });
                 });
             }

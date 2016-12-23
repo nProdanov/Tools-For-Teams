@@ -100,7 +100,8 @@ export class Auth {
           };
 
           this.userService.saveUser(user).subscribe(() => {
-            console.log('User registered!');
+            console.log('User registered');
+            this.router.navigateByUrl('/login');
           });
         });
       }
