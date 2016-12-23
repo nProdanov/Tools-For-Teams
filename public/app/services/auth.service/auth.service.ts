@@ -31,7 +31,7 @@ export class Auth {
 
         let id = profile.user_id;
 
-        this.userService.getUserByNickname(id).subscribe(resUser => {
+        this.userService.getUserById(id).subscribe(resUser => {
           let userToShow = {
             username: resUser.username,
             id: resUser.id,

@@ -23,18 +23,11 @@ var UserService = (function () {
         });
     };
     UserService.prototype.getUserById = function (id) {
-        var url = this.projectUrl + "/:" + id;
+        var url = this.projectUrl + "/" + id;
         return this
             .http
-            .get(this.projectUrl)
+            .get(url)
             .map(function (response) {
-            var data = response.json();
-            return data;
-        });
-    };
-    UserService.prototype.getUserByNickname = function (nickname) {
-        var url = this.projectUrl + "/" + nickname;
-        return this.http.get(url).map(function (response) {
             var data = response.json();
             return data;
         });

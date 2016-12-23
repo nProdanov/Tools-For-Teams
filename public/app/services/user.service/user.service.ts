@@ -16,22 +16,14 @@ export class UserService {
         });
     }
 
-    getUserById(id: any): Observable<any> {
-        let url = `${this.projectUrl}/:${id}`;
+    getUserById(id: string): Observable<any> {
+        let url = `${this.projectUrl}/${id}`;
         return this
             .http
-            .get(this.projectUrl)
+            .get(url)
             .map(response => {
                 let data = response.json();
                 return data;
             });
-    }
-
-    getUserByNickname(nickname: string): Observable<any> {
-        let url = `${this.projectUrl}/${nickname}`;
-        return this.http.get(url).map(response => {
-            let data = response.json();
-            return data;
-        });
     }
 };

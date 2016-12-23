@@ -31,7 +31,7 @@ var Auth = (function () {
                     console.log(err);
                 }
                 var id = profile.user_id;
-                _this.userService.getUserByNickname(id).subscribe(function (resUser) {
+                _this.userService.getUserById(id).subscribe(function (resUser) {
                     var userToShow = {
                         username: resUser.username,
                         id: resUser.id,
