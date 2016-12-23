@@ -31,6 +31,19 @@ export class Auth {
 
         let id = profile.user_id;
 
+        this.userService.getUserByNickname(id).subscribe(resUser => {
+          let userToShow = {
+            username: resUser.username,
+            id: resUser.id,
+            email: resUser.email,
+            company: resUser.company,
+            picture: resUser.picture,
+            name: resUser.name
+          }
+
+          localStorage.setItem('profile', JSON.stringify(userToShow));
+        });
+
 
       });
     } else if (result && result.error) {
@@ -79,14 +92,13 @@ export class Auth {
 
           let user = {
             id: profile.user_id,
-            username: username,
+            username: profile.nickname,
             name: name,
             picture: picture || profile.picture,
-            email: 'email',
+            email: username,
             company: company
           };
 
-          console.log(profile);
           this.userService.saveUser(user).subscribe(() => {
             console.log('User registered!');
           });

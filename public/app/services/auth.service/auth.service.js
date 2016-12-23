@@ -14,6 +14,7 @@ var router_1 = require('@angular/router');
 var user_service_1 = require('../user.service/user.service');
 var Auth = (function () {
     function Auth(router, userService) {
+        var _this = this;
         this.auth0 = new Auth0({
             domain: 'toolsforteams.eu.auth0.com',
             clientID: 'wFe7CwezBHRXTHI7ZTCK3Jp7x4PWLqrK',
@@ -30,6 +31,17 @@ var Auth = (function () {
                     console.log(err);
                 }
                 var id = profile.user_id;
+                _this.userService.getUserByNickname(id).subscribe(function (resUser) {
+                    var userToShow = {
+                        username: resUser.username,
+                        id: resUser.id,
+                        email: resUser.email,
+                        company: resUser.company,
+                        picture: resUser.picture,
+                        name: resUser.name
+                    };
+                    localStorage.setItem('profile', JSON.stringify(userToShow));
+                });
             });
         }
         else if (result && result.error) {
@@ -78,10 +90,9 @@ var Auth = (function () {
                         username: profile.nickname,
                         name: name,
                         picture: picture || profile.picture,
-                        email: profile.email,
+                        email: username,
                         company: company
                     };
-                    console.log(profile);
                     _this.userService.saveUser(user).subscribe(function () {
                         console.log('User registered!');
                     });
@@ -99,10 +110,10 @@ var Auth = (function () {
         return angular2_jwt_1.tokenNotExpired();
     };
     Auth = __decorate([
-        core_1.Injectable(),
+        core_1.Injectable(), 
         __metadata('design:paramtypes', [router_1.Router, user_service_1.UserService])
     ], Auth);
     return Auth;
-} ());
+}());
 exports.Auth = Auth;
 //# sourceMappingURL=auth.service.js.map

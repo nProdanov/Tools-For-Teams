@@ -22,6 +22,23 @@ var UserService = (function () {
             return data;
         });
     };
+    UserService.prototype.getUserById = function (id) {
+        var url = this.projectUrl + "/:" + id;
+        return this
+            .http
+            .get(this.projectUrl)
+            .map(function (response) {
+            var data = response.json();
+            return data;
+        });
+    };
+    UserService.prototype.getUserByNickname = function (nickname) {
+        var url = this.projectUrl + "/" + nickname;
+        return this.http.get(url).map(function (response) {
+            var data = response.json();
+            return data;
+        });
+    };
     UserService = __decorate([
         core_1.Injectable(), 
         __metadata('design:paramtypes', [http_1.Http])

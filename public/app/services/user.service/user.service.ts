@@ -11,8 +11,27 @@ export class UserService {
 
     saveUser(body: User): Observable<any> {
         return this.http.post(this.projectUrl, body).map(response => {
+            let data = response.json();
+            return data;
+        });
+    }
+
+    getUserById(id: any): Observable<any> {
+        let url = `${this.projectUrl}/:${id}`;
+        return this
+            .http
+            .get(this.projectUrl)
+            .map(response => {
                 let data = response.json();
                 return data;
             });
+    }
+
+    getUserByNickname(nickname: string): Observable<any> {
+        let url = `${this.projectUrl}/${nickname}`;
+        return this.http.get(url).map(response => {
+            let data = response.json();
+            return data;
+        });
     }
 };

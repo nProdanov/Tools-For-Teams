@@ -3,11 +3,12 @@
 const express = require("express");
 let Router = express.Router;
 
-module.exports = function({ app, controllers }) {
+module.exports = function ({ app, controllers }) {
     let router = new Router();
-    
+
     router
-         .get("/*", controllers.home);
+        .get("/api/users/:id", controllers.getUserById)
+        .get("/*", controllers.home);
 
     app.use("/", router);
 
