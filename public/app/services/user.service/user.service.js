@@ -39,8 +39,7 @@ var UserService = (function () {
             .http
             .post(url, body)
             .map(function (response) {
-            console.log(response);
-            var data = "alksjdas";
+            var data = response.json();
             return data;
         });
     };

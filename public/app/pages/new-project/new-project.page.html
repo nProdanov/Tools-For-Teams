@@ -1,8 +1,8 @@
 <div class="modal-content">
-        <h4 class="modal-title text-left">New Project</h4>
-        <a routerLink="/" class="btn btn-danger">x</a>
+    <h4 class="modal-title text-left">New Project</h4>
+    <a routerLink="/" class="btn btn-danger">x</a>
     <div class="modal-body">
-        <form data-validate="true" class="form-group" novalidate="novalidate" id="new_project" accept-charset="UTF-8">
+        <form data-validate="true" class="form-group" novalidate="novalidate" id="new_project" accept-charset="UTF-8" #form>
             <div class="form-group">
                 <label for="project_name">Name</label>
                 <input class="form-control" maxlength="30" size="30" type="text" name="project" [(ngModel)]="project.name">
@@ -12,7 +12,7 @@
                 <textarea class="form-control" rows="5" name="project" [(ngModel)]="project.description"></textarea>
             </div>
             <div class="actions">
-                <input type="submit" name="commit" value="Save Project" class="save-project-button" (click)="saveProject()">
+                <input type="submit" name="commit" value="Save Project" class="save-project-button" (click)="saveProject() form.reset()">
             </div>
         </form>
     </div>

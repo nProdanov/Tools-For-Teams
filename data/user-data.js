@@ -54,7 +54,6 @@ module.exports = function (models, validator) {
                     // if (!hashPass) {
                     //     return reject("Hash pass must exists");
                     // }
-                    console.log(username);
                     let user = new User({
                         User,
                         id,
