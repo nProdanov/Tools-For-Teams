@@ -14,6 +14,7 @@ import { ProfilePage } from '../../pages/profile/profile.page';
 import { NewProjectPage } from '../../pages/new-project/new-project.page';
 import { LoginPage } from '../../pages/login/login.page';
 import { RegisterPage } from '../../pages/register/register.page';
+import { HomePage } from '../../pages/home/home.page';
 
 //  Services
 import { AuthGuard } from '../../services/auth-guard.service/auth.guard.service';
@@ -33,7 +34,8 @@ import { UserService } from '../../services/user.service/user.service';
     ProfilePage,
     NewProjectPage,
     LoginPage,
-    RegisterPage
+    RegisterPage,
+    HomePage
   ],
   bootstrap: [AppComponent],
   providers: [

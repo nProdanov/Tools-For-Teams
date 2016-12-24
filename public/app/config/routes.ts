@@ -3,6 +3,8 @@ import { Routes } from '@angular/router';
 import { AuthGuard } from '../services/auth-guard.service/auth.guard.service';
 
 export const appRoutes: Routes = [
+    { path: '', redirectTo: 'home', pathMatch: 'full'},
+    { path: 'home', component: pages.home },
     { path: 'login', component: pages.login },
     { path: 'login-callback', redirectTo: '/', pathMatch: 'full' },
     { path: 'register', component: pages.register },

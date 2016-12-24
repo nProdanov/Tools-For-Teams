@@ -21,6 +21,7 @@ var profile_page_1 = require('../../pages/profile/profile.page');
 var new_project_page_1 = require('../../pages/new-project/new-project.page');
 var login_page_1 = require('../../pages/login/login.page');
 var register_page_1 = require('../../pages/register/register.page');
+var home_page_1 = require('../../pages/home/home.page');
 //  Services
 var auth_guard_service_1 = require('../../services/auth-guard.service/auth.guard.service');
 var auth_service_1 = require('../../services/auth.service/auth.service');
@@ -42,7 +43,8 @@ var AppModule = (function () {
                 profile_page_1.ProfilePage,
                 new_project_page_1.NewProjectPage,
                 login_page_1.LoginPage,
-                register_page_1.RegisterPage
+                register_page_1.RegisterPage,
+                home_page_1.HomePage
             ],
             bootstrap: [app_component_1.AppComponent],
             providers: [
