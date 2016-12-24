@@ -12,7 +12,7 @@
                 <textarea class="form-control" rows="5" name="project" [(ngModel)]="project.description"></textarea>
             </div>
             <div class="actions">
-                <input type="submit" name="commit" value="Save Project" class="save-project-button" (click)="saveProject() form.reset()">
+                <input type="submit" name="commit" value="Save Project" class="save-project-button" (click)="saveProject(); form.reset()">
             </div>
         </form>
     </div>
