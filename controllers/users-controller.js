@@ -19,6 +19,15 @@ module.exports = function (params) {
                 .catch(err => {
                     res.json(err);
                 });
+        },
+        addProjectToUser(req, res) {
+            data.addProjectToUser(req.params.userId, req.body)
+                .then((response) => {
+                    res.json(response);
+                })
+                .catch(err => {
+                    res.json(err);
+                });
         }
         // getUserProfile(req, res) {
         //     let username = req.params.username;

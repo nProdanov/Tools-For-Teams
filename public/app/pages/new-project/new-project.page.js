@@ -10,9 +10,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var project_service_1 = require('../../services/project.service/project.service');
+var user_service_1 = require('../../services/user.service/user.service');
 var NewProjectPage = (function () {
-    function NewProjectPage(service) {
-        this.service = service;
+    function NewProjectPage(projectService, userService) {
+        this.projectService = projectService;
+        this.userService = userService;
         this.profile = JSON.parse(localStorage.getItem('profile'));
     }
     NewProjectPage.prototype.ngOnInit = function () {
@@ -21,11 +23,16 @@ var NewProjectPage = (function () {
             name: '',
             description: ''
         };
-        this.project.creator = this.profile.nickname;
+        this.project.creator = this.profile.username;
     };
     NewProjectPage.prototype.saveProject = function () {
-        this.service.saveProject(this.project).subscribe(function (res) {
-            console.log(res);
+        var _this = this;
+        this.projectService.saveProject(this.project).subscribe(function (resProject) {
+            _this.userService
+                .addProject(_this.profile.id, resProject._id, resProject.name)
+                .subscribe(function (res) {
+                console.log('success');
+            });
         });
     };
     NewProjectPage = __decorate([
@@ -33,7 +40,7 @@ var NewProjectPage = (function () {
             moduleId: module.id,
             templateUrl: './new-project.page.html'
         }), 
-        __metadata('design:paramtypes', [project_service_1.ProjectService])
+        __metadata('design:paramtypes', [project_service_1.ProjectService, user_service_1.UserService])
     ], NewProjectPage);
     return NewProjectPage;
 }());

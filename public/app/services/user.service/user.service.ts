@@ -26,4 +26,18 @@ export class UserService {
                 return data;
             });
     }
+
+    addProject(userId: string, projectId: string, projectName: string) {
+        let url = `${this.projectUrl}/${userId}/projects`;
+        let body = { projectId, projectName };
+
+        return this
+            .http
+            .post(url, body)
+            .map(response => {
+                console.log(response);
+                let data = "alksjdas";
+                return data;
+            });
+    }
 };

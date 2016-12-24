@@ -32,6 +32,18 @@ var UserService = (function () {
             return data;
         });
     };
+    UserService.prototype.addProject = function (userId, projectId, projectName) {
+        var url = this.projectUrl + "/" + userId + "/projects";
+        var body = { projectId: projectId, projectName: projectName };
+        return this
+            .http
+            .post(url, body)
+            .map(function (response) {
+            console.log(response);
+            var data = "alksjdas";
+            return data;
+        });
+    };
     UserService = __decorate([
         core_1.Injectable(), 
         __metadata('design:paramtypes', [http_1.Http])

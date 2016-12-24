@@ -14,5 +14,6 @@ module.exports = modelRegistrator.register("User", {
     picture: String,
     email: String,
     company: String,
-    isManager: false
+    isManager: false,
+    projects: [{}]
 });

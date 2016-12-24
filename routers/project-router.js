@@ -8,7 +8,8 @@ module.exports = function ({ app, controllers }) {
 
     router
         .post("/project", controllers.createProject)
-        .post("/users", controllers.createUser);
+        .post("/users", controllers.createUser)
+        .post('/users/:userId/projects', controllers.addProjectToUser);
 
     app.use("/api", router);
 
