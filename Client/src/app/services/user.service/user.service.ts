@@ -35,8 +35,7 @@ export class UserService {
             .http
             .post(url, body)
             .map(response => {
-                console.log(response);
-                let data = "alksjdas";
+                let data = response.json();
                 return data;
             });
     }

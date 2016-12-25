@@ -5,29 +5,35 @@ module.exports = function (models) {
 
     return {
         createProject(creator, name, description) {
-            return new Promise((resolve, reject) => {
-                Project.findOne({ name }, (err, project) => {
-                    if (err) {
-                        return reject(err);
-                    }
+            return new
+                Promise((resolve, reject) => {
+                    Project.findOne({ name }, (err, project) => {
+                        if (err) {
+                            return reject(err);
+                        }
 
-                    return resolve(project || null);
-                });
-                let project = new Project({
-                    Project,
-                    creator,
-                    name,
-                    description
+                        return resolve(project || null);
+                    });
                 })
-
-                project.save((err) => {
-                    if (err) {
-                        return reject(err);
+                .then((foundProject) => {
+                    if (foundProject !== null) {
+                        return Promise.reject("Project already exists");
                     }
 
-                    return resolve(project);
+                    let project = new Project({
+                        Project,
+                        creator,
+                        name,
+                        description
+                    })
+
+                    project.save((err) => {
+                        if (err) {
+                            return Promise.reject(err);
+                        }
+                    });
+                    return Promise.resolve(project);
                 });
-            });
         }
     };
 };
