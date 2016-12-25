@@ -7,7 +7,6 @@
         <form class="form-horizontal" method="post" action="">
             <div class="form-group" hidden="hidden"><label class="col-md-2 control-label">Username:</label>
                 <div class="col-md-8"><input class="form-control" id="username" type="text" name="username" readonly="readonly" /></div>
-                <p>Is manager: {{profile.isManager}}</p>
             </div>
             <div class="form-group"><label class="col-md-2 control-label">Email:</label>
                 <div class="col-md-8"><input class="form-control" id="email" type="text" name="email" /></div>
@@ -30,7 +29,7 @@
             <div class="form-group">
                 <div class="col-md-10 col-md-offset-2 add-spacing-after">
                     <button class="btn btn-success" id="save-changes" type="submit">Save Changes</button>
-                    <a class="btn btn-primary" href="#">Cancel</a>
+                    <a class="btn btn-primary" routerLink="/profile">Cancel</a>
                 </div>
             </div>
         </form>

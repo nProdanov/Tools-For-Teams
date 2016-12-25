@@ -31,9 +31,8 @@ export class NewProjectPage implements PageComponent, OnInit {
             this.userService
                 .addProject(this.profile.id, resProject._id, resProject.name)
                 .subscribe(res => {
-                    console.log(res);
+                    this.toastr.success("Successfully created new project");
                 });
-
         });
     }
 }

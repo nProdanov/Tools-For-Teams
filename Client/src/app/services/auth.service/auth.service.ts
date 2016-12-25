@@ -32,9 +32,6 @@ export class Auth {
         let id = profile.user_id;
 
         this.userService.getUserById(id).subscribe(resUser => {
-          if (resUser === null) {
-            // Think should save the user in MongoDb
-          }
           let userToShow = {
             username: resUser.username,
             id: resUser.id,

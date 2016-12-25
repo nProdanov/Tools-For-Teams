@@ -6,13 +6,26 @@ import { Http } from '@angular/http';
 
 @Injectable()
 export class ProjectService {
-    private projectUrl = 'http://localhost:3001/api/project';
+    private projectUrl = 'http://localhost:3001/api/projects';
+
     constructor(private http: Http) { }
 
+    getProjectById(id: string): Observable<any> {
+        return this.http.get(this.projectUrl).map(response => {
+            let data = response.json();
+            return data;
+        });
+    }
+
+    getAllProjectsByUsername(): Observable<any> {
+        return this.http.get(this.projectUrl).map(p => p.json());
+    }
+
     saveProject(body: Project): Observable<any> {
-        return this.http.post(this.projectUrl, body).map(response => {
+        return this.http.post(this.projectUrl, body)
+            .map(response => {
                 let data = response.json();
                 return data;
-            });
+            })
     }
 };

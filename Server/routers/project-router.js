@@ -7,8 +7,9 @@ module.exports = function ({ app, controllers }) {
     let router = new Router();
 
     router
-        .get("/api/users/:id", controllers.getUserById)
-        .post("/project", controllers.createProject)
+        .get("/users/:id", controllers.getUserById)
+        .get("/projects", controllers.getAllProjects)
+        .post("/projects", controllers.createProject)
         .post("/users", controllers.createUser)
         .post('/users/:userId/projects', controllers.addProjectToUser);
 

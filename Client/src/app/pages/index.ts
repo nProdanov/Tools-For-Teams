@@ -3,11 +3,13 @@ import { NewProjectPage } from './new-project/new-project.page';
 import { LoginPage } from './login/login.page';
 import { RegisterPage } from './register/register.page';
 import { HomePage } from './home/home.page';
+import { MyProjectsPage } from './my-projects/my-projects.page';
 
 export const pages = {
     profile: ProfilePage,
     newProject: NewProjectPage,
     login: LoginPage,
     register: RegisterPage,
-    home: HomePage
+    home: HomePage,
+    myProjects: MyProjectsPage
 };

@@ -13,6 +13,15 @@ module.exports = function (params) {
                 .catch(err => {
                     res.json(err);
                 });
+        },
+        getAllProjects(req, res) {
+            data.getAllProjects()
+                .then(projects => {
+                    res.json(projects);
+                })
+                .catch(err => {
+                    res.json(err);
+                });
         }
     };
 };

@@ -34,6 +34,17 @@ module.exports = function (models) {
                     });
                     return Promise.resolve(project);
                 });
+        },
+        getAllProjects() {
+            return new Promise((resolve, reject) => {
+                Project.find({}, (err, projects) => {
+                    if (err) {
+                        return reject(err);
+                    }
+
+                    return resolve(projects);
+                });
+            });
         }
     };
 };

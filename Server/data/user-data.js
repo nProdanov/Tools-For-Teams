@@ -80,11 +80,7 @@ module.exports = function (models, validator) {
                         return reject(err);
                     }
 
-                    if (user) {
-                        return resolve(user);
-                    }
-
-                    return reject(null);
+                    return resolve(user || null);
                 });
             });
         },
