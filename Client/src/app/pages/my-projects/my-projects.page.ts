@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PageComponent } from '../../components/page.component/page.component';
 import { Project } from '../../models/project.model/project.model';
 import { ProjectService } from '../../services/project.service/project.service';
-import { UserService } from '../../services/user.service/user.service';
-import { ToastsManager } from 'ng2-toastr';
+import { Router } from '@angular/router';
 import { GridDataResult, PageChangeEvent } from '@progress/kendo-angular-grid';
 import { SortDescriptor, orderBy } from '@progress/kendo-data-query';
 
@@ -18,7 +17,7 @@ export class MyProjectsPage implements PageComponent, OnInit {
     private pageSize: number = 5;
     private skip: number = 0;
 
-    constructor(private toastr: ToastsManager, private projectService: ProjectService, private userService: UserService) {
+    constructor(private router: Router, private projectService: ProjectService) {
         this.profile = JSON.parse(localStorage.getItem('profile'));
     }
 
@@ -55,6 +54,10 @@ export class MyProjectsPage implements PageComponent, OnInit {
             data: this.projects.slice(this.skip, this.skip + this.pageSize),
             total: this.projects.length
         };
+    }
+
+    private onSelect(e) {
+        this.router.navigateByUrl(`/project-details/${this.gridView.data[e.index]._id}`);
     }
 
     private loadProjects(): void {

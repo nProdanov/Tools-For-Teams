@@ -11,7 +11,7 @@ export class ProjectService {
     constructor(private http: Http) { }
 
     getProjectById(id: string): Observable<any> {
-        return this.http.get(this.projectUrl).map(response => {
+        return this.http.get(`${this.projectUrl}/${id}`).map(response => {
             let data = response.json();
             return data;
         });

@@ -1,5 +1,7 @@
 <kendo-grid 
     [data]="gridView"
+    [selectable]="true"
+    (selectionChange)="onSelect($event)"
     [sortable]="{ mode: 'multiple' }"
     [sort]="sort" 
     (sortChange)="sortChange($event)"
