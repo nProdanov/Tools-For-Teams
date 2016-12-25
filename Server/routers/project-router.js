@@ -9,6 +9,7 @@ module.exports = function ({ app, controllers }) {
     router
         .get("/users/:id", controllers.getUserById)
         .get("/projects", controllers.getAllProjects)
+        .get("/projects/:id", controllers.getProjectById)
         .post("/projects", controllers.createProject)
         .post("/users", controllers.createUser)
         .post('/users/:userId/projects', controllers.addProjectToUser);

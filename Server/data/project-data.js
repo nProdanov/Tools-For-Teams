@@ -45,6 +45,17 @@ module.exports = function (models) {
                     return resolve(projects);
                 });
             });
+        },
+        getProjectById(id) {
+            return new Promise((resolve, reject) => {
+                Project.findOne({ _id: id }, (err, project) => {
+                    if (err) {
+                        return reject(err);
+                    }
+
+                    return resolve(project);
+                })
+            });
         }
     };
 };

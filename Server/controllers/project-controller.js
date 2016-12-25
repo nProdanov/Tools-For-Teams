@@ -22,6 +22,15 @@ module.exports = function (params) {
                 .catch(err => {
                     res.json(err);
                 });
+        },
+        getProjectById(req, res) {
+            data.getProjectById(req.params.id)
+                .then(project => {
+                    res.json(project);
+                })
+                .catch(err => {
+                    res.json(err);
+                })
         }
     };
 };
