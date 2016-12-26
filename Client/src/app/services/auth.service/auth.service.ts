@@ -98,7 +98,7 @@ export class Auth {
             lastName: lastName,
             gender,
             picture: picture || profile.picture,
-            email: username,
+            email: email,
             company: company
           };
 
