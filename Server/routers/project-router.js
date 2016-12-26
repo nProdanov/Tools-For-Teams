@@ -11,6 +11,7 @@ module.exports = function ({ app, controllers }) {
         .get("/users/:id", controllers.getUserById)
         .get("/projects", controllers.getAllProjects)
         .get("/projects/:id", controllers.getProjectById)
+        .post("/tasks", controllers.createTask)
         .post("/projects", controllers.createProject)
         .post("/users", controllers.createUser)
         .post('/users/:userId/projects', controllers.addProjectToUser);

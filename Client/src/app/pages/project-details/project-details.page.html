@@ -24,7 +24,7 @@
         <h4 class="modal-title">New Task</h4>
     </div>
     <div class="modal-body">
-        <form #newTaskForm="ngForm" (ngSubmit)="addNewTask()" data-validate="true" class="form-group edit-task-form" novalidate="novalidate" id="new_task" accept-charset="UTF-8" data-remote="true">
+        <form #newTaskForm="ngForm" (ngSubmit)="addNewTask(); newTaskForm.reset()" data-validate="true" class="form-group edit-task-form" novalidate="novalidate" id="new_task" accept-charset="UTF-8" data-remote="true">
             <input name="utf8" type="hidden" value="✓">
             <div class="row">
                 <div class="form-group">
@@ -87,7 +87,13 @@
                 <div class="form-group">
                     <div class="col-xs-2">
                         <label for="task_status">Add user to task</label>
-                        <input auto-complete [source]="users" type="text"/>
+                        <ul>
+                            <li *ngFor="let selected of newTask.users">
+                                {{selected}}
+                            </li>
+                        </ul>
+                        <input auto-complete [source]="users" name="selectedUser" [(ngModel)]="selectedUser" type="text"/>
+                        <a class="btn btn-warning" (click)="addUserToTask()">Add user</a>
                     </div>
                 </div>
                 <input class="form-control" type="hidden" value="1290" name="task[project_id]" id="task_project_id">
