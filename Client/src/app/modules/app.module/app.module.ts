@@ -19,6 +19,7 @@ import { RegisterPage } from '../../pages/register/register.page';
 import { HomePage } from '../../pages/home/home.page';
 import { MyProjectsPage } from '../../pages/my-projects/my-projects.page';
 import { ProjectDetailsPage } from '../../pages/project-details/project-details.page';
+import { ChatPage } from '../../pages/sample-chat/sample.chat';
 
 //  Services
 import { AuthGuard } from '../../services/auth-guard.service/auth.guard.service';
@@ -46,7 +47,8 @@ import { TaskService } from '../../services/task.service/task.service';
     RegisterPage,
     HomePage,
     MyProjectsPage,
-    ProjectDetailsPage
+    ProjectDetailsPage,
+    ChatPage
   ],
   bootstrap: [AppComponent],
   providers: [

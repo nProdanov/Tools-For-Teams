@@ -7,8 +7,8 @@ let data = require('./data')(config.connectionString, validator);
 
 let controllers = require('./controllers')({ data, validator });
 
-let app = require('./config/application')({ data });
-
+let { app, server } = require('./config/application')({ data });
+let io = require('./config/socket')({ server, data });
 require('./routers')({ app, data, controllers });
 
-app.listen(config.port, () => console.log(`App running at: ${config.port}`));
+server.listen(config.port, () => console.log(`App running at: ${config.port}`));

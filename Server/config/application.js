@@ -21,6 +21,6 @@ module.exports = function ({ data }) {
     app.use(cors());
 
     data.encryption = encryption;
-
-    return app;
+    let server = require("http").Server(app);
+    return { app, server };
 };
