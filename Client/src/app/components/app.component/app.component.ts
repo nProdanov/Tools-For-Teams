@@ -2,6 +2,7 @@ import { Component, OnInit, ViewContainerRef } from '@angular/core';
 import { Auth } from '../../services/auth.service/auth.service';
 import { ToastsManager } from 'ng2-toastr';
 
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html'

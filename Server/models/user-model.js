@@ -10,7 +10,9 @@ module.exports = modelRegistrator.register("User", {
         unique: true
     },
     username: String,
-    name: String,
+    firstName: String,
+    lastName: String,
+    gender: String,
     picture: String,
     email: String,
     company: String,
