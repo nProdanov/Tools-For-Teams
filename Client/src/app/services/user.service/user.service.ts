@@ -1,13 +1,18 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/filter';
 import { Http } from '@angular/http';
 import { User } from '../../models/user.model/user.model';
 
 @Injectable()
 export class UserService {
     private projectUrl = 'http://localhost:3001/api/users';
-    constructor(private http: Http) { }
+    public profile: any;
+
+    constructor(private http: Http) { 
+        this.profile = JSON.parse(localStorage.getItem('profile'));
+    }
 
     saveUser(body: User): Observable<any> {
         return this.http.post(this.projectUrl, body).map(response => {
@@ -31,7 +36,7 @@ export class UserService {
         return this.http.get(this.projectUrl)
             .map(res => {
                 let resJson = res.json();
-                let users = resJson.map(u => u.username);
+                let users = resJson.map(u => u.username).filter(u => u !== this.profile.username);
                 return users;
             });
     }

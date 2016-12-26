@@ -1,4 +1,5 @@
 export interface Task {
+    projectId: string;
     title: string;
     description: string;
     timeForExecution: string;

@@ -8,5 +8,6 @@ module.exports = modelRegistrator.register("Project", {
     creator: String,
     name: String,
     description: String,
-    projectMembers: [String]
+    projectMembers: [String],
+    tasks: []
 });
