@@ -84,6 +84,17 @@ module.exports = function (models, validator) {
                 });
             });
         },
+        getAllUsers() {
+            return new Promise((resolve, reject) => {
+                User.find({}, (err, users) => {
+                    if (err) {
+                        return reject(err);
+                    }
+
+                    return resolve(users);
+                });
+            });
+        },
         addProjectToUser(userId, project) {
             return new Promise((resolve, reject) => {
                 User.findOne({ id: userId }, (err, user) => {

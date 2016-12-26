@@ -20,6 +20,15 @@ module.exports = function (params) {
                     res.json(err);
                 });
         },
+        getAllUsers(req, res) {
+            data.getAllUsers()
+                .then((users) => {
+                    res.json(users);
+                })
+                .catch((err) => {
+                    res.json(err);
+                });
+        },
         addProjectToUser(req, res) {
             data.addProjectToUser(req.params.userId, req.body)
                 .then((response) => {

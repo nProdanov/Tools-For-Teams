@@ -7,6 +7,7 @@ module.exports = function ({ app, controllers }) {
     let router = new Router();
 
     router
+        .get("/users", controllers.getAllUsers)
         .get("/users/:id", controllers.getUserById)
         .get("/projects", controllers.getAllProjects)
         .get("/projects/:id", controllers.getProjectById)

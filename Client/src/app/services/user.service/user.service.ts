@@ -29,7 +29,10 @@ export class UserService {
 
     getAllUsers() {
         return this.http.get(this.projectUrl)
-            .map(res => res.json());
+            .map(res => {
+                console.log(res)
+                res.json();
+            });
     }
 
     addProject(userId: string, projectId: string, projectName: string) {
