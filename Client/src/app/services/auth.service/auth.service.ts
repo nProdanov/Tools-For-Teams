@@ -52,12 +52,12 @@ export class Auth {
     }
   }
 
-  public login(username: string, password: string) {
+  public login({email, password}) {
     this.auth0.login({
       connection: 'Username-Password-Authentication',
       responseType: 'token',
-      email: username,
-      password: password,
+      email,
+      password,
     }, function (err: any) {
       if (err) {
         alert('something went wrong: ' + err.message);

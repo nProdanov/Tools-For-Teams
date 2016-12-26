@@ -4,7 +4,8 @@ import { User } from '../../models/user.model/user.model';
 import { UserService } from '../../services/user.service/user.service';
 
 @Component({
-    templateUrl: './register.page.html'
+    templateUrl: './register.page.html',
+    styleUrls: ['./register.page.css']
 })
 export class RegisterPage implements OnInit {
     private users: string[];
@@ -59,7 +60,7 @@ export class RegisterPage implements OnInit {
         }
     }
 
-    register(){
+    register() {
         this.auth.signUp(this.userToRegister);
     }
 };
