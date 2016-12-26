@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { tokenNotExpired } from 'angular2-jwt';
 import { Router } from '@angular/router';
 import { UserService } from '../user.service/user.service';
+import { ToastsManager } from 'ng2-toastr';
 
 declare var Auth0: any;
 
@@ -17,7 +18,7 @@ export class Auth {
   private router: Router;
   private userService: UserService;
 
-  constructor(router: Router, userService: UserService) {
+  constructor(private toastr: ToastsManager, router: Router, userService: UserService) {
     this.router = router;
     this.userService = userService;
 
@@ -75,11 +76,11 @@ export class Auth {
     });
   }
 
-  public signUp(username: string, password: string, name: string, picture: string, company: string) {
+  public signUp({email, username, firstName, lastName, password, picture, gender, company}) {
     this.auth0.signup({
       connection: 'Username-Password-Authentication',
       responseType: 'token',
-      email: username,
+      email: email,
       password: password,
     }, (err: any, signUpObj: any) => {
       if (err) {
@@ -92,15 +93,23 @@ export class Auth {
 
           let user = {
             id: profile.user_id,
-            username: profile.nickname,
-            name: name,
+            username: username,
+            firstName: firstName,
+            lastName: lastName,
+            gender,
             picture: picture || profile.picture,
             email: username,
             company: company
           };
 
-          this.userService.saveUser(user).subscribe(() => {
-            console.log('User registered');
+          this.userService.saveUser(user).subscribe((err) => {
+            if (err.error) {
+              this.toastr.error(err.error);
+            }
+            else {
+              this.toastr.success('User registered');
+
+            }
             this.router.navigateByUrl('/login');
           });
         });

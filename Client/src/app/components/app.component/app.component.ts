@@ -1,6 +1,8 @@
 import { Component, OnInit, ViewContainerRef } from '@angular/core';
 import { Auth } from '../../services/auth.service/auth.service';
 import { ToastsManager } from 'ng2-toastr';
+import { RADIO_GROUP_DIRECTIVES } from 'ng2-radio-group';
+
 
 @Component({
   selector: 'app-root',
