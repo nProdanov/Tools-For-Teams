@@ -5,5 +5,5 @@ export interface Project {
     name: string;
     description: string;
     tasks: Task[];
-    users: any[];
+    projectMembers: any[];
 };

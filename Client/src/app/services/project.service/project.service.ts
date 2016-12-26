@@ -21,6 +21,12 @@ export class ProjectService {
         return this.http.get(this.projectUrl).map(p => p.json());
     }
 
+    addUserToProject(id: string, username: string) {
+        return this.http.put(`${this.projectUrl}/${id}`, { username }).map(res => { 
+            return res.json()
+         });
+    }
+
     saveProject(body: Project): Observable<any> {
         return this.http.post(this.projectUrl, body)
             .map(response => {

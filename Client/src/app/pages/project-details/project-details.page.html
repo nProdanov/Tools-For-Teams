@@ -10,6 +10,7 @@
     </li>
     <li>
         <h5>Project tasks</h5>
+        <p>{{project | json}}</p>
         <ul>
             <li *ngFor="let task of project.tasks">
                 {{task.title}}
@@ -17,6 +18,8 @@
         </ul>
     </li>
 </ul>
+<input auto-complete [source]="users" name="userToAdd" [(ngModel)]="userToAdd" type="text"/>
+<button (click)="addUserToProject()">Add user to project</button>
 <button class="btn btn-info" (click)="visible = !visible">New task</button>
 <div class="modal-content" [hidden]="!visible" style="width: 300px;">
     <div class="modal-header">

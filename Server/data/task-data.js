@@ -11,7 +11,7 @@ module.exports = function (models) {
                         return reject(err);
                     }
 
-                    if (task !== undefined) {
+                    if (task !== null) {
                         return reject({ error: "Task already exists in this project!" });
                     }
 
@@ -39,7 +39,7 @@ module.exports = function (models) {
                             return Promise.reject(err);
                         }
 
-                        project.projectMembers.push(newTask);
+                        project.tasks.push(newTask);
                         project.save((err) => {
                             if (err) {
                                 return Promise.reject(err);

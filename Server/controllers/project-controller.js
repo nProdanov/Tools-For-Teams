@@ -31,6 +31,15 @@ module.exports = function (params) {
                 .catch(err => {
                     res.json(err);
                 })
+        },
+        addUserToProject(req, res) {
+            data.addUserToProject(req.params.id, req.body.username)
+                .then(() => {
+                    res.json("User added successfully to project!");
+                })
+                .catch((err) => {
+                    res.json(err);
+                });
         }
     };
 };

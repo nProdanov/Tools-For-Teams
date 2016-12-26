@@ -19,6 +19,7 @@ export class ProjectDetailsPage implements PageComponent, OnInit {
     public newTask: Task;
     public selectedUser: string;
     public users: string[];
+    public userToAdd: string;
 
     constructor(
         private toastr: ToastsManager,
@@ -27,7 +28,7 @@ export class ProjectDetailsPage implements PageComponent, OnInit {
         private userService: UserService,
         private taskService: TaskService) {
         this.profile = JSON.parse(localStorage.getItem('profile'));
-        this.project = { creator: '', name: '', description: '', tasks: [], users: [] };
+        this.project = { creator: '', name: '', description: '', tasks: [], projectMembers: [] };
         this.newTask = { projectId: '', title: '', description: '', timeForExecution: '', cost: 0, status: '', users: [] };
     }
 
@@ -39,9 +40,6 @@ export class ProjectDetailsPage implements PageComponent, OnInit {
             })
             .subscribe((project: Project) => {
                 this.project = project;
-                this.project.users = [];
-                this.project.users.push(this.profile.username);
-                this.project.tasks = [];
             });
 
         this.userService.getAllUsers().subscribe((users: any) => {
@@ -67,7 +65,15 @@ export class ProjectDetailsPage implements PageComponent, OnInit {
             this.newTask.users.push(this.selectedUser);
             this.selectedUser = '';
         } else {
-            this.toastr.error("User doesnt't exist or is already assigned to task");
+            this.toastr.error('User doesnt\'t exist or is already assigned to task');
         }
+    }
+
+    addUserToProject() {
+        this.projectService.addUserToProject(this.newTask.projectId, this.userToAdd)
+            .subscribe((res: any) => {
+                // should add validation for already existing user
+                this.toastr.success('User added to project!');
+            });
     }
 }

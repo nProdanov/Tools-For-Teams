@@ -22,7 +22,7 @@ export class NewProjectPage implements PageComponent, OnInit {
             name: '',
             description: '',
             tasks: [],
-            users: []
+            projectMembers: []
         };
 
         this.project.creator = this.profile.username;
