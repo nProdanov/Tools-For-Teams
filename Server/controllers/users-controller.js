@@ -6,9 +6,12 @@ module.exports = function (params) {
     let { data, validator } = params;
     return {
         createUser(req, res) {
-            data.createUser(req.body.id, req.body.username, req.body.name, req.body.picture, req.body.email, req.body.company)
+            data.createUser(req.body)
                 .then(() => {
                     res.json("User created successfully!");
+                })
+                .catch(err => {
+                    res.json({ error: err })
                 });
         },
         getUserById(req, res) {
