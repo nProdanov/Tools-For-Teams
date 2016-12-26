@@ -30,8 +30,9 @@ export class UserService {
     getAllUsers() {
         return this.http.get(this.projectUrl)
             .map(res => {
-                console.log(res)
-                res.json();
+                let resJson = res.json();
+                let users = resJson.map(u => u.username);
+                return users;
             });
     }
 
