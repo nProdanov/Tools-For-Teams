@@ -23,14 +23,15 @@ export class ChatService {
       return observable;
   }
 
-  messageBoardUpdate(message) {
-    this.socket.emit('message-board-update', message);
+  messageBoardUpdate(message, userName) {
+    this.socket.emit('message-board-update', message, userName);
   }
 
   getMessageBoard() {
     let observable = new Observable(observer => {
         this.socket = io(this.url);
         this.socket.on('message-board-update', (data) => {
+          console.log(data);
           observer.next(data);    
         });
         return () => {
