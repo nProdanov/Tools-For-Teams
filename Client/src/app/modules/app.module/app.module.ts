@@ -21,6 +21,8 @@ import { MyProjectsPage } from '../../pages/my-projects/my-projects.page';
 import { ProjectDetailsPage } from '../../pages/project-details/project-details.page';
 import { ChatPage } from '../../pages/sample-chat/sample.chat';
 
+import { MessageBoardComponent } from '../../components/message-board.component/message-board.component';
+
 //  Services
 import { AuthGuard } from '../../services/auth-guard.service/auth.guard.service';
 import { Auth } from '../../services/auth.service/auth.service';
@@ -49,7 +51,8 @@ import { StorageService } from '../../services/storage.service/storage.service';
     HomePage,
     MyProjectsPage,
     ProjectDetailsPage,
-    ChatPage
+    ChatPage,
+    MessageBoardComponent
   ],
   bootstrap: [AppComponent],
   providers: [

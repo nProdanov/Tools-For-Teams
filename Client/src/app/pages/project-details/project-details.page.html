@@ -1,109 +1,117 @@
-<h4>Details for project: {{project.name}}</h4>
-<ul>
-    <li>
-        <h5>People working on this project</h5>
-        <ul>
-            <li *ngFor="let user of project.users">
-                {{user}}
-            </li>
-        </ul>
-    </li>
-    <li>
-        <h5>Project tasks</h5>
-        <p>{{project | json}}</p>
-        <ul>
-            <li *ngFor="let task of project.tasks">
-                {{task.title}}
-            </li>
-        </ul>
-    </li>
-</ul>
-<input auto-complete [source]="users" name="userToAdd" [(ngModel)]="userToAdd" type="text"/>
-<button (click)="addUserToProject()">Add user to project</button>
-<button class="btn btn-info" (click)="visible = !visible">New task</button>
-<div class="modal-content" [hidden]="!visible" style="width: 300px;">
-    <div class="modal-header">
-        <button class="close btn btn-danger" data-dismiss="modal" aria-hidden="true" (click)="visible = !visible">×</button>
-        <h4 class="modal-title">New Task</h4>
-    </div>
-    <div class="modal-body">
-        <form #newTaskForm="ngForm" (ngSubmit)="addNewTask(); newTaskForm.reset()" data-validate="true" class="form-group edit-task-form" novalidate="novalidate" id="new_task" accept-charset="UTF-8" data-remote="true">
-            <input name="utf8" type="hidden" value="✓">
-            <div class="row">
-                <div class="form-group">
-                    <div class="col-xs-2">
-                        <label for="task_name">Name</label>
-                    </div>
-                    <div class="col-xs-10">
-                        <input class="form-control" placeholder="Something catchy and short." maxlength="30" size="30" type="text"
-                            name="task[name]" id="task_name" data-validate="true" [(ngModel)]="newTask.title">
-                    </div>
+<div class="container">
+    <div class="row">
+        <div class="col-xs-6">
+            <h4>Details for project: {{project.name}}</h4>
+            <ul>
+                <li>
+                    <h5>People working on this project</h5>
+                    <ul>
+                        <li *ngFor="let user of project.users">
+                            {{user}}
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <h5>Project tasks</h5>
+                    <p>{{project | json}}</p>
+                    <ul>
+                        <li *ngFor="let task of project.tasks">
+                            {{task.title}}
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <input auto-complete [source]="users" name="userToAdd" [(ngModel)]="userToAdd" type="text" />
+            <button (click)="addUserToProject()">Add user to project</button>
+            <button class="btn btn-info" (click)="visible = !visible">New task</button>
+            <div class="modal-content" [hidden]="!visible" style="width: 300px;">
+                <div class="modal-header">
+                    <button class="close btn btn-danger" data-dismiss="modal" aria-hidden="true" (click)="visible = !visible">×</button>
+                    <h4 class="modal-title">New Task</h4>
                 </div>
-            </div>
-            <div class="row">
-                <div class="form-group col-sm-12">
-                    <label for="task_description">Description</label>
-                    <textarea class="form-control" rows="5" placeholder="Something descriptive, but don't write a novel." name="task[description]"
-                        id="task_description" data-validate="true" [(ngModel)]="newTask.description"></textarea>
-                </div>
-            </div>
-            <div class="row task-numerical-fields">
-                <div class="col-xs-6">
-                    <div class="form-group">
-                        <label for="task_hours">Hours</label>
-                        <div class="input-group">
-                            <div class="input-group-addon">
-                                <span class="glyphicon glyphicon-time"></span>
+                <div class="modal-body">
+                    <form #newTaskForm="ngForm" (ngSubmit)="addNewTask(); newTaskForm.reset()" data-validate="true" class="form-group edit-task-form" novalidate="novalidate" id="new_task" accept-charset="UTF-8" data-remote="true">
+                        <input name="utf8" type="hidden" value="✓">
+                        <div class="row">
+                            <div class="form-group">
+                                <div class="col-xs-2">
+                                    <label for="task_name">Name</label>
+                                </div>
+                                <div class="col-xs-10">
+                                    <input class="form-control" placeholder="Something catchy and short." maxlength="30" size="30" type="text" name="task[name]" id="task_name" data-validate="true" [(ngModel)]="newTask.title">
+                                </div>
                             </div>
-                            <input value="0:00" class="form-control" type="text" name="task[hours]" id="task_hours" data-validate="true" [(ngModel)]="newTask.timeForExecution">
                         </div>
-                    </div>
-                </div>
-                <div class="col-xs-6">
-                    <div class="form-group">
-                        <label for="task_one_time_cost">Cost</label>
-                        <div class="input-group">
-                            <div class="input-group-addon">
-                                <span class="glyphicon glyphicon-usd"></span>
+                        <div class="row">
+                            <div class="form-group col-sm-12">
+                                <label for="task_description">Description</label>
+                                <textarea class="form-control" rows="5" placeholder="Something descriptive, but don't write a novel." name="task[description]" id="task_description" data-validate="true" [(ngModel)]="newTask.description"></textarea>
                             </div>
-                            <input class="form-control" type="text" name="task[one_time_cost]" id="task_one_time_cost" data-validate="true" [(ngModel)]="newTask.cost">
                         </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="form-group">
-                    <div class="col-xs-2">
-                        <label for="task_status">Status</label>
-                    </div>
-                    <div class="col-xs-10">
-                        <select class="form-control" name="task[status]" id="task_status" data-validate="true" [(ngModel)]="newTask.status">
+                        <div class="row task-numerical-fields">
+                            <div class="col-xs-6">
+                                <div class="form-group">
+                                    <label for="task_hours">Hours</label>
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            <span class="glyphicon glyphicon-time"></span>
+                                        </div>
+                                        <input value="0:00" class="form-control" type="text" name="task[hours]" id="task_hours" data-validate="true" [(ngModel)]="newTask.timeForExecution">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-6">
+                                <div class="form-group">
+                                    <label for="task_one_time_cost">Cost</label>
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            <span class="glyphicon glyphicon-usd"></span>
+                                        </div>
+                                        <input class="form-control" type="text" name="task[one_time_cost]" id="task_one_time_cost" data-validate="true" [(ngModel)]="newTask.cost">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group">
+                                <div class="col-xs-2">
+                                    <label for="task_status">Status</label>
+                                </div>
+                                <div class="col-xs-10">
+                                    <select class="form-control" name="task[status]" id="task_status" data-validate="true" [(ngModel)]="newTask.status">
                             <option value="started">Started</option>
                             <option value="done">Done</option>
                             <option value="live">Live</option>
                         </select>
-                    </div>
+                                </div>
+                            </div>
+                            <input class="form-control" type="hidden" value="1290" name="task[project_id]" id="task_project_id">
+                        </div>
+                        <div class="row">
+                            <div class="form-group">
+                                <div class="col-xs-2">
+                                    <label for="task_status">Add user to task</label>
+                                    <ul>
+                                        <li *ngFor="let selected of newTask.users">
+                                            {{selected}}
+                                        </li>
+                                    </ul>
+                                    <input auto-complete [source]="users" name="selectedUser" [(ngModel)]="selectedUser" type="text" />
+                                    <a class="btn btn-warning" (click)="addUserToTask()">Add user</a>
+                                </div>
+                            </div>
+                            <input class="form-control" type="hidden" value="1290" name="task[project_id]" id="task_project_id">
+                        </div>
+                        <div>
+                            <input type="submit" class="btn btn-success" value="Save Task" />
+                        </div>
+                    </form>
                 </div>
-                <input class="form-control" type="hidden" value="1290" name="task[project_id]" id="task_project_id">
             </div>
-            <div class="row">
-                <div class="form-group">
-                    <div class="col-xs-2">
-                        <label for="task_status">Add user to task</label>
-                        <ul>
-                            <li *ngFor="let selected of newTask.users">
-                                {{selected}}
-                            </li>
-                        </ul>
-                        <input auto-complete [source]="users" name="selectedUser" [(ngModel)]="selectedUser" type="text"/>
-                        <a class="btn btn-warning" (click)="addUserToTask()">Add user</a>
-                    </div>
-                </div>
-                <input class="form-control" type="hidden" value="1290" name="task[project_id]" id="task_project_id">
-            </div>
-            <div>
-                <input type="submit" class="btn btn-success" value="Save Task" />
-            </div>
-        </form>
+        </div>
+        <div class="col-xs-6">
+            <h4>Message board for: {{project.name}}</h4>
+            <message-board></message-board>
+        </div>
     </div>
 </div>
