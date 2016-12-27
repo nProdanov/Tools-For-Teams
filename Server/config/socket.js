@@ -1,7 +1,8 @@
 /* globals module */
 "use strict";
+// let RoomSocket = require("./room");
 
-module.exports = function({ server }) {
+module.exports = function({ server, data }) {
     const io = require("socket.io")(server);
 
     io.on('connection', (socket) => {
@@ -18,7 +19,17 @@ module.exports = function({ server }) {
         socket.on('message-board-update', (message, userName, date) => {
             io.emit('message-board-update', { type: 'new-message-board', text: message, userName: userName, date: date });
         });
+
+        socket.on('create event', (projectName) => {
+            attachEvent(socket, projectName);
+        });
     });
+
+    function attachEvent(socket, projectName) {
+        socket.on(projectName, (msg) => {
+            console.log(msg);
+        });
+    }
 
     return io;
 };

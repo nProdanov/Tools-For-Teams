@@ -6,6 +6,8 @@ import { Router } from '@angular/router';
 import { GridDataResult, PageChangeEvent } from '@progress/kendo-angular-grid';
 import { SortDescriptor, orderBy } from '@progress/kendo-data-query';
 import { StorageService } from '../../services/storage.service/storage.service';
+import { UserService } from '../../services/user.service/user.service';
+import { Observable } from 'rxjs';
 
 @Component({
     templateUrl: './my-projects.page.html'
@@ -18,7 +20,7 @@ export class MyProjectsPage implements PageComponent, OnInit {
     private pageSize: number = 5;
     private skip: number = 0;
 
-    constructor(private storageService: StorageService, private router: Router, private projectService: ProjectService) {
+    constructor(private userService: UserService, private storageService: StorageService, private router: Router, private projectService: ProjectService) {
         this.profile = {};
     }
 
@@ -27,21 +29,24 @@ export class MyProjectsPage implements PageComponent, OnInit {
             .getProfileItem()
             .subscribe(resProfile => {
                 this.profile = resProfile;
-                this.projectService.getAllProjectsByUsername()
-                    .subscribe((resProjects: any[]) => {
-                        let userProjects: any[] = [];
-                        resProjects.forEach((value: any, index: number) => {
-                            if (value.creator === this.profile.username) {
-                                // TODO: new logic
-                                userProjects.push(value);
-                            }
+                this.userService
+                    .getUserById(this.profile.id)
+                    .subscribe(resUser => {
+                        let projectsObservables: Observable<any>[] = [];
+                        resUser.projects.forEach(proj => {
+                            projectsObservables.push(this.projectService.getProjectById(proj.id));
                         });
 
-                        this.projects = resProjects;
-                        this.gridView = {
-                            data: this.projects.slice(this.skip, this.skip + this.pageSize),
-                            total: this.projects.length
-                        }
+                        Observable
+                            .forkJoin(...projectsObservables)
+                            .subscribe(data => {
+                                this.projects = data;
+
+                                this.gridView = {
+                                    data: this.projects.slice(this.skip, this.skip + this.pageSize),
+                                    total: this.projects.length
+                                }
+                            });
                     });
             });
     }
