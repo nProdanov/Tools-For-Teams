@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PageComponent } from '../../components/page.component/page.component';
+import { StorageService } from '../../services/storage.service/storage.service';
 
 @Component({
     templateUrl: './profile.page.html'
@@ -7,9 +8,13 @@ import { PageComponent } from '../../components/page.component/page.component';
 export class ProfilePage implements PageComponent, OnInit {
     public profile: any;
 
-    constructor() {
-        this.profile = JSON.parse(localStorage.getItem('profile'));
+    constructor(private storageService: StorageService) {
+        this.profile = {};
     }
 
-    ngOnInit(){}
+    ngOnInit() {
+        this.storageService
+            .getProfileItem()
+            .subscribe(resProfile => this.profile = resProfile);
+    }
 }

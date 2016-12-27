@@ -5,6 +5,7 @@ import { ProjectService } from '../../services/project.service/project.service';
 import { Router } from '@angular/router';
 import { GridDataResult, PageChangeEvent } from '@progress/kendo-angular-grid';
 import { SortDescriptor, orderBy } from '@progress/kendo-data-query';
+import { StorageService } from '../../services/storage.service/storage.service';
 
 @Component({
     templateUrl: './my-projects.page.html'
@@ -17,25 +18,31 @@ export class MyProjectsPage implements PageComponent, OnInit {
     private pageSize: number = 5;
     private skip: number = 0;
 
-    constructor(private router: Router, private projectService: ProjectService) {
-        this.profile = JSON.parse(localStorage.getItem('profile'));
+    constructor(private storageService: StorageService, private router: Router, private projectService: ProjectService) {
+        this.profile = {};
     }
 
     ngOnInit() {
-        this.projectService.getAllProjectsByUsername()
-            .subscribe((resProjects: any[]) => {
-                let userProjects: any[] = [];
-                resProjects.forEach((value: any, index: number) => {
-                    if (value.creator === this.profile.username) {
-                        userProjects.push(value);
-                    }
-                });
+        this.storageService
+            .getProfileItem()
+            .subscribe(resProfile => {
+                this.profile = resProfile;
+                this.projectService.getAllProjectsByUsername()
+                    .subscribe((resProjects: any[]) => {
+                        let userProjects: any[] = [];
+                        resProjects.forEach((value: any, index: number) => {
+                            if (value.creator === this.profile.username) {
+                                // TODO: new logic
+                                userProjects.push(value);
+                            }
+                        });
 
-                this.projects = resProjects;
-                this.gridView = {
-                    data: this.projects.slice(this.skip, this.skip + this.pageSize),
-                    total: this.projects.length
-                }
+                        this.projects = resProjects;
+                        this.gridView = {
+                            data: this.projects.slice(this.skip, this.skip + this.pageSize),
+                            total: this.projects.length
+                        }
+                    });
             });
     }
 

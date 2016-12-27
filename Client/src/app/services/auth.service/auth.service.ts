@@ -3,6 +3,7 @@ import { tokenNotExpired } from 'angular2-jwt';
 import { Router } from '@angular/router';
 import { UserService } from '../user.service/user.service';
 import { ToastsManager } from 'ng2-toastr';
+import { StorageService } from '../storage.service/storage.service';
 
 declare var Auth0: any;
 
@@ -18,13 +19,15 @@ export class Auth {
   private router: Router;
   private userService: UserService;
 
-  constructor(private toastr: ToastsManager, router: Router, userService: UserService) {
+  constructor(private storageService: StorageService, private toastr: ToastsManager, router: Router, userService: UserService) {
     this.router = router;
     this.userService = userService;
 
     var result = this.auth0.parseHash(window.location.hash);
     if (result && result.idToken) {
-      localStorage.setItem('id_token', result.idToken);
+      this.storageService
+        .setItem('id_token', result.idToken)
+        .subscribe();
       this.auth0.getProfile(result.idToken, (err: any, profile: any) => {
         if (err) {
           console.log(err);
@@ -32,18 +35,20 @@ export class Auth {
 
         let id = profile.user_id;
 
-        this.userService.getUserById(id).subscribe(resUser => {
-          let userToShow = {
-            username: resUser.username,
-            id: resUser.id,
-            email: resUser.email,
-            company: resUser.company,
-            picture: resUser.picture,
-            name: resUser.name
-          }
+        this.userService
+          .getUserById(id)
+          .subscribe(resUser => {
+            let userToShow = {
+              username: resUser.username,
+              id: resUser.id,
+              email: resUser.email,
+              company: resUser.company,
+              picture: resUser.picture,
+              name: resUser.name
+            }
 
-          localStorage.setItem('profile', JSON.stringify(userToShow));
-        });
+            this.storageService.setProfileItem(userToShow).subscribe();
+          });
 
 
       });
@@ -118,9 +123,13 @@ export class Auth {
   };
 
   logout() {
-    localStorage.removeItem('profile');
-    localStorage.removeItem('id_token');
 
+    this.storageService
+      .removeProfileItem()
+      .subscribe();
+    this.storageService
+      .removeItem('id_token')
+      .subscribe();
     this.router.navigateByUrl('/');
   }
 

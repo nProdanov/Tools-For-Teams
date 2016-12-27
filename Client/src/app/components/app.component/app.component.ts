@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewContainerRef } from '@angular/core';
 import { Auth } from '../../services/auth.service/auth.service';
 import { ToastsManager } from 'ng2-toastr';
+import { StorageService } from '../../services/storage.service/storage.service';
 
 
 @Component({
@@ -10,11 +11,14 @@ import { ToastsManager } from 'ng2-toastr';
 export class AppComponent implements OnInit {
   public profile: any;
 
-  constructor(private service: Auth, public toastr: ToastsManager, public vRef: ViewContainerRef) {
+  constructor(private stroageService: StorageService, private service: Auth, public toastr: ToastsManager, public vRef: ViewContainerRef) {
     this.toastr.setRootViewContainerRef(vRef);
+    this.profile = {};
   }
 
   ngOnInit() {
-    this.profile = JSON.parse(localStorage.getItem('profile'));
+    this.stroageService
+      .getProfileItem()
+      .subscribe(resProfile => this.profile = resProfile);
   }
 }

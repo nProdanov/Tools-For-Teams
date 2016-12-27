@@ -29,6 +29,7 @@ import { Auth } from '../../services/auth.service/auth.service';
 import { ProjectService } from '../../services/project.service/project.service';
 import { UserService } from '../../services/user.service/user.service';
 import { TaskService } from '../../services/task.service/task.service';
+import { StorageService } from '../../services/storage.service/storage.service';
 
 @NgModule({
   imports: [
@@ -59,7 +60,8 @@ import { TaskService } from '../../services/task.service/task.service';
     AuthGuard,
     ProjectService,
     UserService,
-    TaskService
+    TaskService,
+    StorageService
   ]
 })
 export class AppModule { }
