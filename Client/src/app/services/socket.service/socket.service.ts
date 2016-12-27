@@ -53,4 +53,21 @@ export class ChatService {
       this.socket = io(this.url);
         this.socket.emit('get', name);
     }
+  messageBoardUpdate(message, userName) {
+    this.socket.emit('message-board-update', message, userName);
+  }
+
+  getMessageBoard() {
+    let observable = new Observable(observer => {
+        this.socket = io(this.url);
+        this.socket.on('message-board-update', (data) => {
+          console.log(data);
+          observer.next(data);    
+        });
+        return () => {
+          this.socket.disconnect();
+        };  
+      })     
+      return observable;
+  }
 }

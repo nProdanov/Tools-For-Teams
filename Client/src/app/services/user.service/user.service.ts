@@ -4,14 +4,17 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/filter';
 import { Http } from '@angular/http';
 import { User } from '../../models/user.model/user.model';
+import { StorageService } from '../storage.service/storage.service';
 
 @Injectable()
 export class UserService {
     private projectUrl = 'http://localhost:3001/api/users';
     public profile: any;
 
-    constructor(private http: Http) { 
-        this.profile = JSON.parse(localStorage.getItem('profile'));
+    constructor(private storageService: StorageService, private http: Http) {
+        this.storageService
+            .getProfileItem()
+            .subscribe(resProfile => this.profile = resProfile);
     }
 
     saveUser(body: User): Observable<any> {
