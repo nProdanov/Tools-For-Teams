@@ -26,8 +26,10 @@ module.exports = function({ server, data }) {
     });
 
     function attachEvent(socket, projectName) {
-        socket.on(projectName, (msg) => {
-            console.log(msg);
+        socket.on(projectName, (message, userName) => {
+            console.log(projectName);
+            console.log(message);
+            socket.broadcast.emit(projectName, { type: 'new-message-board', text: message, userName: userName });
         });
     }
 
