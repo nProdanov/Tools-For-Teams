@@ -8,7 +8,7 @@
       <form #loginForm="ngForm" (ngSubmit)="login(); loginForm.reset()">
         <div class="form-group">
           <label for="email">Email</label>
-          <input type="text" class="form-control" #email="ngModel" name="email" id="email" [(ngModel)]="model.email" placeholder="yours@example.com"
+          <input required type="text" class="form-control" #email="ngModel" name="email" id="email" [(ngModel)]="model.email" placeholder="yours@example.com"
           />
         </div>
         <div class="form-group">
@@ -20,9 +20,10 @@
             name="password"
             [(ngModel)]="model.password" 
             id="password"
-            placeholder="your password" />
+            placeholder="your password"
+            required />
         </div>
-        <button type="submit" class="btn btn-default">Login</button>
+        <button [disabled]="!loginForm.form.valid" type="submit" class="btn btn-default">Login</button>
       </form>
       <button type="submit" class="btn btn-default btn-primary" (click)="loginGoogle()">Login with google</button>
     </div>

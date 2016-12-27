@@ -41,7 +41,7 @@ export class MyProjectsPage implements PageComponent, OnInit {
                             .forkJoin(...projectsObservables)
                             .subscribe(data => {
                                 this.projects = data;
-
+                                console.log(data);
                                 this.gridView = {
                                     data: this.projects.slice(this.skip, this.skip + this.pageSize),
                                     total: this.projects.length

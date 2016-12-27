@@ -63,9 +63,9 @@ export class Auth {
       responseType: 'token',
       email,
       password,
-    }, function (err: any) {
+    }, (err: any) => {
       if (err) {
-        alert('something went wrong: ' + err.message);
+        this.toastr.error(err.message);
       }
     });
 
@@ -123,7 +123,6 @@ export class Auth {
   };
 
   logout() {
-
     this.storageService
       .removeProfileItem()
       .subscribe();
