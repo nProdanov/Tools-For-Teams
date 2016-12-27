@@ -5,7 +5,6 @@ import { RegisterPage } from './register/register.page';
 import { HomePage } from './home/home.page';
 import { MyProjectsPage } from './my-projects/my-projects.page';
 import { ProjectDetailsPage } from './project-details/project-details.page';
-import { ChatPage } from './sample-chat/sample.chat';
 
 export const pages = {
     profile: ProfilePage,
@@ -14,6 +13,5 @@ export const pages = {
     register: RegisterPage,
     home: HomePage,
     myProjects: MyProjectsPage,
-    projectDetails: ProjectDetailsPage,
-    sampleChat: ChatPage
+    projectDetails: ProjectDetailsPage
 };

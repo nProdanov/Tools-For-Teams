@@ -1,6 +1,0 @@
-<div class="row" *ngFor="let message of messages">
-    <div class="col-md-4">On {{message.date | customDateFormat}}</div>
-    <div class="col-md-4">{{message.userName}} wrote:</div>
-    <div class="col-md-4">{{message.text}}</div>
-</div>
-<input [(ngModel)]="message" /><button (click)="messageBoardUpdate()">Send</button>

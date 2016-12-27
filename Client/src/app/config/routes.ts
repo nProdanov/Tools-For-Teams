@@ -11,6 +11,5 @@ export const appRoutes: Routes = [
     { path: 'profile', component: pages.profile, canActivate: [AuthGuard] },
     { path: 'new-project', component: pages.newProject, canActivate: [AuthGuard] },
     { path: 'my-projects', component: pages.myProjects },
-    { path: 'project-details/:id', component: pages.projectDetails },
-    { path: 'sample-chat', component: pages.sampleChat }
+    { path: 'project-details/:id', component: pages.projectDetails }
 ];
