@@ -22,4 +22,21 @@ export class ChatService {
       })     
       return observable;
   }
+
+  messageBoardUpdate(message) {
+    this.socket.emit('message-board-update', message);
+  }
+
+  getMessageBoard() {
+    let observable = new Observable(observer => {
+        this.socket = io(this.url);
+        this.socket.on('message-board-update', (data) => {
+          observer.next(data);    
+        });
+        return () => {
+          this.socket.disconnect();
+        };  
+      })     
+      return observable;
+  }
 }

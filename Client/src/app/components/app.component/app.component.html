@@ -6,11 +6,10 @@
                 <li><a class="navbar-brand" routerLink="/home">The App</a></li>
                 <li><a routerLink="/profile" routerLinkActive="active" *ngIf="service.authenticated()">Profile</a></li>
                 <li><a routerLink="/my-projects" routerLinkActive="active" *ngIf="service.authenticated()">My Projects</a></li>
-                <li><a routerLink="/sample-chat" routerLinkActive="active" *ngIf="service.authenticated()">Sample chat</a></li>
+                <li><a routerLink="/sample-chat" routerLinkActive="active" *ngIf="service.authenticated()">Go chatting</a></li>
                 <li>
                     <form class="navbar-form navbar-left form-group form-inline" role="search" action="/search" method="get">
-                        <div class="col-md-1 search-bar"><input class="searchUsers form-control" id="search-input" type="text" name="username" placeholder="Find user"
-                            /><button class="btn btn-danger serch-icon"><span class="glyphicon glyphicon-search">                       </span></button></div>
+                        <div class="col-md-1 search-bar"><input class="searchUsers form-control" id="search-input" type="text" name="username" placeholder="Find user" /><button class="btn btn-danger serch-icon"><span class="glyphicon glyphicon-search">                       </span></button></div>
                     </form>
                 </li>
             </ul>

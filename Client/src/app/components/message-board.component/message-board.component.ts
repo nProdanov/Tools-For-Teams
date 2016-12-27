@@ -13,13 +13,18 @@ export class MessageBoardComponent implements OnInit, OnDestroy {
 
     constructor(private chatService: ChatService) { }
 
-    sendMessage() {
-        this.chatService.sendMessage(this.message);
+    // sendMessage() {
+    //     this.chatService.sendMessage(this.message);
+    //     this.message = '';
+    // }
+
+    messageBoardUpdate() {
+        this.chatService.messageBoardUpdate(this.message);
         this.message = '';
     }
 
     ngOnInit() {
-        this.connection = this.chatService.getMessages().subscribe(message => {
+        this.connection = this.chatService.getMessageBoard().subscribe(message => {
             this.messages.push(message);
         })
     }
