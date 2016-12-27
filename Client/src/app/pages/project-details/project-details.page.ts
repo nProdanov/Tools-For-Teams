@@ -55,27 +55,19 @@ export class ProjectDetailsPage implements PageComponent, OnInit, OnDestroy {
                     .subscribe((project: Project) => {
                         this.project = project;
                         this.chatService.createEvent(this.project.name);
-                         console.log(this.project.name);
+                        this.connection = this.chatService.getMessages(this.project.name).subscribe(message => {
+                            this.messages.push(message);
+                        });
                     });
 
                 this.userService.getAllUsers().subscribe((users: any) => {
                     this.users = users;
                 });
-
-                console.log(this.project.name);
             });
-
-        console.log("before get messages " + this.project.name);
-        this.connection = this.chatService.getMessages(this.project.name).subscribe(message => {
-            console.log(message);
-            this.messages.push(message);
-        });
     }
 
     messageBoardUpdate() {
-        // this.chatService.messageBoardUpdate(this.message, this.currentUser);
-
-        this.chatService.sendSocketMsg(this.project.name, this.message, this.currentUser);
+        this.chatService.sendMessage(this.project.name, this.message, this.currentUser);
         this.message = '';
     }
 

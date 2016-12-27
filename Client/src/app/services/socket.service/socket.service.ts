@@ -7,68 +7,24 @@ export class ChatService {
   private name: string;
   private socket: SocketIOClient.Socket;
 
-  sendMessage(message) {
-    this.socket.emit('chat message', message);
+  constructor() {
+    this.socket = io(this.url);
   }
 
   getMessages(projectName: string) {
     let observable = new Observable(observer => {
-      this.socket = io(this.url);
       this.socket.on(projectName, (data) => {
         observer.next(data);
       });
-      return () => {
-        this.socket.disconnect();
-      };
-    })
+    });
     return observable;
   }
 
-  sendSocketMsg(projectName: string, message: string, userName: string) {
+  sendMessage(projectName: string, message: string, userName: string) {
     this.socket.emit(projectName, message, userName);
   }
-  messageBoardUpdate(message, userName, date) {
-    this.socket.emit('message-board-update', message, userName, date);
-  }
-
 
   createEvent(projectName: string) {
     this.socket.emit('create event', projectName);
-  }
-  // get(name: string): Observable<any> {
-  //       this.name = name;
-  //       let socketUrl = this.url;
-  //       this.socket = io.connect(socketUrl);
-  //       this.socket.on("connect", () => this.connect());
-  //       this.socket.on("disconnect", () => this.disconnect());
-  //       this.socket.on("error", (error: string) => {
-  //           console.log(`ERROR: "${error}" (${socketUrl})`);
-  //       });
-
-  //       // Return observable which follows "create" and "remove" signals from socket stream
-  //       return Observable.create((observer: any) => {
-  //           this.socket.on("create", (item: any) => observer.next({ action: "create", item: item }) );
-  //           this.socket.on("remove", (item: any) => observer.next({ action: "remove", item: item }) );
-  //           return () => this.socket.close();
-  //       });
-  //   }
-
-  get(name: string) {
-    this.socket = io(this.url);
-    this.socket.emit('get', name);
-  }
-
-  getMessageBoard() {
-    let observable = new Observable(observer => {
-      this.socket = io(this.url);
-      this.socket.on('message-board-update', (data) => {
-        console.log(data);
-        observer.next(data);
-      });
-      return () => {
-        this.socket.disconnect();
-      };
-    })
-    return observable;
   }
 }

@@ -19,11 +19,11 @@ export class ChatPage implements OnInit, OnDestroy {
     sendMessage() {
         this.chatService.sendMessage(this.message);
         this.message = '';
-        this.chatService.sendSocketMsg('test', 'Raboti dee');
+        this.chatService.sendSocketMsg('test', 'Raboti dee', 'some');
     }
 
     ngOnInit() {
-        this.connection = this.chatService.getMessages().subscribe(message => {
+        this.connection = this.chatService.getMessages('Test').subscribe(message => {
             this.messages.push(message);
         })
         this.chatService.createEvent('test');
