@@ -25,6 +25,7 @@
     "@progress/kendo-angular-grid": "^0.8.2",
     "@progress/kendo-data-query": "^0.3.4",
     "@telerik/kendo-theme-default": "^1.33.0",
+    "@types/socket.io-client": "^1.4.29",
     "angular2-jwt": "^0.1.27",
     "auth0-lock": "^10.7.3",
     "bootstrap": "^3.3.7",
