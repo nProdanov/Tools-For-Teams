@@ -12,21 +12,25 @@ export class ChatService {
   }
 
   getMessages(projectName: string) {
-      let observable = new Observable(observer => {
-        this.socket = io(this.url);
-        this.socket.on(projectName, (data) => {
-          observer.next(data);    
-        });
-        return () => {
-          this.socket.disconnect();
-        };  
-      })     
-      return observable;
+    let observable = new Observable(observer => {
+      this.socket = io(this.url);
+      this.socket.on(projectName, (data) => {
+        observer.next(data);
+      });
+      return () => {
+        this.socket.disconnect();
+      };
+    })
+    return observable;
   }
 
   sendSocketMsg(projectName: string, message: string, userName: string) {
     this.socket.emit(projectName, message, userName);
   }
+  messageBoardUpdate(message, userName, date) {
+    this.socket.emit('message-board-update', message, userName, date);
+  }
+
 
   createEvent(projectName: string) {
     this.socket.emit('create event', projectName);
@@ -49,25 +53,22 @@ export class ChatService {
   //       });
   //   }
 
-    get(name: string) {
-      this.socket = io(this.url);
-        this.socket.emit('get', name);
-    }
-  messageBoardUpdate(message, userName) {
-    this.socket.emit('message-board-update', message, userName);
+  get(name: string) {
+    this.socket = io(this.url);
+    this.socket.emit('get', name);
   }
 
   getMessageBoard() {
     let observable = new Observable(observer => {
-        this.socket = io(this.url);
-        this.socket.on('message-board-update', (data) => {
-          console.log(data);
-          observer.next(data);    
-        });
-        return () => {
-          this.socket.disconnect();
-        };  
-      })     
-      return observable;
+      this.socket = io(this.url);
+      this.socket.on('message-board-update', (data) => {
+        console.log(data);
+        observer.next(data);
+      });
+      return () => {
+        this.socket.disconnect();
+      };
+    })
+    return observable;
   }
 }

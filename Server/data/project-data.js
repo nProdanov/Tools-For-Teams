@@ -1,7 +1,7 @@
 /* globals module Promise */
 
 module.exports = function (models) {
-    let { Project } = models;
+    let { Project, User } = models;
 
     return {
         createProject(creator, name, description) {
@@ -24,7 +24,8 @@ module.exports = function (models) {
                         Project,
                         creator,
                         name,
-                        description
+                        description,
+                        projectMembers: [creator]
                     })
 
                     project.save((err) => {
@@ -69,14 +70,26 @@ module.exports = function (models) {
                     }
 
                     project.save((err) => {
-                        if(err) {
+                        if (err) {
                             return reject(err);
                         }
 
                         return resolve(project);
                     });
                 });
-            });
+            })
+                .then(project => {
+                    User.findOne({ username }, (err, user) => {
+                        if (err) {
+                            return Promise.reject(err);
+                        }
+
+                        if (user) {
+                            user.projects.push({ id, name: project.name });
+                            return Promise.resolve(project);
+                        }
+                    });
+                });
         }
     };
 };

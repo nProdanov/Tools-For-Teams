@@ -25,7 +25,7 @@ export class NewProjectPage implements PageComponent, OnInit {
             tasks: [],
             projectMembers: []
         };
-        
+
         this.storageService
             .getProfileItem()
             .subscribe(resProfile => {
@@ -36,6 +36,7 @@ export class NewProjectPage implements PageComponent, OnInit {
 
     saveProject() {
         this.projectService.saveProject(this.project).subscribe((resProject) => {
+            console.log(resProject);
             this.userService
                 .addProject(this.profile.id, resProject._id, resProject.name)
                 .subscribe(res => {

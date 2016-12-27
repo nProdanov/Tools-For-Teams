@@ -12,6 +12,7 @@ export class MessageBoardComponent implements OnInit, OnDestroy {
     message;
     currentUser;
     @Input() projectName;
+    messageDate: Date;
 
     constructor(private chatService: ChatService, private storageService: StorageService, public elRef: ElementRef) {
         this.storageService.getProfileItem().subscribe(res => this.currentUser = res.username);
@@ -21,7 +22,10 @@ export class MessageBoardComponent implements OnInit, OnDestroy {
         // this.chatService.messageBoardUpdate(this.message, this.currentUser);
 
         this.chatService.sendSocketMsg(this.projectName, this.message, this.currentUser);
+        this.messageDate = new Date();
+        this.chatService.messageBoardUpdate(this.message, this.currentUser, this.messageDate);
         this.message = '';
+        this.messageDate = null;
     }
 
     ngOnInit() {

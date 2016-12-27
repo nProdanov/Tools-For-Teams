@@ -32,6 +32,9 @@ import { TaskService } from '../../services/task.service/task.service';
 import { StorageService } from '../../services/storage.service/storage.service';
 import { ChatService } from '../../services/socket.service/socket.service';
 
+//  Pipes
+import { FormatDatePipe } from './../../pipes/date.pipe'
+
 @NgModule({
   imports: [
     BrowserModule,
@@ -53,7 +56,8 @@ import { ChatService } from '../../services/socket.service/socket.service';
     MyProjectsPage,
     ProjectDetailsPage,
     ChatPage,
-    MessageBoardComponent
+    MessageBoardComponent,
+    FormatDatePipe
   ],
   bootstrap: [AppComponent],
   providers: [

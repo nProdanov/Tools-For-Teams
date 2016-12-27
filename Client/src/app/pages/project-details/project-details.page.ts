@@ -80,6 +80,7 @@ export class ProjectDetailsPage implements PageComponent, OnInit, OnDestroy {
     }
 
     addNewTask() {
+        this.project.tasks.push(this.newTask);
         this.taskService.saveTask(this.newTask)
             .subscribe((res: any) => {
                 if (res.error) {
@@ -102,11 +103,16 @@ export class ProjectDetailsPage implements PageComponent, OnInit, OnDestroy {
     }
 
     addUserToProject() {
-        this.projectService.addUserToProject(this.newTask.projectId, this.userToAdd)
-            .subscribe((res: any) => {
-                // should add validation for already existing user
-                this.toastr.success('User added to project!');
-            });
+        if (this.project.projectMembers.indexOf(this.userToAdd) < 0) {
+            this.projectService.addUserToProject(this.newTask.projectId, this.userToAdd)
+                .subscribe((res: any) => {
+                    this.project.projectMembers.push(this.userToAdd);
+                    this.toastr.success('User added to project!');
+                });
+        }
+        else {
+            this.toastr.error('User already works on this project');
+        }
     }
 
     ngOnDestroy() {
