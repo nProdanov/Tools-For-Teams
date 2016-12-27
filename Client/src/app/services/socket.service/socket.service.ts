@@ -11,10 +11,10 @@ export class ChatService {
     this.socket.emit('chat message', message);
   }
 
-  getMessages() {
+  getMessages(projectName: string) {
       let observable = new Observable(observer => {
         this.socket = io(this.url);
-        this.socket.on('chat', (data) => {
+        this.socket.on(projectName, (data) => {
           observer.next(data);    
         });
         return () => {
@@ -24,8 +24,8 @@ export class ChatService {
       return observable;
   }
 
-  sendSocketMsg(projectName: string, message: string) {
-    this.socket.emit(projectName, message);
+  sendSocketMsg(projectName: string, message: string, userName: string) {
+    this.socket.emit(projectName, message, userName);
   }
 
   createEvent(projectName: string) {
