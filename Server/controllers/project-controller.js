@@ -7,8 +7,11 @@ module.exports = function (params) {
             let project = req.body;
 
             data.createProject(project.creator, project.name, project.description)
-                .then(project => {
-                    res.json(project);
+                .then((project) => {
+                    return data.createProjectChat(project.name);
+                })
+                .then(() => {
+                    res.json({ message: "Successfully created new project" });
                 })
                 .catch(err => {
                     res.json(err);
