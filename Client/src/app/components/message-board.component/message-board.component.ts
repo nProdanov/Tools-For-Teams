@@ -12,14 +12,17 @@ export class MessageBoardComponent implements OnInit, OnDestroy {
     connection;
     message;
     currentUser;
+    messageDate: Date;
 
     constructor(private chatService: ChatService, private storageService: StorageService) { 
         this.storageService.getProfileItem().subscribe(res => this.currentUser = res.username);
     }
 
     messageBoardUpdate() {
-        this.chatService.messageBoardUpdate(this.message, this.currentUser);
+        this.messageDate = new Date();
+        this.chatService.messageBoardUpdate(this.message, this.currentUser, this.messageDate);
         this.message = '';
+        this.messageDate = null;
     }
 
     ngOnInit() {

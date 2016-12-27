@@ -31,6 +31,9 @@ import { UserService } from '../../services/user.service/user.service';
 import { TaskService } from '../../services/task.service/task.service';
 import { StorageService } from '../../services/storage.service/storage.service';
 
+//  Pipes
+import { FormatDatePipe } from './../../pipes/date.pipe'
+
 @NgModule({
   imports: [
     BrowserModule,
@@ -52,7 +55,8 @@ import { StorageService } from '../../services/storage.service/storage.service';
     MyProjectsPage,
     ProjectDetailsPage,
     ChatPage,
-    MessageBoardComponent
+    MessageBoardComponent,
+    FormatDatePipe
   ],
   bootstrap: [AppComponent],
   providers: [

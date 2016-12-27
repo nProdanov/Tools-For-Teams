@@ -23,8 +23,8 @@ export class ChatService {
       return observable;
   }
 
-  messageBoardUpdate(message, userName) {
-    this.socket.emit('message-board-update', message, userName);
+  messageBoardUpdate(message, userName, date) {
+    this.socket.emit('message-board-update', message, userName, date);
   }
 
   getMessageBoard() {

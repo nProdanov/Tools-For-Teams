@@ -15,8 +15,8 @@ module.exports = function({ server }) {
             io.emit('chat', { type: 'new-message', text: message });
         });
 
-        socket.on('message-board-update', (message, userName) => {
-            io.emit('message-board-update', { type: 'new-message-board', text: message, userName: userName });
+        socket.on('message-board-update', (message, userName, date) => {
+            io.emit('message-board-update', { type: 'new-message-board', text: message, userName: userName, date: date });
         });
     });
 
