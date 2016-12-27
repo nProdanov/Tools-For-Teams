@@ -24,6 +24,10 @@ export class ChatService {
       return observable;
   }
 
+  messageBoardUpdate(message, userName, date) {
+    this.socket.emit('message-board-update', message, userName, date);
+  }
+
   sendSocketMsg(projectName: string, message: string) {
     this.socket.emit(projectName, message);
   }
@@ -53,9 +57,6 @@ export class ChatService {
       this.socket = io(this.url);
         this.socket.emit('get', name);
     }
-  messageBoardUpdate(message, userName) {
-    this.socket.emit('message-board-update', message, userName);
-  }
 
   getMessageBoard() {
     let observable = new Observable(observer => {
