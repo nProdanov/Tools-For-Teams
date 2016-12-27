@@ -4,6 +4,7 @@ import { Project } from '../../models/project.model/project.model';
 import { ProjectService } from '../../services/project.service/project.service';
 import { UserService } from '../../services/user.service/user.service';
 import { ToastsManager } from 'ng2-toastr';
+import { StorageService } from '../../services/storage.service/storage.service';
 
 @Component({
     templateUrl: './new-project.page.html'
@@ -12,8 +13,8 @@ export class NewProjectPage implements PageComponent, OnInit {
     public profile: any;
     public project: Project;
 
-    constructor(private toastr: ToastsManager, private projectService: ProjectService, private userService: UserService) {
-        this.profile = JSON.parse(localStorage.getItem('profile'));
+    constructor(private storageService: StorageService, private toastr: ToastsManager, private projectService: ProjectService, private userService: UserService) {
+        this.profile = {};
     }
 
     ngOnInit() {
@@ -24,8 +25,13 @@ export class NewProjectPage implements PageComponent, OnInit {
             tasks: [],
             projectMembers: []
         };
-
-        this.project.creator = this.profile.username;
+        
+        this.storageService
+            .getProfileItem()
+            .subscribe(resProfile => {
+                this.profile = resProfile;
+                this.project.creator = this.profile.username;
+            });
     }
 
     saveProject() {

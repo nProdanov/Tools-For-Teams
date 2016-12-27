@@ -9,6 +9,7 @@ import { UserService } from '../../services/user.service/user.service';
 import { TaskService } from '../../services/task.service/task.service';
 import { ToastsManager } from 'ng2-toastr';
 import { Ng2AutoComplete } from 'ng2-auto-complete';
+import { StorageService } from '../../services/storage.service/storage.service';
 
 @Component({
     templateUrl: './project-details.page.html'
@@ -22,29 +23,36 @@ export class ProjectDetailsPage implements PageComponent, OnInit {
     public userToAdd: string;
 
     constructor(
+        private StorageService: StorageService,
         private toastr: ToastsManager,
         private projectService: ProjectService,
         private route: ActivatedRoute,
         private userService: UserService,
         private taskService: TaskService) {
-        this.profile = JSON.parse(localStorage.getItem('profile'));
+        this.profile = {};
         this.project = { creator: '', name: '', description: '', tasks: [], projectMembers: [] };
         this.newTask = { projectId: '', title: '', description: '', timeForExecution: '', cost: 0, status: '', users: [] };
     }
 
     ngOnInit() {
-        this.route.params
-            .switchMap((params: Params) => {
-                this.newTask.projectId = params['id'];
-                return this.projectService.getProjectById(params['id'])
-            })
-            .subscribe((project: Project) => {
-                this.project = project;
-            });
+        this.StorageService
+            .getProfileItem()
+            .subscribe(resProfile => {
+                this.profile = resProfile;
 
-        this.userService.getAllUsers().subscribe((users: any) => {
-            this.users = users;
-        });
+                this.route.params
+                    .switchMap((params: Params) => {
+                        this.newTask.projectId = params['id'];
+                        return this.projectService.getProjectById(params['id'])
+                    })
+                    .subscribe((project: Project) => {
+                        this.project = project;
+                    });
+
+                this.userService.getAllUsers().subscribe((users: any) => {
+                    this.users = users;
+                });
+            });
     }
 
     addNewTask() {
