@@ -39,7 +39,7 @@ export class UserService {
         return this.http.get(this.projectUrl)
             .map(res => {
                 let resJson = res.json();
-                let users = resJson.map(u => u.username).filter(u => u !== this.profile.username);
+                let users = resJson.map(u => u.username);
                 return users;
             });
     }

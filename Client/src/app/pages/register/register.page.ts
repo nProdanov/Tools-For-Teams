@@ -17,7 +17,7 @@ export class RegisterPage implements OnInit {
     genders: any[];
 
     constructor(private auth: Auth, private userService: UserService) {
-        this.userToRegister = { username: '' };
+        this.userToRegister = {};
         this.isUsernameValid = false;
         this.users = [];
         this.confirmPassword = '';
