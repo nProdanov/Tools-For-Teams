@@ -14,7 +14,7 @@ import { Observable } from 'rxjs';
 })
 export class MyProjectsPage implements PageComponent, OnInit {
     public profile: any;
-    public projects: Project[];
+    public projects: any[];
     private sort: SortDescriptor[] = [];
     private gridView: GridDataResult;
     private pageSize: number = 5;
@@ -23,7 +23,7 @@ export class MyProjectsPage implements PageComponent, OnInit {
     constructor(private userService: UserService, private storageService: StorageService, private router: Router, private projectService: ProjectService) {
         this.profile = {};
     }
-    // filter the project without getting the messages
+    
     ngOnInit() {
         this.storageService
             .getProfileItem()
@@ -34,7 +34,7 @@ export class MyProjectsPage implements PageComponent, OnInit {
                     .subscribe(resUser => {
                         let projectsObservables: Observable<any>[] = [];
                         resUser.projects.forEach(proj => {
-                            projectsObservables.push(this.projectService.getProjectById(proj.id));
+                            projectsObservables.push(this.projectService.getMappedProjectById(proj.id));
                         });
 
                         Observable

@@ -6,7 +6,7 @@ export const appRoutes: Routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full'},
     { path: 'home', component: pages.home },
     { path: 'login', component: pages.login },
-    { path: 'login-callback', redirectTo: '/', pathMatch: 'full' },
+    { path: 'login-callback', redirectTo: '/home', pathMatch: 'full' },
     { path: 'register', component: pages.register },
     { path: 'profile', component: pages.profile, canActivate: [AuthGuard] },
     { path: 'my-projects', component: pages.myProjects },
