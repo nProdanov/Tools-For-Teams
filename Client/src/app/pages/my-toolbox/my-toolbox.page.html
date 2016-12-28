@@ -1,38 +1,38 @@
 <div class="container">
     <h2 class="text-center">Toolbox</h2>
+    <h2> TODO: ADD CHARTS WITH BOOTSTRAP </h2>
     <div class="panel-group">
-        <div class="panel panel-default">
-            <div class="panel-heading text-center row row-list">
-                <nav id="primary_nav_wrap">
-                    <ul>
-                        <li>
-                            <div class="col-xs-4">
-                                <a href="my-toolbox" data-toggle="tooltip" title="Create and manage charts">
-                                    <h3>Charts</h3>
-                                </a>
-                                <ul>
-                                    <li>
-
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="col-xs-4">
-                                <a href="my-toolbox" data-toggle="tooltip" title="Create and manage documents">
-                                    <h3>Documents</h3>
-                                </a>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="col-xs-4">
-                                <a href="my-toolbox" data-toggle="tooltip" title="Add more features">
-                                    <h3>Add more</h3>
-                                </a>
-                            </div>
-                        </li>
-                    </ul>
-                </nav>
+        <div class="text-center row row-list">
+            <div class="col-xs-4">
+                <button id="btn-one" #btnOne (click)="toggleMove(btnOne.id)" class="btn btn-success btn-block" data-toggle="tooltip" title="Create and manage charts">
+                    <h3>Charts</h3>
+                </button>
+                <div id="content" [@flyInOut]='stateOne' class="list-group">
+                    <div class="list-group-item">
+                        <h4>Choose the project</h4>
+                    </div>
+                    <a href="#" class="list-group-item" *ngFor="let project of projects">
+                        <h4>Project name: {{project.name}}</h4>
+                    </a>
+                </div>
+            </div>
+            <div class="col-xs-4">
+                <button id="btn-two" #btnTwo (click)="toggleMove(btnTwo.id)" class="btn btn-success btn-block" data-toggle="tooltip" title="Create and manage documents">
+                    <h3>Documents</h3>
+                </button>
+                <div id="content" [@flyInOut]='stateTwo' class="list-group">
+                    <div class="list-group-item">
+                        <h4>Choose the project</h4>
+                    </div>
+                    <a href="#" class="list-group-item" *ngFor="let project of projects">
+                        <h4>Project name: {{project.name}}</h4>
+                    </a>
+                </div>
+            </div>
+            <div class="col-xs-4">
+                <button class="btn btn-success btn-block" data-toggle="tooltip" title="Add more features">
+                    <h3>Add more</h3>
+                </button>
             </div>
         </div>
     </div>
