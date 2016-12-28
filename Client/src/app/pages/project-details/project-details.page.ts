@@ -78,7 +78,7 @@ export class ProjectDetailsPage implements PageComponent, OnInit, OnDestroy {
             message: this.message
         };
 
-        this.projectService.saveMessage(messageToSend).subscribe(() => {});
+        this.projectService.saveMessage(messageToSend).subscribe(() => { });
         this.chatService.sendMessage(this.project.name, this.message, this.currentUser);
         this.message = '';
     }

@@ -38,11 +38,10 @@ export class NewProjectPage implements PageComponent, OnInit {
             .subscribe(resProfile => {
                 this.profile = resProfile;
                 this.project.creator = this.profile.username;
-
+                this.project.name = this.project.name.trim();
                 this.projectService
                     .saveProject(this.project)
                     .subscribe((resProject) => {
-                        console.log(resProject);
                         this.userService
                             .addProject(this.profile.id, resProject._id, resProject.name)
                             .subscribe(res => {

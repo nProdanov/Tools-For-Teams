@@ -32,21 +32,26 @@ export class ProjectService {
     }
 
     addUserToProject(id: string, username: string) {
-        return this.http.put(`${this.projectUrl}/${id}`, { username }).map(res => { 
-            return res.json()
-         });
+        return this.http.put(`${this.projectUrl}/${id}`, { username })
+            .map(response => {
+                let data = response.json();
+                return data;
+            });
     }
 
     saveMessage(body: Message): Observable<any> {
         return this.http.post(this.messageUrl, body)
             .map(response => {
-                console.log(response);
                 let data = response.json();
                 return data;
             })
     }
 
     saveProject(body: Project): Observable<any> {
-        return this.http.post(this.projectUrl, body);
+        return this.http.post(this.projectUrl, body)
+            .map(response => {
+                let data = response.json();
+                return data;
+            });
     }
 };
