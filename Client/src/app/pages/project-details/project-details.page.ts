@@ -13,7 +13,8 @@ import { Ng2AutoComplete } from 'ng2-auto-complete';
 import { StorageService } from '../../services/storage.service/storage.service';
 
 @Component({
-    templateUrl: './project-details.page.html'
+    templateUrl: './project-details.page.html',
+    styleUrls: ['./project-datils.page.css']
 })
 export class ProjectDetailsPage implements PageComponent, OnInit, OnDestroy {
     public profile: any;
@@ -84,13 +85,13 @@ export class ProjectDetailsPage implements PageComponent, OnInit, OnDestroy {
     }
 
     addNewTask() {
-        this.project.tasks.push(this.newTask);
         this.taskService.saveTask(this.newTask)
             .subscribe((res: any) => {
                 if (res.error) {
                     this.toastr.error(res.error);
                 } else {
-                    this.toastr.success(res.message);
+                    this.project.tasks.push(res);
+                    this.toastr.success("Task added successfully.");
                 }
 
                 this.newTask.users = [];

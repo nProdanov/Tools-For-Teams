@@ -34,23 +34,22 @@ module.exports = function (models) {
                 });
             })
                 .then((newTask) => {
-                    Project.findOne({ _id: newTask.projectId }, (err, project) => {
-                        if (err) {
-                            return Promise.reject(err);
-                        }
-
-                        project.tasks.push(newTask);
-                        project.save((err) => {
+                    return new Promise((resolve, reject) => {
+                        Project.findOne({ _id: newTask.projectId }, (err, project) => {
                             if (err) {
                                 return Promise.reject(err);
                             }
 
-                            return Promise.resolve(project);
+                            project.tasks.push(newTask);
+                            project.save((err) => {
+                                if (err) {
+                                    return reject(err);
+                                }
+                                
+                                return resolve(newTask);
+                            });
                         });
                     });
-                })
-                .then((project) => {
-                    return Promise.resolve({ message: "Task added successfully!" });
                 });
         }
     };
