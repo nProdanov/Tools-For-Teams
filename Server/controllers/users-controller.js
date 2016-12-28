@@ -2,7 +2,7 @@
 
 const REQUIRED_POINTS_PER_STAR = 45;
 
-module.exports = function (params) {
+module.exports = function(params) {
     let { data, validator } = params;
     return {
         createUser(req, res) {
@@ -40,6 +40,15 @@ module.exports = function (params) {
                 .catch(err => {
                     res.json(err);
                 });
+        },
+        getAllProjectsByUserId(req, res) {
+            data.getAllProjectsByUserId(req.params.userId)
+                .then((response) => {
+                    res.json(response);
+                })
+                .catch(err => {
+                    res.json(err);
+                })
         }
     };
 };

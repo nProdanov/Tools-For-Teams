@@ -3,33 +3,33 @@
 const dataUtils = require("./utils/data-utils");
 const encrypt = require("../utils/encryption");
 
-module.exports = function (models, validator) {
+module.exports = function(models, validator) {
     let { User } = models;
 
     return {
-        createUser({id, username, firstName, lastName, email, gender, picture, company}) {
+        createUser({ id, username, firstName, lastName, email, gender, picture, company }) {
             return new
-                Promise((resolve, reject) => {
+            Promise((resolve, reject) => {
 
-                    let user = new User({
-                        id,
-                        username,
-                        firstName,
-                        lastName,
-                        picture,
-                        email,
-                        gender,
-                        company
-                    });
-
-                    user.save(err => {
-                        if (err) {
-                            return reject(err);
-                        }
-
-                        return resolve(user);
-                    });
+                let user = new User({
+                    id,
+                    username,
+                    firstName,
+                    lastName,
+                    picture,
+                    email,
+                    gender,
+                    company
                 });
+
+                user.save(err => {
+                    if (err) {
+                        return reject(err);
+                    }
+
+                    return resolve(user);
+                });
+            });
         },
         getUserById(id) {
             return new Promise((resolve, reject) => {
@@ -55,18 +55,18 @@ module.exports = function (models, validator) {
         },
         addProjectToUser(userId, project) {
             return new Promise((resolve, reject) => {
-                User.findOne({ id: userId }, (err, user) => {
-                    if (err) {
-                        return reject(err);
-                    }
+                    User.findOne({ id: userId }, (err, user) => {
+                        if (err) {
+                            return reject(err);
+                        }
 
-                    if (user) {
-                        return resolve(user);
-                    }
+                        if (user) {
+                            return resolve(user);
+                        }
 
-                    return reject("user not found");
-                });
-            })
+                        return reject("user not found");
+                    });
+                })
                 .then(user => {
                     let projectToAdd = {
                         id: project.projectId,
@@ -83,6 +83,19 @@ module.exports = function (models, validator) {
 
                     return Promise.resolve(user);
                 });
+        },
+        getAllProjectsByUserId(userId) {
+            return new Promise((resolve, reject) => {
+                User.findOne({ userId }, (err, user) => {
+                    if (err) {
+                        return reject(err);
+                    }
+
+                    let projects = user.projects;
+
+                    return resolve(projects || null);
+                });
+            });
         }
     };
 };

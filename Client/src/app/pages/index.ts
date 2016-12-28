@@ -5,6 +5,7 @@ import { RegisterPage } from './register/register.page';
 import { HomePage } from './home/home.page';
 import { MyProjectsPage } from './my-projects/my-projects.page';
 import { ProjectDetailsPage } from './project-details/project-details.page';
+import { ToolboxPage } from './my-toolbox/my-toolbox.page';
 
 export const pages = {
     profile: ProfilePage,
@@ -13,5 +14,6 @@ export const pages = {
     register: RegisterPage,
     home: HomePage,
     myProjects: MyProjectsPage,
-    projectDetails: ProjectDetailsPage
+    projectDetails: ProjectDetailsPage,
+    myToolbox: ToolboxPage
 };
