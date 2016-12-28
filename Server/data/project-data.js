@@ -47,12 +47,11 @@ module.exports = function (models) {
                 })
             })
                 .then((project) => {
-                    let messages = project.messages;
-                    messages
+                    let messages = project.messages
                         .sort((a, b) => {
-                            return b.created < a.created;
+                            return new Date(a.created) - new Date(b.created);
                         })
-                        .slice(0, 11);
+                        .slice(project.messages.length - 10);
 
                     return Promise.resolve(messages);
                 });
