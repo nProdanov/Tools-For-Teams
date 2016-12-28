@@ -67,6 +67,14 @@ export class ProjectDetailsPage implements PageComponent, OnInit, OnDestroy {
     }
 
     messageBoardUpdate() {
+        let messageToSend = {
+            projectName: this.project.name,
+            created: new Date(Date.now()),
+            from: this.currentUser,
+            message: this.message
+        };
+
+        this.projectService.saveMessage(messageToSend).subscribe(() => {});
         this.chatService.sendMessage(this.project.name, this.message, this.currentUser);
         this.message = '';
     }

@@ -23,7 +23,7 @@ export class MyProjectsPage implements PageComponent, OnInit {
     constructor(private userService: UserService, private storageService: StorageService, private router: Router, private projectService: ProjectService) {
         this.profile = {};
     }
-
+    // filter the project without getting the messages
     ngOnInit() {
         this.storageService
             .getProfileItem()

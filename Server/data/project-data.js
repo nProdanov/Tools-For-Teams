@@ -1,7 +1,7 @@
 /* globals module Promise */
 
 module.exports = function (models) {
-    let { Project, User } = models;
+    let { Project, User, Message } = models;
 
     return {
         createProject(creator, name, description) {
@@ -57,6 +57,36 @@ module.exports = function (models) {
                     return resolve(project);
                 })
             });
+        },
+        addMessageToProject(projectName, created, from, message) {
+            return new Promise((resolve, reject) => {
+                Project.findOne({ name: projectName }, (err, project) => {
+                    if (err) {
+                        return reject(err);
+                    }
+
+                    return resolve(project);
+                });
+            })
+                .then((project) => {
+                    return new Promise((resolve, reject) => {
+                        let messageToAdd = new Message({
+                            projectName,
+                            created,
+                            from,
+                            message
+                        });
+
+                        project.messages.push(messageToAdd);
+                        project.save((err) => {
+                            if (err) {
+                                return reject(err);
+                            }
+
+                            return resolve(project);
+                        });
+                    });
+                });
         },
         addUserToProject(id, username) {
             return new Promise((resolve, reject) => {

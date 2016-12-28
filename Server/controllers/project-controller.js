@@ -40,6 +40,12 @@ module.exports = function (params) {
                 .catch((err) => {
                     res.json(err);
                 });
+        },
+        addMessageToProject(req, res) {
+            data.addMessageToProject(req.body.projectName, req.body.created, req.body.from, req.body.message)
+                .catch((err) => {
+                    res.json(err);
+                })
         }
     };
 };
