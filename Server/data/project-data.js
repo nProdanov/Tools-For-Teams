@@ -86,7 +86,13 @@ module.exports = function (models) {
 
                         if (user) {
                             user.projects.push({ id, name: project.name });
-                            return Promise.resolve(project);
+                            user.save((saveErr) => {
+                                if (saveErr) {
+                                    return Promise.reject(saveErr);
+                                }
+
+                                return Promise.resolve(project);
+                            });
                         }
                     });
                 });
