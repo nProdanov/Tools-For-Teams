@@ -5,10 +5,8 @@ module.exports = function({ server, data }) {
     const io = require("socket.io")(server);
 
     io.on('connection', (socket) => {
-        console.log('user connected');
 
         socket.on('disconnect', function() {
-            console.log('user disconnected');
         });
 
         socket.on('chat message', (message) => {
@@ -22,7 +20,7 @@ module.exports = function({ server, data }) {
 
     function attachEvent(socket, projectName) {
         socket.on(projectName, (message, userName) => {
-            io.emit(projectName, { type: 'new-message-board', text: message, userName: userName });
+            io.emit(projectName, { type: 'new-message-board', message: message, from: userName });
         });
     }
 

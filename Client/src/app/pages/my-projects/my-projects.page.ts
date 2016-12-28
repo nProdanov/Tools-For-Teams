@@ -68,7 +68,7 @@ export class MyProjectsPage implements PageComponent, OnInit {
     }
 
     private onSelect(e) {
-        this.router.navigateByUrl(`/project-details/${this.gridView.data[e.index]._id}`);
+        this.router.navigateByUrl(`/project-details/${this.gridView.data[e.index % this.pageSize]._id}`);
     }
 
     private loadProjects(): void {

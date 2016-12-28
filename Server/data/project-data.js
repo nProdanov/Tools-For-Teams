@@ -36,6 +36,26 @@ module.exports = function (models) {
                     return Promise.resolve(project);
                 });
         },
+        getLastTenMessages(name) {
+            return new Promise((resolve, reject) => {
+                Project.findOne({ name }, (err, project) => {
+                    if (err) {
+                        return reject(err);
+                    }
+
+                    return resolve(project);
+                })
+            })
+                .then((project) => {
+                    let messages = project.messages
+                        .sort((a, b) => {
+                            return new Date(a.created) - new Date(b.created);
+                        })
+                        .slice(project.messages.length - 10);
+
+                    return Promise.resolve(messages);
+                });
+        },
         getAllProjects() {
             return new Promise((resolve, reject) => {
                 Project.find({}, (err, projects) => {

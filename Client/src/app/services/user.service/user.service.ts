@@ -47,7 +47,8 @@ export class UserService {
     addProject(userId: string, projectId: string, projectName: string) {
         let url = `${this.projectUrl}/${userId}/projects`;
         let body = { projectId, projectName };
-
+        console.log(url);
+        console.log(body);
         return this
             .http
             .post(url, body)

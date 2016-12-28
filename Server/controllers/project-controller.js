@@ -5,7 +5,6 @@ module.exports = function (params) {
     return {
         createProject(req, res) {
             let project = req.body;
-
             data.createProject(project.creator, project.name, project.description)
                 .then((project) => {
                     res.json(project);
@@ -43,9 +42,21 @@ module.exports = function (params) {
         },
         addMessageToProject(req, res) {
             data.addMessageToProject(req.body.projectName, req.body.created, req.body.from, req.body.message)
+                .then(() => {
+                    res.json({});
+                })
                 .catch((err) => {
                     res.json(err);
                 })
+        },
+        getLastTenMessages(req, res) {
+            data.getLastTenMessages(req.params.name)
+                .then((messages) => {
+                    res.json(messages);
+                })
+                .catch((err) => {
+                    res.json(err);
+                });
         }
     };
 };

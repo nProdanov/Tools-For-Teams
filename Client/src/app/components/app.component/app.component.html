@@ -1,6 +1,7 @@
 <nav class="navbar navbar-default">
     <div class="container-fluid text-center">
-        <div class="navbar-header"><button class="navbar-toggle collapsed btn btn-success" type="button" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar">        </span></button></div>
+        <div class="navbar-header"><button class="navbar-toggle collapsed btn btn-success" type="button" data-toggle="collapse" data-target="#navbar-collapse"
+                aria-expanded="false"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar">        </span></button></div>
         <div class="collapse navbar-collapse" id="navbar-collapse">
             <ul class="nav navbar-nav">
                 <li><a class="navbar-brand" routerLink="/home">The App</a></li>
@@ -9,12 +10,13 @@
                 <li><a routerLink="/my-toolbox" routerLinkActive="active" *ngIf="service.authenticated()">My Toolbox</a></li>
                 <li>
                     <form class="navbar-form navbar-left form-group form-inline" role="search" action="/search" method="get">
-                        <div class="col-md-1 search-bar"><input class="searchUsers form-control" id="search-input" type="text" name="username" placeholder="Find user" /><button class="btn btn-danger serch-icon"><span class="glyphicon glyphicon-search">                       </span></button></div>
+                        <div class="col-md-1 search-bar"><input class="searchUsers form-control" id="search-input" type="text" name="username" placeholder="Find user"
+                            /><button class="btn btn-danger serch-icon"><span class="glyphicon glyphicon-search">                       </span></button></div>
                     </form>
                 </li>
             </ul>
             <div class="nav navbar-nav navbar-right">
-                <a class="btn btn-default" routerLink="/new-project" *ngIf="service.authenticated()">New Project</a>
+                <a class="btn btn-default" (click)="newProjectVisible = !newProjectVisible" *ngIf="service.authenticated()">New Project</a>
                 <a class="btn btn-default" routerLink="/login" *ngIf="!service.authenticated()">Login</a>
                 <a class="btn btn-default" routerLink="/register" *ngIf="!service.authenticated()">Register</a>
                 <a class="btn btn-default" (click)="service.logout()" *ngIf="service.authenticated()">Logout</a>
@@ -24,4 +26,5 @@
 </nav>
 <router-outlet>
 </router-outlet>
+<new-project [hidden]="!newProjectVisible || !service.authenticated()"></new-project>
 <footer>App footer</footer>

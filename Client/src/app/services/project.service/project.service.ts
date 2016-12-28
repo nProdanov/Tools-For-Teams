@@ -19,26 +19,39 @@ export class ProjectService {
         });
     }
 
+    getLastTenMessages(projectName: string): Observable<Message[]> {
+        return this.http.get(`${this.messageUrl}/${projectName}`)
+            .map(response => {
+                let data = response.json();
+                return data;
+            });
+    }
+
     getAllProjectsByUsername(): Observable<any> {
         return this.http.get(this.projectUrl).map(p => p.json());
     }
 
     addUserToProject(id: string, username: string) {
-        return this.http.put(`${this.projectUrl}/${id}`, { username }).map(res => { 
-            return res.json()
-         });
+        return this.http.put(`${this.projectUrl}/${id}`, { username })
+            .map(response => {
+                let data = response.json();
+                return data;
+            });
     }
 
     saveMessage(body: Message): Observable<any> {
         return this.http.post(this.messageUrl, body)
             .map(response => {
-                console.log(response);
                 let data = response.json();
                 return data;
             })
     }
 
     saveProject(body: Project): Observable<any> {
-        return this.http.post(this.projectUrl, body);
+        return this.http.post(this.projectUrl, body)
+            .map(response => {
+                let data = response.json();
+                return data;
+            });
     }
 };
