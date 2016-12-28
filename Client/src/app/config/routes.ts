@@ -10,5 +10,6 @@ export const appRoutes: Routes = [
     { path: 'register', component: pages.register },
     { path: 'profile', component: pages.profile, canActivate: [AuthGuard] },
     { path: 'my-projects', component: pages.myProjects },
-    { path: 'project-details/:id', component: pages.projectDetails }
+    { path: 'project-details/:id', component: pages.projectDetails },
+    { path: 'my-toolbox', component: pages.myToolbox }
 ];
