@@ -1,16 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { PageComponent } from '../../components/page.component/page.component';
 import { Project } from '../../models/project.model/project.model';
 import { ProjectService } from '../../services/project.service/project.service';
 import { UserService } from '../../services/user.service/user.service';
 import { ToastsManager } from 'ng2-toastr';
 import { StorageService } from '../../services/storage.service/storage.service';
+import { ModalDirective } from 'ng2-bootstrap';
 
 @Component({
     selector: 'new-project',
     templateUrl: './new-project.page.html'
 })
 export class NewProjectPage implements PageComponent, OnInit {
+    @ViewChild('childModal') public childModal: ModalDirective;
+
     public profile: any;
     public project: Project;
 
@@ -32,6 +35,14 @@ export class NewProjectPage implements PageComponent, OnInit {
         };
     }
 
+    public showChildModal(): void {
+        this.childModal.show();
+    }
+
+    public hideChildModal(): void {
+        this.childModal.hide();
+    }
+
     saveProject() {
         this.storageService
             .getProfileItem()
@@ -49,6 +60,5 @@ export class NewProjectPage implements PageComponent, OnInit {
                             });
                     });
             });
-
     }
 }

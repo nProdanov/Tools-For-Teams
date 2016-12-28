@@ -10,6 +10,7 @@ import { ToastModule } from 'ng2-toastr';
 import { ButtonsModule } from '@progress/kendo-angular-buttons';
 import { GridModule } from '@progress/kendo-angular-grid';
 import { Ng2AutoCompleteModule } from 'ng2-auto-complete';
+import { ModalModule } from 'ng2-bootstrap';
 
 //  Pages
 import { ProfilePage } from '../../pages/profile/profile.page';
@@ -42,7 +43,8 @@ import { FormatDatePipe } from './../../pipes/date.pipe'
     ToastModule,
     ButtonsModule,
     GridModule,
-    Ng2AutoCompleteModule
+    Ng2AutoCompleteModule,
+    ModalModule.forRoot()
   ],
   declarations: [
     AppComponent,

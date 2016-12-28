@@ -1,27 +1,30 @@
-import { Component, OnInit, ViewContainerRef } from '@angular/core';
+import { Component, OnInit, ViewContainerRef, ViewChild } from '@angular/core';
 import { Auth } from '../../services/auth.service/auth.service';
 import { ToastsManager } from 'ng2-toastr';
 import { StorageService } from '../../services/storage.service/storage.service';
-
+import { NewProjectPage } from '../../pages/new-project/new-project.page';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html'
+    selector: 'app-root',
+    templateUrl: './app.component.html'
 })
 export class AppComponent implements OnInit {
-  public profile: any;
-  newProjectVisible : boolean;
+    @ViewChild(NewProjectPage) childModal: NewProjectPage
+    public profile: any;
 
-  constructor(private stroageService: StorageService, private service: Auth, public toastr: ToastsManager, public vRef: ViewContainerRef) {
-    this.toastr.setRootViewContainerRef(vRef);
-    this.profile = {};
-    this.newProjectVisible = false;
-  }
+    constructor(private stroageService: StorageService, private service: Auth, public toastr: ToastsManager, public vRef: ViewContainerRef) {
+        this.toastr.setRootViewContainerRef(vRef);
+        this.profile = {};
+    }
 
-  ngOnInit() {
+    ngOnInit() {
 
-    this.stroageService
-      .getProfileItem()
-      .subscribe(resProfile => this.profile = resProfile);
-  }
+        this.stroageService
+            .getProfileItem()
+            .subscribe(resProfile => this.profile = resProfile);
+    }
+
+    showChildModal() {
+        this.childModal.showChildModal();
+    }
 }
