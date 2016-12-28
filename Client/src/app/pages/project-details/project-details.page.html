@@ -1,30 +1,64 @@
-<div class="container">
-    <div class="row">
-        <div class="col-xs-6">
-            <h4>Details for project: {{project.name}}</h4>
-            <ul>
-                <li>
-                    <h5>People working on this project</h5>
-                    <ul>
-                        <li *ngFor="let user of project.projectMembers">
-                            {{user}}
-                        </li>
+<div id="wrapper">
+    <div id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+            <li class="sidebar-brand">
+                <div class="dropdown">
+                    <button id="dLabel" class="btn btn-default" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Dropdown trigger
+    <span class="caret"></span>
+  </button>
+                    <ul class="dropdown-menu" aria-labelledby="dLabel">
+                        ...
                     </ul>
-                </li>
+                </div>
+            </li>
+            <li class="sidebar-brand">
+                <a href="#">New Task</a>
+            </li>
+            <div *ngIf="project.tasks.length === 0">
                 <li>
-                    <h5>Project tasks</h5>
-                    <p>{{project | json}}</p>
-                    <ul>
-                        <li *ngFor="let task of project.tasks">
-                            {{task.title}}
-                        </li>
-                    </ul>
+                    <span>No tasks yet</span>
                 </li>
-            </ul>
-            <input auto-complete [source]="users" name="userToAdd" [(ngModel)]="userToAdd" type="text" />
-            <button (click)="addUserToProject()">Add user to project</button>
-            <button class="btn btn-info" (click)="visible = !visible">New task</button>
-            <div class="modal-content" [hidden]="!visible" style="width: 300px;">
+            </div>
+            <div *ngIf="project.tasks.length > 0">
+                <li *ngFor="let task of project.tasks">
+                    <a>{{task.title}}</a>
+                </li>
+            </div>
+        </ul>
+    </div>
+    <!-- /#sidebar-wrapper -->
+
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+        <div class="container-fluid">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-6">
+                        <h4>Details for project: {{project.name}}</h4>
+                        <ul>
+                            <li>
+                                <h5>People working on this project</h5>
+                                <ul>
+                                    <li *ngFor="let user of project.projectMembers">
+                                        {{user}}
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <h5>Project tasks</h5>
+                                <p>{{project | json}}</p>
+                                <ul>
+                                    <li *ngFor="let task of project.tasks">
+                                        {{task.title}}
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <input auto-complete [source]="users" name="userToAdd" [(ngModel)]="userToAdd" type="text" />
+                        <button (click)="addUserToProject()">Add user to project</button>
+                        <button class="btn btn-info" (click)="visible = !visible">New task</button>
+                        <div class="modal-content" [hidden]="!visible" style="width: 300px;">-->
 <div class="modal-header">
     <button class="close btn btn-danger" data-dismiss="modal" aria-hidden="true" (click)="visible = !visible">×</button>
     <h4 class="modal-title">New Task</h4>
@@ -117,7 +151,10 @@
     <div *ngFor="let message of messages">
         {{message.from}}: {{message.message}}
     </div>
-    <input [(ngModel)]="message" /><button (click)="messageBoardUpdate()">Send</button>
+    <input [(ngModel)]="message" />
+    <button (click)="messageBoardUpdate()">Send</button>
+</div>
+</div>
 </div>
 </div>
 </div>
