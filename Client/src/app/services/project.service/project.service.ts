@@ -19,6 +19,14 @@ export class ProjectService {
         });
     }
 
+    getLastTenMessages(projectName: string): Observable<Message[]> {
+        return this.http.get(`${this.messageUrl}/${projectName}`)
+            .map(response => {
+                let data = response.json();
+                return data;
+            });
+    }
+
     getAllProjectsByUsername(): Observable<any> {
         return this.http.get(this.projectUrl).map(p => p.json());
     }

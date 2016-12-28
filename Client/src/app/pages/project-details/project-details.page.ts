@@ -58,6 +58,10 @@ export class ProjectDetailsPage implements PageComponent, OnInit, OnDestroy {
                         this.connection = this.chatService.getMessages(this.project.name).subscribe(message => {
                             this.messages.push(message);
                         });
+
+                        this.projectService.getLastTenMessages(this.project.name).subscribe((response) => {
+                            this.messages = response;
+                        });
                     });
 
                 this.userService.getAllUsers().subscribe((users: any) => {
