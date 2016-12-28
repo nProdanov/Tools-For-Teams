@@ -1,7 +1,6 @@
 export interface Message {
-    room: string;
+    projectName: string;
     created: Date;
     from: string;
-    to: string;
-    message: string;
+    message: {};
 }

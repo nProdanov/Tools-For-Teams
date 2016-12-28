@@ -1,7 +1,7 @@
 /* globals module Promise */
 
 module.exports = function (models) {
-    let { Project, User } = models;
+    let { Project, User, Message } = models;
 
     return {
         createProject(creator, name, description) {
@@ -36,6 +36,26 @@ module.exports = function (models) {
                     return Promise.resolve(project);
                 });
         },
+        getLastTenMessages(name) {
+            return new Promise((resolve, reject) => {
+                Project.findOne({ name }, (err, project) => {
+                    if (err) {
+                        return reject(err);
+                    }
+
+                    return resolve(project);
+                })
+            })
+                .then((project) => {
+                    let messages = project.messages
+                        .sort((a, b) => {
+                            return new Date(a.created) - new Date(b.created);
+                        })
+                        .slice(project.messages.length - 10);
+
+                    return Promise.resolve(messages);
+                });
+        },
         getAllProjects() {
             return new Promise((resolve, reject) => {
                 Project.find({}, (err, projects) => {
@@ -57,6 +77,36 @@ module.exports = function (models) {
                     return resolve(project);
                 })
             });
+        },
+        addMessageToProject(projectName, created, from, message) {
+            return new Promise((resolve, reject) => {
+                Project.findOne({ name: projectName }, (err, project) => {
+                    if (err) {
+                        return reject(err);
+                    }
+
+                    return resolve(project);
+                });
+            })
+                .then((project) => {
+                    return new Promise((resolve, reject) => {
+                        let messageToAdd = new Message({
+                            projectName,
+                            created,
+                            from,
+                            message
+                        });
+
+                        project.messages.push(messageToAdd);
+                        project.save((err) => {
+                            if (err) {
+                                return reject(err);
+                            }
+
+                            return resolve(project);
+                        });
+                    });
+                });
         },
         addUserToProject(id, username) {
             return new Promise((resolve, reject) => {

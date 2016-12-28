@@ -1,4 +1,5 @@
 import { Project } from '../../models/project.model/project.model';
+import { Message } from '../../models/message.model/message.model';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map';
@@ -7,6 +8,7 @@ import { Http } from '@angular/http';
 @Injectable()
 export class ProjectService {
     private projectUrl = 'http://localhost:3001/api/projects';
+    private messageUrl = 'http://localhost:3001/api/messages';
 
     constructor(private http: Http) { }
 
@@ -15,6 +17,14 @@ export class ProjectService {
             let data = response.json();
             return data;
         });
+    }
+
+    getLastTenMessages(projectName: string): Observable<Message[]> {
+        return this.http.get(`${this.messageUrl}/${projectName}`)
+            .map(response => {
+                let data = response.json();
+                return data;
+            });
     }
 
     getAllProjectsByUsername(): Observable<any> {
@@ -27,11 +37,16 @@ export class ProjectService {
          });
     }
 
-    saveProject(body: Project): Observable<any> {
-        return this.http.post(this.projectUrl, body)
+    saveMessage(body: Message): Observable<any> {
+        return this.http.post(this.messageUrl, body)
             .map(response => {
+                console.log(response);
                 let data = response.json();
                 return data;
             })
+    }
+
+    saveProject(body: Project): Observable<any> {
+        return this.http.post(this.projectUrl, body);
     }
 };
