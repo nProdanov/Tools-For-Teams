@@ -19,6 +19,13 @@ export class ProjectService {
         });
     }
 
+    getMappedProjectById(id: string): Observable<any> {
+        return this.http.get(`${this.projectUrl}/${id}/filtered`).map(response => {
+            let data = response.json();
+            return data;
+        });
+    }
+
     getLastTenMessages(projectName: string): Observable<Message[]> {
         return this.http.get(`${this.messageUrl}/${projectName}`)
             .map(response => {

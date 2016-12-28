@@ -76,6 +76,33 @@ module.exports = function (models) {
 
                     return resolve(project);
                 })
+            })
+                .then((project) => {
+                    return new Promise((resolve, reject => {
+                        let messages = project.messages
+                            .sort((a, b) => {
+                                return new Date(a.created) - new Date(b.created);
+                            })
+                            .slice(project.messages.length - 10);
+
+                        return resolve(project);
+                    }));
+                });
+        },
+        getProjectByIdMapped(id) {
+            return new Promise((resolve, reject) => {
+                Project.findOne({ _id: id }, (err, project) => {
+                    if (err) {
+                        return reject(err);
+                    }
+
+                    return resolve({
+                        _id: project._id,
+                        name: project.name,
+                        description: project.description,
+                        creator: project.creator
+                    });
+                })
             });
         },
         addMessageToProject(projectName, created, from, message) {

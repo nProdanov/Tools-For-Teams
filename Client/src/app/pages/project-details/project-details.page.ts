@@ -47,7 +47,8 @@ export class ProjectDetailsPage implements PageComponent, OnInit, OnDestroy {
             .getProfileItem()
             .subscribe(resProfile => {
                 this.profile = resProfile;
-
+                // get project with the latest ten messages
+                // user profiles
                 this.route.params
                     .switchMap((params: Params) => {
                         this.newTask.projectId = params['id'];

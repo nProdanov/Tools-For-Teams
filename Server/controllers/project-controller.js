@@ -31,6 +31,15 @@ module.exports = function (params) {
                     res.json(err);
                 })
         },
+        getProjectByIdMapped(req, res) {
+            data.getProjectByIdMapped(req.params.id)
+                .then(mappedProject => {
+                    res.json(mappedProject);
+                })
+                .catch(err => {
+                    res.json(err);
+                })
+        },
         addUserToProject(req, res) {
             data.addUserToProject(req.params.id, req.body.username)
                 .then(() => {

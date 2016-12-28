@@ -3,17 +3,20 @@
         <ul class="sidebar-nav">
             <li class="sidebar-brand">
                 <div class="dropdown">
-                    <button id="dLabel" class="btn btn-default" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    Dropdown trigger
-    <span class="caret"></span>
-  </button>
-                    <ul class="dropdown-menu" aria-labelledby="dLabel">
-                        ...
+                    <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Project members
+  <span class="caret"></span></button>
+                    <ul class="dropdown-menu" style="position: absolute; top:45px; left: 80px;">
+                        <li *ngFor="let user of users">
+                            <a routerLink="#">{{user}}</a>
+                        </li>
                     </ul>
                 </div>
             </li>
             <li class="sidebar-brand">
-                <a href="#">New Task</a>
+                <a (click)="visible = !visible">New Task</a>
+            </li>
+            <li class="sidebar-brand">
+                <a (click)="addUser = !addUser">Add user to project</a>
             </li>
             <div *ngIf="project.tasks.length === 0">
                 <li>
@@ -38,14 +41,6 @@
                         <h4>Details for project: {{project.name}}</h4>
                         <ul>
                             <li>
-                                <h5>People working on this project</h5>
-                                <ul>
-                                    <li *ngFor="let user of project.projectMembers">
-                                        {{user}}
-                                    </li>
-                                </ul>
-                            </li>
-                            <li>
                                 <h5>Project tasks</h5>
                                 <p>{{project | json}}</p>
                                 <ul>
@@ -55,16 +50,17 @@
                                 </ul>
                             </li>
                         </ul>
-                        <input auto-complete [source]="users" name="userToAdd" [(ngModel)]="userToAdd" type="text" />
-                        <button (click)="addUserToProject()">Add user to project</button>
-                        <button class="btn btn-info" (click)="visible = !visible">New task</button>
-                        <div class="modal-content" [hidden]="!visible" style="width: 300px;">-->
+                        <div [hidden]="!addUser">
+                            <input auto-complete [source]="users" name="userToAdd" [(ngModel)]="userToAdd" type="text" />
+                            <button (click)="addUserToProject(); !addUser">Add user to project</button>
+                        </div>
+                        <div class="modal-content" [hidden]="!visible" style="width: 300px;">
 <div class="modal-header">
     <button class="close btn btn-danger" data-dismiss="modal" aria-hidden="true" (click)="visible = !visible">×</button>
     <h4 class="modal-title">New Task</h4>
 </div>
 <div class="modal-body">
-    <form #newTaskForm="ngForm" (ngSubmit)="addNewTask(); newTaskForm.reset()" data-validate="true" class="form-group edit-task-form"
+    <form #newTaskForm="ngForm" (ngSubmit)="addNewTask(); newTaskForm.reset(); visible = !visible" data-validate="true" class="form-group edit-task-form"
         novalidate="novalidate" id="new_task" accept-charset="UTF-8" data-remote="true">
         <input name="utf8" type="hidden" value="✓">
         <div class="row">
