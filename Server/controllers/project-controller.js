@@ -58,8 +58,8 @@ module.exports = function (params) {
                     res.json(err);
                 })
         },
-        getLastTenMessages(req, res) {
-            data.getLastTenMessages(req.params.name)
+        getTenMessages(req, res) {
+            data.getTenMessages(req.params.name)
                 .then((messages) => {
                     res.json(messages);
                 })

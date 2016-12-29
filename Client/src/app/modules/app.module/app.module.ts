@@ -45,11 +45,8 @@ import { FormatDatePipe } from './../../pipes/date.pipe'
     ButtonsModule,
     GridModule,
     Ng2AutoCompleteModule,
-<<<<<<< HEAD
-    InfiniteScrollModule
-=======
+    InfiniteScrollModule,
     ModalModule.forRoot()
->>>>>>> 65386f1c3ef950030d9afe2ac1111bed276cd94d
   ],
   declarations: [
     AppComponent,

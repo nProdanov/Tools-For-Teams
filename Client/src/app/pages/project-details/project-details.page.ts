@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, OnDestroy, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, ElementRef, OnInit, OnDestroy, ViewChild, AfterViewChecked } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { PageComponent } from '../../components/page.component/page.component';
 import { Project } from '../../models/project.model/project.model';
@@ -18,7 +18,7 @@ import { InfiniteScroll } from 'angular2-infinite-scroll';
     styleUrls: ['./project-datils.page.css', './message-board.css'],
     providers: [InfiniteScroll]
 })
-export class ProjectDetailsPage implements PageComponent, OnInit, OnDestroy, AfterViewInit {
+export class ProjectDetailsPage implements PageComponent, OnInit, OnDestroy, AfterViewChecked {
     public profile: any;
     public project: Project;
     public newTask: Task;
@@ -29,7 +29,7 @@ export class ProjectDetailsPage implements PageComponent, OnInit, OnDestroy, Aft
     public connection;
     public message;
     public currentUser;    
-    @ViewChild('chatContent') el:ElementRef;
+    @ViewChild('chatContent') private el:ElementRef;
 
     constructor(
         private StorageService: StorageService,
@@ -50,7 +50,6 @@ export class ProjectDetailsPage implements PageComponent, OnInit, OnDestroy, Aft
     }
 
     ngOnInit() {
-        this.el.nativeElement.scrollTop = this.el.nativeElement.scrollHeight;
         this.StorageService
             .getProfileItem()
             .subscribe(resProfile => {
@@ -69,7 +68,7 @@ export class ProjectDetailsPage implements PageComponent, OnInit, OnDestroy, Aft
                             this.messages.push(message);
                         });
 
-                        this.projectService.getLastTenMessages(this.project.name).subscribe((response) => {
+                        this.projectService.getTenMessages(this.project.name).subscribe((response) => {
                             this.messages = response;
                         });
                     });
@@ -80,7 +79,7 @@ export class ProjectDetailsPage implements PageComponent, OnInit, OnDestroy, Aft
             });
     }
 
-    ngAfterViewInit() {
+    ngAfterViewChecked() {
         this.el.nativeElement.scrollTop = this.el.nativeElement.scrollHeight;
     }
 

@@ -36,7 +36,7 @@ module.exports = function (models) {
                     return Promise.resolve(project);
                 });
         },
-        getLastTenMessages(name) {
+        getTenMessages(name, start, end) {
             return new Promise((resolve, reject) => {
                 Project.findOne({ name }, (err, project) => {
                     if (err) {
@@ -51,7 +51,7 @@ module.exports = function (models) {
                         .sort((a, b) => {
                             return new Date(a.created) - new Date(b.created);
                         })
-                        .slice(project.messages.length - 10);
+                        .slice(start, end);
 
                     return Promise.resolve(messages);
                 });
