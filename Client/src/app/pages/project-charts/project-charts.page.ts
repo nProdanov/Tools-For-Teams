@@ -15,8 +15,8 @@ export class ProjectCharts implements PageComponent, OnInit {
     private totalHours: number;
     private costScale: number;
     private hoursScale: number;
-    private chartTitle: any;
     private tasksValues: any[];
+    private numberOfTasks: number;
 
     constructor(private projectService: ProjectService, private route: ActivatedRoute,) {
         this.project = {};
@@ -27,8 +27,8 @@ export class ProjectCharts implements PageComponent, OnInit {
         this.totalHours = 0;
         this.costScale = 0;
         this.hoursScale = 0;
-        this.chartTitle = {};
         this.tasksValues = [];
+        this.numberOfTasks = 0;
     }
 
     ngOnInit() {
@@ -62,9 +62,7 @@ export class ProjectCharts implements PageComponent, OnInit {
                     this.tasksValues.push([currentCost + previousCost, currentHours + previousHours])
                 }
 
-                this.costScale = (Math.floor(this.totalCost / 100) + 1) * 100;
-                this.hoursScale = this.totalHours + 1;                
-                this.chartTitle.text = this.project.name;
+                this.numberOfTasks = this.tasks.length;
             });
     }
 
@@ -83,7 +81,7 @@ export class ProjectCharts implements PageComponent, OnInit {
         }
 
         let selectedTask = this.tasks[counter];
-
+        console.log(this.tasks[counter]);
         console.log("TODO: make modal for task page " + this.tasks[counter].title);    
     }
 }

@@ -1,7 +1,11 @@
 <div class="container">
-    <h2 class="text-center">Charts for project: {{project.name}}</h2>
+    <h2 class="text-center">Stats for project: {{project.name}}</h2>
 
-    <kendo-chart [title]="chartTitle" (seriesClick)="onSeriesClick($event)">
+    <div class="well well-sm">Total hours: {{totalHours}}</div>
+    <div class="well well-sm">Total cost: {{totalCost}}</div>
+    <div class="well well-sm"># of tasks: {{numberOfTasks}}</div>
+
+    <kendo-chart (seriesClick)="onSeriesClick($event)">
         <kendo-chart-tooltip background="green" format="Cost: {0}, Hours: {1}">
         </kendo-chart-tooltip>
         <kendo-chart-legend position="bottom" orientation="horizontal">
