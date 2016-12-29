@@ -1,0 +1,93 @@
+<div *ngIf="active" title="Edit" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" style="position: absolute; bottom: -350px;left: 150px;">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" aria-label="Close" (click)="onCancel()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+                <h4 class="modal-title">Edit task</h4>
+            </div>
+            <div class="modal-body">
+                <form #newTaskForm="ngForm" (ngSubmit)="onSave()" data-validate="true" class="form-group edit-task-form"
+                    novalidate="novalidate" id="new_task" accept-charset="UTF-8" data-remote="true">
+                    <input name="utf8" type="hidden" value="✓">
+                    <div class="row">
+                        <div class="form-group">
+                            <div class="col-xs-2">
+                                <label for="task_name">Name</label>
+                            </div>
+                            <div class="col-xs-10">
+                                <input class="form-control" placeholder="Something catchy and short." maxlength="30" size="30" type="text" name="dataItem[title]"
+                                    id="task_name" data-validate="true" [(ngModel)]="dataItem.title">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-sm-12">
+                            <label for="task_description">Description</label>
+                            <textarea class="form-control" rows="5" placeholder="Something descriptive, but don't write a novel." name="dataItem[description]"
+                                id="task_description" data-validate="true" [(ngModel)]="dataItem.description"></textarea>
+                        </div>
+                    </div>
+                    <div class="row task-numerical-fields">
+                        <div class="col-xs-6">
+                            <div class="form-group">
+                                <label for="task_hours">Hours</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <span class="glyphicon glyphicon-time"></span>
+                                    </div>
+                                    <input value="0:00" class="form-control" type="text" name="timeForExecution" id="task_hours" data-validate="true" [(ngModel)]="dataItem.timeForExecution">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-6">
+                            <div class="form-group">
+                                <label for="task_one_time_cost">Cost</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <span class="glyphicon glyphicon-usd"></span>
+                                    </div>
+                                    <input class="form-control" type="text" name="cost" id="task_one_time_cost" data-validate="true" [(ngModel)]="dataItem.cost">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group">
+                            <div class="col-xs-2">
+                                <label for="task_status">Status</label>
+                            </div>
+                            <div class="col-xs-10">
+                                <select class="form-control" name="status" id="task_status" data-validate="true" [(ngModel)]="dataItem.status">
+                            <option value="started">Started</option>
+                            <option value="done">Done</option>
+                            <option value="live">Live</option>
+                        </select>
+                            </div>
+                        </div>
+                        <input class="form-control" type="hidden" value="1290" name="task[project_id]" id="task_project_id">
+                    </div>
+                    <div class="row">
+                        <div class="form-group">
+                            <div class="col-xs-2">
+                                <label for="task_status">Add user to task</label>
+                                <ul>
+                                    <li *ngFor="let selected of dataItem.users">
+                                        {{selected}}
+                                    </li>
+                                </ul>
+                                <input auto-complete [source]="members" name="selectedUser" [(ngModel)]="selectedUser" type="text" />
+                                <a class="btn btn-warning" (click)="addUserToTask()">Add user</a>
+                            </div>
+                        </div>
+                        <input class="form-control" type="hidden" value="1290" name="task[project_id]" id="task_project_id">
+                    </div>
+                    <div>
+                        <input type="submit" class="btn btn-success" value="Save Task" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

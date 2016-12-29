@@ -12,6 +12,8 @@ import { ToastsManager } from 'ng2-toastr';
 import { Ng2AutoComplete } from 'ng2-auto-complete';
 import { StorageService } from '../../services/storage.service/storage.service';
 import { NewTaskModalComponent } from '../../components/new-task.component/new-task.component';
+import { EditTaskComponent } from '../../components/edit-task.component/edit-task.component';
+import { GridDataResult, PageChangeEvent } from '@progress/kendo-angular-grid';
 
 @Component({
     templateUrl: './project-details.page.html',
@@ -31,6 +33,10 @@ export class ProjectDetailsPage implements PageComponent, OnInit, OnDestroy, Aft
     public connection;
     public message;
     public currentUser;
+    private gridView: GridDataResult;
+    private pageSize: number = 10;
+    private skip: number = 0;
+    public dataItem: Task;
 
     constructor(
         private StorageService: StorageService,
@@ -44,13 +50,10 @@ export class ProjectDetailsPage implements PageComponent, OnInit, OnDestroy, Aft
         this.project = { creator: '', name: '', description: '', tasks: [], projectMembers: [] };
         this.StorageService.getProfileItem().subscribe(res => this.currentUser = res.username);
     }
+
     showChildModal() {
         console.log(this.childModal);
         this.childModal.showChildModal();
-    }
-
-    onScrollUp() {
-        console.log("scrolling");
     }
 
     ngOnInit() {
@@ -58,7 +61,6 @@ export class ProjectDetailsPage implements PageComponent, OnInit, OnDestroy, Aft
             .getProfileItem()
             .subscribe(resProfile => {
                 this.profile = resProfile;
-                // get project with the latest ten messages
                 // user profiles
                 this.route.params
                     .switchMap((params: Params) => {
@@ -75,6 +77,11 @@ export class ProjectDetailsPage implements PageComponent, OnInit, OnDestroy, Aft
                         this.projectService.getTenMessages(this.project.name).subscribe((response) => {
                             this.messages = response;
                         });
+
+                        this.gridView = {
+                            data: this.project.tasks.slice(this.skip, this.skip + this.pageSize),
+                            total: this.project.tasks.length
+                        };
                     });
 
                 this.userService.getAllUsers().subscribe((users: any) => {
@@ -85,6 +92,32 @@ export class ProjectDetailsPage implements PageComponent, OnInit, OnDestroy, Aft
 
     ngAfterViewChecked() {
         this.el.nativeElement.scrollTop = this.el.nativeElement.scrollHeight;
+    }
+
+    protected pageChange(event: PageChangeEvent): void {
+        this.skip = event.skip;
+        this.pageSizeProjects();
+    }
+
+    private pageSizeProjects(): void {
+        this.gridView = {
+            data: this.project.tasks.slice(this.skip, this.skip + this.pageSize),
+            total: this.project.tasks.length
+        };
+    }
+
+    public onEdit(dataItem: any): void {
+        console.log(dataItem);
+        this.dataItem = dataItem;
+    }
+
+    public onSave(editedTask: Task): void {
+        console.log(editedTask);
+
+        // operation.switchMap(x => this.getProducts())
+        //     .subscribe((response: Product[]) => {
+        //         this.view = response;
+        //     });
     }
 
     messageBoardUpdate() {
