@@ -50,6 +50,7 @@ export class ProjectDetailsPage implements PageComponent, OnInit, OnDestroy, Aft
     }
 
     ngOnInit() {
+        this.el.nativeElement.scrollTop = this.el.nativeElement.scrollHeight;
         this.StorageService
             .getProfileItem()
             .subscribe(resProfile => {
@@ -80,11 +81,7 @@ export class ProjectDetailsPage implements PageComponent, OnInit, OnDestroy, Aft
     }
 
     ngAfterViewInit() {
-        console.log(this.el.nativeElement);
-        let newHeight = this.el.nativeElement.scrollHeight;
-        this.el.nativeElement.scrollTop = newHeight;
-        console.log(this.el.nativeElement.scrollTop);
-        console.log(newHeight);
+        this.el.nativeElement.scrollTop = this.el.nativeElement.scrollHeight;
     }
 
     messageBoardUpdate() {
