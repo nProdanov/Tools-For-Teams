@@ -1,4 +1,4 @@
-<div id="wrapper" infinite-scroll (scrolledUp)="onScrollUp()">
+<div id="wrapper">
     <div id="sidebar-wrapper">
         <ul class="sidebar-nav">
             <li class="sidebar-brand">
@@ -6,170 +6,89 @@
                     <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Project members
   <span class="caret"></span></button>
                     <ul class="dropdown-menu" style="position: absolute; top:45px; left: 80px;">
-<li *ngFor="let user of users">
-    <a routerLink="#">{{user}}</a>
-</li>
-</ul>
-</div>
-</li>
-<li class="sidebar-brand">
-    <a (click)="visible = !visible">New Task</a>
-</li>
-<li class="sidebar-brand">
-    <a (click)="addUser = !addUser">Add user to project</a>
-</li>
-<div *ngIf="project.tasks.length === 0">
-    <li>
-        <span>No tasks yet</span>
-    </li>
-</div>
-<div *ngIf="project.tasks.length > 0">
-    <li *ngFor="let task of project.tasks">
-        <a>{{task.title}}</a>
-    </li>
-</div>
-</ul>
-</div>
-<!-- /#sidebar-wrapper -->
-
-<!-- Page Content -->
-<div id="page-content-wrapper">
-    <div class="container-fluid">
-        <div class="container">
-            <div class="row">
-                <div class="col-xs-6">
-                    <h4>Details for project: {{project.name}}</h4>
-                    <ul>
-                        <li>
-                            <h5>Project tasks</h5>
-                            <p>{{project | json}}</p>
-                            <ul>
-                                <li *ngFor="let task of project.tasks">
-                                    {{task.title}}
-                                </li>
-                            </ul>
+                        <li *ngFor="let user of users">
+                            <a routerLink="#">{{user}}</a>
                         </li>
                     </ul>
-                    <div [hidden]="!addUser">
-                        <input auto-complete [source]="users" name="userToAdd" [(ngModel)]="userToAdd" type="text" />
-                        <button (click)="addUserToProject(); !addUser">Add user to project</button>
-                    </div>
-                    <div class="modal-content" [hidden]="!visible" style="width: 300px;">
-<div class="modal-header">
-    <button class="close btn btn-danger" data-dismiss="modal" aria-hidden="true" (click)="visible = !visible">×</button>
-    <h4 class="modal-title">New Task</h4>
-</div>
-<div class="modal-body">
-    <form #newTaskForm="ngForm" (ngSubmit)="addNewTask(); newTaskForm.reset(); visible = !visible" data-validate="true" class="form-group edit-task-form"
-        novalidate="novalidate" id="new_task" accept-charset="UTF-8" data-remote="true">
-        <input name="utf8" type="hidden" value="✓">
-        <div class="row">
-            <div class="form-group">
-                <div class="col-xs-2">
-                    <label for="task_name">Name</label>
                 </div>
-                <div class="col-xs-10">
-                    <input class="form-control" placeholder="Something catchy and short." maxlength="30" size="30" type="text" name="task[name]"
-                        id="task_name" data-validate="true" [(ngModel)]="newTask.title">
-                </div>
+            </li>
+            <li class="sidebar-brand">
+                <a (click)="showChildModal()">New Task</a>
+            </li>
+            <li class="sidebar-brand">
+                <a (click)="showChat = !showChat">Project messages</a>
+            </li>
+            <li class="sidebar-brand">
+                <a (click)="addUser = !addUser">Add user to project</a>
+            </li>
+            <div *ngIf="project.tasks.length === 0">
+                <li>
+                    <span>No tasks yet</span>
+                </li>
             </div>
-        </div>
-        <div class="row">
-            <div class="form-group col-sm-12">
-                <label for="task_description">Description</label>
-                <textarea class="form-control" rows="5" placeholder="Something descriptive, but don't write a novel." name="task[description]"
-                    id="task_description" data-validate="true" [(ngModel)]="newTask.description"></textarea>
+            <div *ngIf="project.tasks.length > 0">
+                <li *ngFor="let task of project.tasks">
+                    <a>{{task.title}}</a>
+                </li>
             </div>
-        </div>
-        <div class="row task-numerical-fields">
-            <div class="col-xs-6">
-                <div class="form-group">
-                    <label for="task_hours">Hours</label>
-                    <div class="input-group">
-                        <div class="input-group-addon">
-                            <span class="glyphicon glyphicon-time"></span>
+        </ul>
+    </div>
+    <!-- /#sidebar-wrapper -->
+
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+        <div class="container-fluid">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-6">
+                        <h4>Details for project: {{project.name}}</h4>
+                        <ul>
+                            <li>
+                                <h5>Project tasks</h5>
+                                <p>{{project | json}}</p>
+                                <ul>
+                                    <li *ngFor="let task of project.tasks">
+                                        {{task.title}}
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <div [hidden]="!addUser">
+                            <input auto-complete [source]="users" name="userToAdd" [(ngModel)]="userToAdd" type="text" />
+                            <button (click)="addUserToProject(); !addUser">Add user to project</button>
                         </div>
-                        <input value="0:00" class="form-control" type="text" name="task[hours]" id="task_hours" data-validate="true" [(ngModel)]="newTask.timeForExecution">
+                        <new-task (onSaveTask)="addToTasks($event)" [users]="project.projectMembers" [projectId]="projectId"></new-task>
+
                     </div>
-                </div>
-            </div>
-            <div class="col-xs-6">
-                <div class="form-group">
-                    <label for="task_one_time_cost">Cost</label>
-                    <div class="input-group">
-                        <div class="input-group-addon">
-                            <span class="glyphicon glyphicon-usd"></span>
-                        </div>
-                        <input class="form-control" type="text" name="task[one_time_cost]" id="task_one_time_cost" data-validate="true" [(ngModel)]="newTask.cost">
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="form-group">
-                <div class="col-xs-2">
-                    <label for="task_status">Status</label>
-                </div>
-                <div class="col-xs-10">
-                    <select class="form-control" name="task[status]" id="task_status" data-validate="true" [(ngModel)]="newTask.status">
-                            <option value="started">Started</option>
-                            <option value="done">Done</option>
-                            <option value="live">Live</option>
-                        </select>
-                </div>
-            </div>
-            <input class="form-control" type="hidden" value="1290" name="task[project_id]" id="task_project_id">
-        </div>
-        <div class="row">
-            <div class="form-group">
-                <div class="col-xs-2">
-                    <label for="task_status">Add user to task</label>
-                    <ul>
-                        <li *ngFor="let selected of newTask.users">
-                            {{selected}}
-                        </li>
-                    </ul>
-                    <input auto-complete [source]="users" name="selectedUser" [(ngModel)]="selectedUser" type="text" />
-                    <a class="btn btn-warning" (click)="addUserToTask()">Add user</a>
-                </div>
-            </div>
-            <input class="form-control" type="hidden" value="1290" name="task[project_id]" id="task_project_id">
-        </div>
-        <div>
-            <input type="submit" class="btn btn-success" value="Save Task" />
-        </div>
-    </form>
-</div>
-</div>
-</div>
 
 
-<div id="main-chat" class="container col-xs-4">
-    <h4>Message board for: {{project.name}}</h4>
-    <div class="row">
-        <div class="panel panel-default">
-            <div class="panel-heading">Chat</div>
-            <div class="panel-body">
-                <div id="message-container" #chatContent class="container scrollable-chat-menu">
-                    <div class="row message-bubble" *ngFor="let message of messages">
-                        <p class="text-muted">{{message.from}}</p>
-                        <span>{{message.message}}</span>
-                        <!--<div>sent </div>-->
-                    </div>
-                </div>
-                <div class="chat-message-botom">
-                    <div class="input-group">
-                        <input id="m" type="text" class="form-control" [(ngModel)]="message" />
-                        <span class="input-group-btn">
-                            <button id="sendMsg" type="button" class="btn btn-success" (click)="messageBoardUpdate()">Send</button>
+                    <div id="main-chat" class="container col-xs-4" [hidden]="!showChat">
+                        <div class="row">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">{{project.name}}</div>
+                                <div class="panel-body">
+                                    <div id="message-container" #chatContent class="container scrollable-chat-menu">
+                                        <div class="row message-bubble" *ngFor="let message of messages">
+                                            <p class="text-muted">
+                                                <img style="width: 30px; height: 25px;" src={{message.picture}}/> {{message.from}}
+                                            </p>
+                                            <p>{{message.message}}</p>
+                                            <div>sent {{message.created | date}}</div>
+                                        </div>
+                                    </div>
+                                    <div class="chat-message-botom">
+                                        <div class="input-group">
+                                            <input id="m" type="text" class="form-control" (keyup.enter)="messageBoardUpdate()" [(ngModel)]="message" />
+                                            <span class="input-group-btn">
+                            <button id="sendMsg" type="submit" class="btn btn-success" (click)="messageBoardUpdate()">Send</button>
                         </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-</div>
-</div>
-</div>
-</div>

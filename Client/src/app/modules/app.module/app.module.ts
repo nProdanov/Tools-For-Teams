@@ -6,6 +6,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { appRoutes } from '../../config/routes';
 import { AppComponent } from '../../components/app.component/app.component';
+import { NewTaskModalComponent } from '../../components/new-task.component/new-task.component';
 import { ToastModule } from 'ng2-toastr';
 import { ButtonsModule } from '@progress/kendo-angular-buttons';
 import { GridModule } from '@progress/kendo-angular-grid';
@@ -62,6 +63,7 @@ import { FormatDatePipe } from './../../pipes/date.pipe'
     ProjectDetailsPage,
     FormatDatePipe,
     ToolboxPage,
+    NewTaskModalComponent,
     ProjectCharts
   ],
   bootstrap: [AppComponent],
