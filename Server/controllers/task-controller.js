@@ -1,6 +1,6 @@
 /* globals module */
 
-module.exports = function (params) {
+module.exports = function(params) {
     let { data, validator } = params;
     return {
         createTask(req, res) {
@@ -11,7 +11,7 @@ module.exports = function (params) {
                     res.json(task);
                 })
                 .catch(err => {
-                    res.json(err);
+                    res.json({ err });
                 });
         }
     };

@@ -57,7 +57,7 @@
                             <input auto-complete [source]="users" name="userToAdd" [(ngModel)]="userToAdd" type="text" />
                             <button (click)="addUserToProject(); !addUser">Add user to project</button>
                         </div>
-                        <new-task [users]="project.projectMembers" [projectId]="projectId"></new-task>
+                        <new-task (onSaveTask)="addToTasks($event)" [users]="project.projectMembers" [projectId]="projectId"></new-task>
 
                     </div>
 

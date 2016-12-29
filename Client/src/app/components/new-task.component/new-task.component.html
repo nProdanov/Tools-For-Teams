@@ -5,11 +5,10 @@
                 <button type="button" class="close" aria-label="Close" (click)="hideChildModal()">
           <span aria-hidden="true">&times;</span>
         </button>
-                <h4 class="modal-title">New Project</h4>
+                <h4 class="modal-title">New Task</h4>
             </div>
             <div class="modal-body">
-                <form #newTaskForm="ngForm" (ngSubmit)="addNewTask(); newTaskForm.reset(); visible = !visible" data-validate="true" class="form-group edit-task-form"
-                    novalidate="novalidate" id="new_task" accept-charset="UTF-8" data-remote="true">
+                <form #newTaskForm="ngForm" (ngSubmit)="addNewTask(); newTaskForm.reset(); visible = !visible" data-validate="true" class="form-group edit-task-form" novalidate="novalidate" id="new_task" accept-charset="UTF-8" data-remote="true">
                     <input name="utf8" type="hidden" value="✓">
                     <div class="row">
                         <div class="form-group">
@@ -17,16 +16,14 @@
                                 <label for="task_name">Name</label>
                             </div>
                             <div class="col-xs-10">
-                                <input class="form-control" placeholder="Something catchy and short." maxlength="30" size="30" type="text" name="task[name]"
-                                    id="task_name" data-validate="true" [(ngModel)]="newTask.title">
+                                <input class="form-control" placeholder="Something catchy and short." maxlength="30" size="30" type="text" name="task[name]" id="task_name" data-validate="true" [(ngModel)]="newTask.title">
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-sm-12">
                             <label for="task_description">Description</label>
-                            <textarea class="form-control" rows="5" placeholder="Something descriptive, but don't write a novel." name="task[description]"
-                                id="task_description" data-validate="true" [(ngModel)]="newTask.description"></textarea>
+                            <textarea class="form-control" rows="5" placeholder="Something descriptive, but don't write a novel." name="task[description]" id="task_description" data-validate="true" [(ngModel)]="newTask.description"></textarea>
                         </div>
                     </div>
                     <div class="row task-numerical-fields">
