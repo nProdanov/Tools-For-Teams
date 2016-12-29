@@ -6,7 +6,8 @@ import { ModalDirective } from 'ng2-bootstrap';
 
 @Component({
     selector: 'new-task',
-    templateUrl: './new-task.component.html'
+    templateUrl: './new-task.component.html',
+    styleUrls: ['./new-task.component.css']
 })
 export class NewTaskModalComponent {
     @ViewChild('childModal') public childModal: ModalDirective;
@@ -15,19 +16,38 @@ export class NewTaskModalComponent {
     @Output() onSaveTask: EventEmitter<any> = new EventEmitter();
     newTask: Task;
     selectedUser: string;
+    hours: number[];
+    isCostValid: boolean;
+    disabled: boolean = false;
+    status: { isopen: boolean } = { isopen: false };
+    items: number[];
 
     constructor(private taskService: TaskService, private toastr: ToastsManager) {
         this.newTask = {
             projectId: '',
             title: '',
             description: '',
-            timeForExecution: '',
-            cost: 0,
-            status: '',
+            timeForExecution: '1',
+            cost: 1,
+            status: 'started',
             users: []
         };
+        this.isCostValid = true;
         this.selectedUser = '';
+        this.items = [];
+        for (let i = 2; i <= 100; i += 1) {
+            this.items.push(i);
+        }
+    }
 
+    public toggled(open: boolean): void {
+        console.log('Dropdown is now: ', open);
+    }
+
+    public toggleDropdown($event: MouseEvent): void {
+        $event.preventDefault();
+        $event.stopPropagation();
+        this.status.isopen = !this.status.isopen;
     }
 
     public showChildModal(): void {
@@ -36,6 +56,19 @@ export class NewTaskModalComponent {
 
     public hideChildModal(): void {
         this.childModal.hide();
+    }
+
+    changeHour(hour) {
+        this.newTask.timeForExecution = hour;
+    }
+
+    validateCost() {
+        if (+this.newTask.cost <= 0) {
+            this.isCostValid = false;
+        }
+        else {
+            this.isCostValid = true;
+        }
     }
 
     addNewTask() {
@@ -56,6 +89,7 @@ export class NewTaskModalComponent {
     addUserToTask() {
         if (this.newTask.users.indexOf(this.selectedUser) < 0 && this.users.indexOf(this.selectedUser) >= 0) {
             this.newTask.users.push(this.selectedUser);
+            this.users.splice(this.users.indexOf(this.selectedUser), 1);
             this.selectedUser = '';
         } else {
             this.toastr.error('User doesnt\'t exist or is already assigned to task');

@@ -8,80 +8,67 @@
                 <h4 class="modal-title">New Task</h4>
             </div>
             <div class="modal-body">
-                <form #newTaskForm="ngForm" (ngSubmit)="addNewTask(); newTaskForm.reset(); visible = !visible" data-validate="true" class="form-group edit-task-form" novalidate="novalidate" id="new_task" accept-charset="UTF-8" data-remote="true">
-                    <input name="utf8" type="hidden" value="✓">
-                    <div class="row">
+                <form #newTaskForm="ngForm" (ngSubmit)="addNewTask(); hideChildModal()">
+                    <div class="form-group">
+                        <label for="taskName">Name</label>
+                        <input class="form-control" placeholder="Something catchy and short." maxlength="50" minlength="3" type="text" name="taskName" id="taskName" data-validate="true" [(ngModel)]="newTask.title" #taskName="ngModel" required>
+                        <small [hidden]="taskName.valid || taskName.pristine" class="text-danger">
+                                Invalid task name: Lenght of the name should be between 3 and 50 symbols.
+                        </small>
+                    </div>
+                    <div class="form-group">
+                        <label for="taskDescription">Description</label>
+                        <textarea class="form-control" rows="5" placeholder="Something descriptive, but don't write a novel.(Optional)" name="taskDescription" id="taskDescription" [(ngModel)]="newTask.description"></textarea>
+                    </div>
+                    <div class="form-group form-inline">
+                        <label for="taskHours">Hours</label>
+                        <div class="input-group">
+                            <div class="input-group-addon">
+                                <span class="glyphicon glyphicon-time"></span>
+                            </div>
+                            <select class="form-control" [(ngModel)]="newTask.timeForExecution" name="taskHours" id="taskHours">
+                                <option [value]="newTask.timeForExecution">{{newTask.timeForExecution}}</option>
+                                <option *ngFor="let hour of items;" [value]="hour">{{hour}}</option>
+                            </select>
+                        </div>
                         <div class="form-group">
-                            <div class="col-xs-2">
-                                <label for="task_name">Name</label>
-                            </div>
-                            <div class="col-xs-10">
-                                <input class="form-control" placeholder="Something catchy and short." maxlength="30" size="30" type="text" name="task[name]" id="task_name" data-validate="true" [(ngModel)]="newTask.title">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="form-group col-sm-12">
-                            <label for="task_description">Description</label>
-                            <textarea class="form-control" rows="5" placeholder="Something descriptive, but don't write a novel." name="task[description]" id="task_description" data-validate="true" [(ngModel)]="newTask.description"></textarea>
-                        </div>
-                    </div>
-                    <div class="row task-numerical-fields">
-                        <div class="col-xs-6">
-                            <div class="form-group">
-                                <label for="task_hours">Hours</label>
-                                <div class="input-group">
-                                    <div class="input-group-addon">
-                                        <span class="glyphicon glyphicon-time"></span>
-                                    </div>
-                                    <input value="0:00" class="form-control" type="text" name="task[hours]" id="task_hours" data-validate="true" [(ngModel)]="newTask.timeForExecution">
+                            <label for="taskCost">Cost</label>
+                            <div class="input-group">
+                                <div class="input-group-addon">
+                                    <span class="glyphicon glyphicon-usd"></span>
                                 </div>
+                                <input class="form-control" type="number" (input)="validateCost()" name="taskCost" id="taskCost" #taskCost="ngModel" [(ngModel)]="newTask.cost" required min="1">
                             </div>
-                        </div>
-                        <div class="col-xs-6">
-                            <div class="form-group">
-                                <label for="task_one_time_cost">Cost</label>
-                                <div class="input-group">
-                                    <div class="input-group-addon">
-                                        <span class="glyphicon glyphicon-usd"></span>
-                                    </div>
-                                    <input class="form-control" type="text" name="task[one_time_cost]" id="task_one_time_cost" data-validate="true" [(ngModel)]="newTask.cost">
-                                </div>
-                            </div>
+                            <small [hidden]="isCostValid" class="text-danger">
+                                    Invalid Cost: Task cost cannot be 0 or negative value.
+                            </small>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="form-group">
-                            <div class="col-xs-2">
-                                <label for="task_status">Status</label>
-                            </div>
-                            <div class="col-xs-10">
-                                <select class="form-control" name="task[status]" id="task_status" data-validate="true" [(ngModel)]="newTask.status">
+                    <div class="form-group">
+                        <label for="taskStatus">Status</label>
+                        <select class="form-control" name="taskStatus" id="taskStatus" [(ngModel)]="newTask.status">
                             <option value="started">Started</option>
                             <option value="done">Done</option>
                             <option value="live">Live</option>
                         </select>
-                            </div>
-                        </div>
-                        <input class="form-control" type="hidden" value="1290" name="task[project_id]" id="task_project_id">
                     </div>
-                    <div class="row">
-                        <div class="form-group">
-                            <div class="col-xs-2">
-                                <label for="task_status">Add user to task</label>
-                                <ul>
-                                    <li *ngFor="let selected of newTask.users">
-                                        {{selected}}
-                                    </li>
-                                </ul>
-                                <input auto-complete [source]="users" name="selectedUser" [(ngModel)]="selectedUser" type="text" />
-                                <a class="btn btn-warning" (click)="addUserToTask()">Add user</a>
-                            </div>
+                    <div class="form-group">
+                        <label for="task_status">Add user to task</label>
+                        <div>
+                            <small class="text-danger" *ngIf="!newTask.users.length">No users assigned yet.</small>
+                            <span *ngIf="newTask.users.length">Assigned users: </span>
                         </div>
-                        <input class="form-control" type="hidden" value="1290" name="task[project_id]" id="task_project_id">
+                        <ul>
+                            <li *ngFor="let selected of newTask.users">
+                                {{selected}}
+                            </li>
+                        </ul>
+                        <input auto-complete class="form-control" [source]="users" name="selectedUser" [(ngModel)]="selectedUser" type="text" />
+                        <a class="btn btn-warning" (click)="addUserToTask()">Add user</a>
                     </div>
-                    <div>
-                        <input type="submit" class="btn btn-success" value="Save Task" />
+                    <input class="form-control" type="hidden" value="1290" name="task[project_id]" id="task_project_id">
+                    <div class="form-group">
+                        <button [disabled]="!(isCostValid && newTaskForm.form.valid && newTask.users.length)" type="submit" class="btn btn-success">Save Task</button>
                     </div>
                 </form>
             </div>
