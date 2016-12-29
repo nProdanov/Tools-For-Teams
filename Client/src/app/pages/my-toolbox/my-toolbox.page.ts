@@ -50,8 +50,14 @@ export class ToolboxPage implements PageComponent, OnInit {
     toggleMove(btnId) {
         if(btnId === 'btn-one') {
             this.stateOne = (this.stateOne === 'out' ? 'in' : 'out');
+            if(this.stateTwo === 'in'){
+                this.stateTwo = 'out';
+            }
         } else if (btnId === 'btn-two') {
             this.stateTwo = (this.stateTwo === 'out' ? 'in' : 'out');
+            if(this.stateOne === 'in'){
+                this.stateOne = 'out';
+            }
         }
     }
 }
