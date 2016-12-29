@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, ElementRef, OnInit, OnDestroy, ViewChild, AfterViewInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { PageComponent } from '../../components/page.component/page.component';
 import { Project } from '../../models/project.model/project.model';
@@ -11,12 +11,14 @@ import { ChatService } from '../../services/socket.service/socket.service';
 import { ToastsManager } from 'ng2-toastr';
 import { Ng2AutoComplete } from 'ng2-auto-complete';
 import { StorageService } from '../../services/storage.service/storage.service';
+import { InfiniteScroll } from 'angular2-infinite-scroll';
 
 @Component({
     templateUrl: './project-details.page.html',
-    styleUrls: ['./project-datils.page.css']
+    styleUrls: ['./project-datils.page.css', './message-board.css'],
+    providers: [InfiniteScroll]
 })
-export class ProjectDetailsPage implements PageComponent, OnInit, OnDestroy {
+export class ProjectDetailsPage implements PageComponent, OnInit, OnDestroy, AfterViewInit {
     public profile: any;
     public project: Project;
     public newTask: Task;
@@ -26,7 +28,8 @@ export class ProjectDetailsPage implements PageComponent, OnInit, OnDestroy {
     public messages = [];
     public connection;
     public message;
-    public currentUser;
+    public currentUser;    
+    @ViewChild('chatContent') el:ElementRef;
 
     constructor(
         private StorageService: StorageService,
@@ -40,6 +43,10 @@ export class ProjectDetailsPage implements PageComponent, OnInit, OnDestroy {
         this.project = { creator: '', name: '', description: '', tasks: [], projectMembers: [] };
         this.newTask = { projectId: '', title: '', description: '', timeForExecution: '', cost: 0, status: '', users: [] };
         this.StorageService.getProfileItem().subscribe(res => this.currentUser = res.username);
+    }
+
+    onScrollUp() {
+        console.log("scrolling");
     }
 
     ngOnInit() {
@@ -70,6 +77,14 @@ export class ProjectDetailsPage implements PageComponent, OnInit, OnDestroy {
                     this.users = users;
                 });
             });
+    }
+
+    ngAfterViewInit() {
+        console.log(this.el.nativeElement);
+        let newHeight = this.el.nativeElement.scrollHeight;
+        this.el.nativeElement.scrollTop = newHeight;
+        console.log(this.el.nativeElement.scrollTop);
+        console.log(newHeight);
     }
 
     messageBoardUpdate() {

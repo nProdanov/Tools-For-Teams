@@ -78,15 +78,15 @@ module.exports = function (models) {
                 })
             })
                 .then((project) => {
-                    return new Promise((resolve, reject => {
+                    return new Promise((resolve, reject) => {
                         let messages = project.messages
                             .sort((a, b) => {
                                 return new Date(a.created) - new Date(b.created);
                             })
                             .slice(project.messages.length - 10);
-
+                            
                         return resolve(project);
-                    }));
+                    });
                 });
         },
         getProjectByIdMapped(id) {
