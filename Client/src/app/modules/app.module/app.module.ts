@@ -13,6 +13,8 @@ import { GridModule } from '@progress/kendo-angular-grid';
 import { Ng2AutoCompleteModule } from 'ng2-auto-complete';
 import { InfiniteScrollModule } from 'angular2-infinite-scroll';
 import { ModalModule } from 'ng2-bootstrap';
+import { EditTaskComponent } from '../../components/edit-task.component/edit-task.component';
+import { ChartsModule } from '@progress/kendo-angular-charts';
 
 //  Pages
 import { ProfilePage } from '../../pages/profile/profile.page';
@@ -48,7 +50,8 @@ import { FormatDatePipe } from './../../pipes/date.pipe'
     GridModule,
     Ng2AutoCompleteModule,
     InfiniteScrollModule,
-    ModalModule.forRoot()
+    ModalModule.forRoot(),
+    ChartsModule
   ],
   declarations: [
     AppComponent,
@@ -62,6 +65,7 @@ import { FormatDatePipe } from './../../pipes/date.pipe'
     FormatDatePipe,
     ToolboxPage,
     NewTaskModalComponent,
+    EditTaskComponent,
     ProjectCharts
   ],
   bootstrap: [AppComponent],
