@@ -9,7 +9,8 @@ import { ModalDirective } from 'ng2-bootstrap';
 
 @Component({
     selector: 'new-project',
-    templateUrl: './new-project.page.html'
+    templateUrl: './new-project.page.html',
+    styleUrls: ['./new-project.page.css']
 })
 export class NewProjectPage implements PageComponent, OnInit {
     @ViewChild('childModal') public childModal: ModalDirective;
