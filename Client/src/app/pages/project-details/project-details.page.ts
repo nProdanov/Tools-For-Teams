@@ -12,6 +12,7 @@ import { ToastsManager } from 'ng2-toastr';
 import { Ng2AutoComplete } from 'ng2-auto-complete';
 import { StorageService } from '../../services/storage.service/storage.service';
 import { InfiniteScroll } from 'angular2-infinite-scroll';
+import { NewTaskModalComponent } from '../../components/new-task.component/new-task.component';
 
 @Component({
     templateUrl: './project-details.page.html',
@@ -19,17 +20,20 @@ import { InfiniteScroll } from 'angular2-infinite-scroll';
     providers: [InfiniteScroll]
 })
 export class ProjectDetailsPage implements PageComponent, OnInit, OnDestroy, AfterViewChecked {
+    @ViewChild(NewTaskModalComponent) childModal: NewTaskModalComponent;
+    @ViewChild('chatContent') private el: ElementRef;
+
     public profile: any;
     public project: Project;
-    public newTask: Task;
+    public projectId: string;
     public selectedUser: string;
     public users: string[];
     public userToAdd: string;
     public messages = [];
     public connection;
     public message;
-    public currentUser;    
-    @ViewChild('chatContent') private el:ElementRef;
+    public currentUser;
+
 
     constructor(
         private StorageService: StorageService,
@@ -41,8 +45,12 @@ export class ProjectDetailsPage implements PageComponent, OnInit, OnDestroy, Aft
         private chatService: ChatService) {
         this.profile = {};
         this.project = { creator: '', name: '', description: '', tasks: [], projectMembers: [] };
-        this.newTask = { projectId: '', title: '', description: '', timeForExecution: '', cost: 0, status: '', users: [] };
         this.StorageService.getProfileItem().subscribe(res => this.currentUser = res.username);
+    }
+
+    showChildModal() {
+        console.log(this.childModal);
+        this.childModal.showChildModal();
     }
 
     onScrollUp() {
@@ -58,7 +66,7 @@ export class ProjectDetailsPage implements PageComponent, OnInit, OnDestroy, Aft
                 // user profiles
                 this.route.params
                     .switchMap((params: Params) => {
-                        this.newTask.projectId = params['id'];
+                        this.projectId = params['id'];
                         return this.projectService.getProjectById(params['id'])
                     })
                     .subscribe((project: Project) => {
@@ -96,32 +104,9 @@ export class ProjectDetailsPage implements PageComponent, OnInit, OnDestroy, Aft
         this.message = '';
     }
 
-    addNewTask() {
-        this.taskService.saveTask(this.newTask)
-            .subscribe((res: any) => {
-                if (res.error) {
-                    this.toastr.error(res.error);
-                } else {
-                    this.project.tasks.push(res);
-                    this.toastr.success("Task added successfully.");
-                }
-
-                this.newTask.users = [];
-            });
-    }
-
-    addUserToTask() {
-        if (this.newTask.users.indexOf(this.selectedUser) < 0 && this.users.indexOf(this.selectedUser) >= 0) {
-            this.newTask.users.push(this.selectedUser);
-            this.selectedUser = '';
-        } else {
-            this.toastr.error('User doesnt\'t exist or is already assigned to task');
-        }
-    }
-
     addUserToProject() {
         if (this.project.projectMembers.indexOf(this.userToAdd) < 0) {
-            this.projectService.addUserToProject(this.newTask.projectId, this.userToAdd)
+            this.projectService.addUserToProject(this.projectId, this.userToAdd)
                 .subscribe((res: any) => {
                     this.project.projectMembers.push(this.userToAdd);
                     this.toastr.success('User added to project!');

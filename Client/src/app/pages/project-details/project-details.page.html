@@ -13,7 +13,7 @@
 </div>
 </li>
 <li class="sidebar-brand">
-    <a (click)="visible = !visible">New Task</a>
+    <a (click)="showChildModal()">New Task</a>
 </li>
 <li class="sidebar-brand">
     <a (click)="addUser = !addUser">Add user to project</a>
@@ -54,12 +54,14 @@
                         <input auto-complete [source]="users" name="userToAdd" [(ngModel)]="userToAdd" type="text" />
                         <button (click)="addUserToProject(); !addUser">Add user to project</button>
                     </div>
-                    <div class="modal-content" [hidden]="!visible" style="width: 300px;">
+                    <new-task [users]="project.projectMembers" [projectId]="projectId"></new-task>
+
+                    <!--<div class="modal-content" [hidden]="!visible" style="width: 300px;">
 <div class="modal-header">
     <button class="close btn btn-danger" data-dismiss="modal" aria-hidden="true" (click)="visible = !visible">×</button>
     <h4 class="modal-title">New Task</h4>
-</div>
-<div class="modal-body">
+</div>-->
+<!--<div class="modal-body">
     <form #newTaskForm="ngForm" (ngSubmit)="addNewTask(); newTaskForm.reset(); visible = !visible" data-validate="true" class="form-group edit-task-form"
         novalidate="novalidate" id="new_task" accept-charset="UTF-8" data-remote="true">
         <input name="utf8" type="hidden" value="✓">
@@ -139,8 +141,8 @@
             <input type="submit" class="btn btn-success" value="Save Task" />
         </div>
     </form>
-</div>
-</div>
+</div>-->
+<!--</div>-->
 </div>
 
 
