@@ -1,4 +1,4 @@
-import { Component, ViewChild, Input } from '@angular/core';
+import { Component, ViewChild, Input, Output, EventEmitter } from '@angular/core';
 import { TaskService } from '../../services/task.service/task.service';
 import { ToastsManager } from 'ng2-toastr';
 import { Task } from '../../models/task.model/task.model';
@@ -12,6 +12,7 @@ export class NewTaskModalComponent {
     @ViewChild('childModal') public childModal: ModalDirective;
     @Input() users: string[];
     @Input() projectId: string;
+    @Output() onSaveTask: EventEmitter<any> = new EventEmitter();
     newTask: Task;
     selectedUser: string;
 
@@ -45,6 +46,7 @@ export class NewTaskModalComponent {
                     this.toastr.error(res.error);
                 } else {
                     this.toastr.success("Task added successfully.");
+                    this.onSaveTask.next(res);
                 }
 
                 this.newTask.users = [];

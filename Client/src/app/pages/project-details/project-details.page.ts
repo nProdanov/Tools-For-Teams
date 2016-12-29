@@ -150,4 +150,8 @@ export class ProjectDetailsPage implements PageComponent, OnInit, OnDestroy, Aft
     ngOnDestroy() {
         this.connection.unsubscribe();
     }
+
+    addToTasks(task){
+        this.project.tasks.push(task);
+    }
 }
