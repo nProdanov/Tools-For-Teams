@@ -8,7 +8,7 @@
         <h4 class="modal-title">New Project</h4>
       </div>
       <div class="modal-body">
-        <form #newProjectForm="ngForm" (ngSubmit)="saveProject()">
+        <form #newProjectForm="ngForm" (ngSubmit)="saveProject(); hideChildModal()">
           <div class="form-group">
             <label for="projectName">Name</label>
             <input class="form-control" id="projectName" type="text" name="project" [(ngModel)]="project.name" #projectName="ngModel"
