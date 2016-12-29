@@ -65,8 +65,6 @@ export class ProjectCharts implements PageComponent, OnInit {
                 this.costScale = (Math.floor(this.totalCost / 100) + 1) * 100;
                 this.hoursScale = this.totalHours + 1;                
                 this.chartTitle.text = this.project.name;
-
-                console.log(this.tasksValues);
             });
     }
 
@@ -86,6 +84,6 @@ export class ProjectCharts implements PageComponent, OnInit {
 
         let selectedTask = this.tasks[counter];
 
-        console.log(this.tasks[counter]);
+        console.log("TODO: make modal for task page " + this.tasks[counter].title);    
     }
 }
