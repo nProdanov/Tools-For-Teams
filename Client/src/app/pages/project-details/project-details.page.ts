@@ -11,12 +11,10 @@ import { ChatService } from '../../services/socket.service/socket.service';
 import { ToastsManager } from 'ng2-toastr';
 import { Ng2AutoComplete } from 'ng2-auto-complete';
 import { StorageService } from '../../services/storage.service/storage.service';
-import { InfiniteScroll } from 'angular2-infinite-scroll';
 
 @Component({
     templateUrl: './project-details.page.html',
-    styleUrls: ['./project-datils.page.css', './message-board.css'],
-    providers: [InfiniteScroll]
+    styleUrls: ['./project-datils.page.css', './message-board.css']
 })
 export class ProjectDetailsPage implements PageComponent, OnInit, OnDestroy, AfterViewChecked {
     public profile: any;
@@ -28,8 +26,8 @@ export class ProjectDetailsPage implements PageComponent, OnInit, OnDestroy, Aft
     public messages = [];
     public connection;
     public message;
-    public currentUser;    
-    @ViewChild('chatContent') private el:ElementRef;
+    public currentUser;
+    @ViewChild('chatContent') private el: ElementRef;
 
     constructor(
         private StorageService: StorageService,
@@ -43,10 +41,6 @@ export class ProjectDetailsPage implements PageComponent, OnInit, OnDestroy, Aft
         this.project = { creator: '', name: '', description: '', tasks: [], projectMembers: [] };
         this.newTask = { projectId: '', title: '', description: '', timeForExecution: '', cost: 0, status: '', users: [] };
         this.StorageService.getProfileItem().subscribe(res => this.currentUser = res.username);
-    }
-
-    onScrollUp() {
-        console.log("scrolling");
     }
 
     ngOnInit() {
@@ -88,11 +82,12 @@ export class ProjectDetailsPage implements PageComponent, OnInit, OnDestroy, Aft
             projectName: this.project.name,
             created: new Date(Date.now()),
             from: this.currentUser,
-            message: this.message
+            message: this.message,
+            picture: this.profile.picture
         };
 
         this.projectService.saveMessage(messageToSend).subscribe(() => { });
-        this.chatService.sendMessage(this.project.name, this.message, this.currentUser);
+        this.chatService.sendMessage(this.project.name, messageToSend);
         this.message = '';
     }
 

@@ -50,7 +50,7 @@ module.exports = function (params) {
                 });
         },
         addMessageToProject(req, res) {
-            data.addMessageToProject(req.body.projectName, req.body.created, req.body.from, req.body.message)
+            data.addMessageToProject(req.body.projectName, req.body.created, req.body.from, req.body.message, req.body.picture)
                 .then(() => {
                     res.json({});
                 })
