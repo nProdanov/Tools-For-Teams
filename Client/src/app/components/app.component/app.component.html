@@ -13,6 +13,7 @@
                 <a class="btn btn-default" type="button" class="btn btn-primary" (click)="showChildModal()" *ngIf="service.authenticated()">New Project</a>
                 <a class="btn btn-default" routerLink="/login" *ngIf="!service.authenticated()">Login</a>
                 <a class="btn btn-default" routerLink="/register" *ngIf="!service.authenticated()">Register</a>
+                <span *ngIf="service.authenticated()" class="btn btn-warning glyphicon glyphicon-bell"></span>
                 <a class="btn btn-default" (click)="service.logout()" *ngIf="service.authenticated()">Logout</a>
             </div>
         </div>
@@ -21,4 +22,13 @@
 <router-outlet>
 </router-outlet>
 <new-project></new-project>
-<footer>App footer</footer>
+<footer class="text-center">
+  <div class="panel-footer">
+    <h4>© League of the Three</h4>
+    <p>Telerik Academy 2016</p>
+    <div>
+      <p><a routerLink="home" target="_blank" class="btn btn-social-icon btn-lg btn-youtube pull-right spacing-left"><i class="fa fa-youtube-play btn-danger"></i></a></p>
+      <p class="home-btn"><a target="_blank" href="https://github.com/League-of-the-Three/Tools-For-Teams" class="btn btn-social-icon btn-lg btn-github pull-right spacing-left"><i class="fa fa-github"> </i></a></p>
+    </div>
+  </div>
+</footer>

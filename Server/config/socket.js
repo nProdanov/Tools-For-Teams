@@ -9,8 +9,9 @@ module.exports = function({ server, data }) {
         socket.on('disconnect', function() {
         });
 
-        socket.on('chat message', (message) => {
-            io.emit('chat', { type: 'new-message', text: message });
+        socket.on('notification', (notification) => {
+            console.log(notification);
+            io.emit('notification', notification);
         });
 
         socket.on('create event', (projectName) => {

@@ -1,20 +1,14 @@
-<kendo-grid 
-    [data]="gridView"
-    [selectable]="true"
-    (selectionChange)="onSelect($event)"
-    [sortable]="{ mode: 'multiple' }"
-    [sort]="sort" 
-    (sortChange)="sortChange($event)"
-    [pageSize]="pageSize"
-    [skip]="skip"
-    [pageable]="true"
-    [height]="180"
-    (pageChange)="pageChange($event)"
-    >
-    <kendo-grid-column field="name" title="Project name">
-    </kendo-grid-column>
-    <kendo-grid-column field="description" title="Project description">
-    </kendo-grid-column>
-    <kendo-grid-column field="creator" title="Creator">
-    </kendo-grid-column>
-</kendo-grid>
+<div class="container">
+    <div class="row">
+        <kendo-grid [data]="gridView" [selectable]="true" (selectionChange)="onSelect($event)" [sortable]="{ mode: 'multiple' }"
+            [sort]="sort" (sortChange)="sortChange($event)" [pageSize]="pageSize" [skip]="skip" [pageable]="true" [height]="auto"
+            (pageChange)="pageChange($event)">
+            <kendo-grid-column field="name" width="150" title="Project name">
+            </kendo-grid-column>
+            <kendo-grid-column width="150" field="description" title="Project description">
+            </kendo-grid-column>
+            <kendo-grid-column width="100" field="creator" title="Creator">
+            </kendo-grid-column>
+        </kendo-grid>
+    </div>
+</div>

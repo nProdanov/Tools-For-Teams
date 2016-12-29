@@ -17,7 +17,7 @@ export class MyProjectsPage implements PageComponent, OnInit {
     public projects: any[];
     private sort: SortDescriptor[] = [];
     private gridView: GridDataResult;
-    private pageSize: number = 5;
+    private pageSize: number = 10;
     private skip: number = 0;
 
     constructor(private userService: UserService, private storageService: StorageService, private router: Router, private projectService: ProjectService) {

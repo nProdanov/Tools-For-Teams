@@ -7,7 +7,8 @@ import { User } from '../../models/user.model/user.model';
 import { ProjectService } from '../../services/project.service/project.service';
 import { UserService } from '../../services/user.service/user.service';
 import { TaskService } from '../../services/task.service/task.service';
-import { ChatService } from '../../services/socket.service/socket.service';
+import { ChatService } from '../../services/chat.service/chat.service';
+import { NotificationService } from '../../services/notification.service/notification.service';
 import { ToastsManager } from 'ng2-toastr';
 import { Ng2AutoComplete } from 'ng2-auto-complete';
 import { StorageService } from '../../services/storage.service/storage.service';
@@ -45,7 +46,8 @@ export class ProjectDetailsPage implements PageComponent, OnInit, OnDestroy, Aft
         private route: ActivatedRoute,
         private userService: UserService,
         private taskService: TaskService,
-        private chatService: ChatService) {
+        private chatService: ChatService,
+        private notificationService: NotificationService) {
         this.profile = {};
         this.project = { creator: '', name: '', description: '', tasks: [], projectMembers: [] };
         this.StorageService.getProfileItem().subscribe(res => this.currentUser = res.username);
@@ -107,11 +109,13 @@ export class ProjectDetailsPage implements PageComponent, OnInit, OnDestroy, Aft
     }
 
     public onEdit(dataItem: any): void {
+        // still not working
         console.log(dataItem);
         this.dataItem = dataItem;
     }
 
     public onSave(editedTask: Task): void {
+        // still not working
         console.log(editedTask);
 
         // operation.switchMap(x => this.getProducts())
@@ -140,6 +144,10 @@ export class ProjectDetailsPage implements PageComponent, OnInit, OnDestroy, Aft
                 .subscribe((res: any) => {
                     this.project.projectMembers.push(this.userToAdd);
                     this.toastr.success('User added to project!');
+                    this.notificationService.sendNotification({
+                        content: `${this.userToAdd} has been added to project ${this.project.name}.`,
+                        created: new Date(Date.now())
+                    });
                 });
         }
         else {
