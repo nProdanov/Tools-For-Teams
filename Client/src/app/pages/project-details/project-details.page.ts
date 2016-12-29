@@ -1,4 +1,17 @@
-import { Component, ElementRef, OnInit, OnDestroy, ViewChild, AfterViewChecked } from '@angular/core';
+import {
+    Component,
+    ElementRef,
+    OnInit,
+    OnDestroy,
+    ViewChild,
+    AfterViewChecked,
+    trigger,
+    state,
+    style,
+    transition,
+    animate,
+    keyframes
+} from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { PageComponent } from '../../components/page.component/page.component';
 import { Project } from '../../models/project.model/project.model';
@@ -17,7 +30,34 @@ import { GridDataResult, PageChangeEvent } from '@progress/kendo-angular-grid';
 
 @Component({
     templateUrl: './project-details.page.html',
-    styleUrls: ['./project-datils.page.css', './message-board.css']
+    styleUrls: [
+        './project-datils.page.css',
+        './message-board.css'],
+    animations: [
+        trigger('movePanel', [
+            state('inactive', style({
+                opacity: 0
+            })),
+            state('active', style({
+                opacity: 1
+            })),
+            transition('inactive => active', [
+                animate(600, keyframes([
+                    style({ opacity: 0, transform: 'translateX(-200px)', offset: 1 }),
+                    style({ opacity: 1, transform: 'translateX(200px)', offset: .75 }),
+                    style({ opacity: 1, transform: 'translateX(0)', offset: 0 }),
+                ]))
+            ]),
+            transition('active => inactive', [
+                animate(600, keyframes([
+                    style({ opacity: 1, transform: 'translateX(0)', offset: 0 }),
+                    style({ opacity: 1, transform: 'translateX(25px)', offset: .75 }),
+                    style({ opacity: 0, transform: 'translateX(-200px)', offset: 1 }),
+                ]))
+            ])
+
+        ])
+    ]
 })
 export class ProjectDetailsPage implements PageComponent, OnInit, OnDestroy, AfterViewChecked {
     @ViewChild(NewTaskModalComponent) childModal: NewTaskModalComponent;
@@ -37,6 +77,7 @@ export class ProjectDetailsPage implements PageComponent, OnInit, OnDestroy, Aft
     private pageSize: number = 10;
     private skip: number = 0;
     public dataItem: Task;
+    public state: string = 'inactive';
 
     constructor(
         private StorageService: StorageService,
@@ -49,6 +90,10 @@ export class ProjectDetailsPage implements PageComponent, OnInit, OnDestroy, Aft
         this.profile = {};
         this.project = { creator: '', name: '', description: '', tasks: [], projectMembers: [] };
         this.StorageService.getProfileItem().subscribe(res => this.currentUser = res.username);
+    }
+
+    toggleMove() {
+        this.state = (this.state === 'inactive' ? 'active' : 'inactive');
     }
 
     showChildModal() {
@@ -151,7 +196,7 @@ export class ProjectDetailsPage implements PageComponent, OnInit, OnDestroy, Aft
         this.connection.unsubscribe();
     }
 
-    addToTasks(task){
+    addToTasks(task) {
         this.project.tasks.push(task);
     }
 }

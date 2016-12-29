@@ -6,91 +6,92 @@
                     <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Project members
   <span class="caret"></span></button>
                     <ul class="dropdown-menu" style="position: absolute; top:45px; left: 80px;">
-<li *ngFor="let user of project.projectMembers">
-    <a routerLink="#">{{user}}</a>
-</li>
-</ul>
-</div>
-</li>
-<li class="sidebar-brand">
-    <a (click)="showChildModal()">New Task</a>
-</li>
-<li class="sidebar-brand">
-    <a (click)="showChat = !showChat">Project messages</a>
-</li>
-<li class="sidebar-brand">
-    <a (click)="addUser = !addUser">Add user to project</a>
-</li>
-<div *ngIf="project.tasks.length === 0">
-    <li>
-        <span>No tasks yet</span>
-    </li>
-</div>
-<div *ngIf="project.tasks.length > 0">
-    <li *ngFor="let task of project.tasks">
-        <a>{{task.title}}</a>
-    </li>
-</div>
-</ul>
-</div>
-<!-- /#sidebar-wrapper -->
+                        <li *ngFor="let user of project.projectMembers">
+                            <a routerLink="#">{{user}}</a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            <li class="sidebar-brand">
+                <a (click)="showChildModal()">New Task</a>
+            </li>
+            <li class="sidebar-brand">
+                <a (click)="showChat = !showChat">Project messages</a>
+            </li>
+            <li class="sidebar-brand">
+                <a (click)="toggleMove()">Add user to project</a>
+            </li>
+            <div *ngIf="project.tasks.length === 0">
+                <li>
+                    <span>No tasks yet</span>
+                </li>
+            </div>
+            <div *ngIf="project.tasks.length > 0">
+                <li *ngFor="let task of project.tasks">
+                    <a>{{task.title}}</a>
+                </li>
+            </div>
+        </ul>
+    </div>
+    <!-- /#sidebar-wrapper -->
 
-<<<<<<< HEAD
-<!-- Page Content -->
-<div id="page-content-wrapper">
-    <div class="container-fluid">
-        <div class="container">
-            <div class="row">
-                <div class="col-xs-10">
-                    <h4>Project tasks</h4>
-                    <kendo-grid [data]="gridView" [pageSize]="pageSize" [skip]="skip" [pageable]="true" [height]="auto" (pageChange)="pageChange($event)">
-                        <kendo-grid-column field="title" width="150" title="Task">
-                        </kendo-grid-column>
-                        <kendo-grid-column field="users" width="250" title="Task Members">
-                        </kendo-grid-column>
-                        <kendo-grid-column field="status" width="120" title="Status">
-                        </kendo-grid-column>
-                        <kendo-grid-column width="120" title="#Edit">
-                            <template kendoCellTemplate let-dataItem>
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+        <div class="container-fluid">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-10">
+                        <h4>Project tasks</h4>
+                        <kendo-grid [data]="gridView" [pageSize]="pageSize" [skip]="skip" [pageable]="true" [height]="auto" (pageChange)="pageChange($event)">
+                            <kendo-grid-column field="title" width="150" title="Task">
+                            </kendo-grid-column>
+                            <kendo-grid-column field="users" width="250" title="Task Members">
+                            </kendo-grid-column>
+                            <kendo-grid-column field="status" width="120" title="Status">
+                            </kendo-grid-column>
+                            <kendo-grid-column width="120" title="#Edit">
+                                <template kendoCellTemplate let-dataItem>
                                 <button (click)="onEdit(dataItem)" class="btn btn-warning k-button-icontext k-grid-edit">Edit</button>
                                 <button (click)="onDelete(dataItem)" class="k-button k-button-icontext k-grid-delete">Delete</button>
                             </template>
-                        </kendo-grid-column>
-                    </kendo-grid>
-                    <edit-task [model]="dataItem" [projectMembers]="project.projectMembers" (save)="onSave($event)"></edit-task>
-                    <div [hidden]="!addUser">
-                        <input auto-complete [source]="users" name="userToAdd" [(ngModel)]="userToAdd" type="text" />
-                        <button (click)="addUserToProject(); !addUser">Add user to project</button>
+                            </kendo-grid-column>
+                        </kendo-grid>
+                        <edit-task [model]="dataItem" [projectMembers]="project.projectMembers" (save)="onSave($event)"></edit-task>
+                        <div class="form-group">
+                            <div [@movePanel]='state' class="add-users-wrapper">
+                                <input class="form-control" auto-complete [source]="users" name="userToAdd" [(ngModel)]="userToAdd" type="text" />
+                                <button class="btn btn-info" (click)="addUserToProject(); !addUser">Add user to project</button>
+                            </div>
+                        </div>
+                        <new-task [users]="project.projectMembers" [projectId]="projectId"></new-task>
                     </div>
-                    <new-task [users]="project.projectMembers" [projectId]="projectId"></new-task>
+                </div>
+            </div>
+        </div>
+        <div id="main-chat" class="container col-xs-4" [hidden]="!showChat">
+            <div class="row">
+                <div class="panel panel-default">
+                    <div class="panel-heading">{{project.name}}</div>
+                    <div class="panel-body">
+                        <div id="message-container" #chatContent class="container scrollable-chat-menu">
+                            <div class="row message-bubble" *ngFor="let message of messages">
+                                <p class="text-muted">
+                                    <img style="width: 30px; height: 25px;" src={{message.picture}}/> {{message.from}}
+                                </p>
+                                <p>{{message.message}}</p>
+                                <div>sent {{message.created | date}}</div>
+                            </div>
+                        </div>
+                        <div class="chat-message-botom">
+                            <div class="input-group">
+                                <input id="m" type="text" class="form-control" (keyup.enter)="messageBoardUpdate()" [(ngModel)]="message" />
+                                <span class="input-group-btn">
+                                            <button id="sendMsg" type="submit" class="btn btn-success" (click)="messageBoardUpdate()">Send</button>
+                                        </span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    <div id="main-chat" class="container col-xs-4" [hidden]="!showChat">
-        <div class="row">
-            <div class="panel panel-default">
-                <div class="panel-heading">{{project.name}}</div>
-                <div class="panel-body">
-                    <div id="message-container" #chatContent class="container scrollable-chat-menu">
-                        <div class="row message-bubble" *ngFor="let message of messages">
-                            <p class="text-muted">
-                                <img style="width: 30px; height: 25px;" src={{message.picture}}/> {{message.from}}
-</p>
-<p>{{message.message}}</p>
-<div>sent {{message.created | date}}</div>
-</div>
-</div>
-<div class="chat-message-botom">
-    <div class="input-group">
-        <input id="m" type="text" class="form-control" (keyup.enter)="messageBoardUpdate()" [(ngModel)]="message" />
-        <span class="input-group-btn">
-                                            <button id="sendMsg" type="submit" class="btn btn-success" (click)="messageBoardUpdate()">Send</button>
-                                        </span>
-    </div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
