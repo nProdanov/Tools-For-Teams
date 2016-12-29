@@ -7,20 +7,21 @@ import { Http } from '@angular/http';
 
 @Injectable()
 export class ProjectService {
-    private projectUrl = 'http://localhost:3001/api/projects';
+    private projectUrl = 'http://localhost:3001/api/project';    
+    private projectsUrl = 'http://localhost:3001/api/projects';
     private messageUrl = 'http://localhost:3001/api/messages';
 
     constructor(private http: Http) { }
 
     getProjectById(id: string): Observable<any> {
-        return this.http.get(`${this.projectUrl}/${id}`).map(response => {
+        return this.http.get(`${this.projectsUrl}/${id}`).map(response => {
             let data = response.json();
             return data;
         });
     }
 
     getMappedProjectById(id: string): Observable<any> {
-        return this.http.get(`${this.projectUrl}/${id}/filtered`).map(response => {
+        return this.http.get(`${this.projectsUrl}/${id}/filtered`).map(response => {
             let data = response.json();
             return data;
         });
@@ -35,11 +36,11 @@ export class ProjectService {
     }
 
     getAllProjectsByUsername(): Observable<any> {
-        return this.http.get(this.projectUrl).map(p => p.json());
+        return this.http.get(this.projectsUrl).map(p => p.json());
     }
 
     addUserToProject(id: string, username: string) {
-        return this.http.put(`${this.projectUrl}/${id}`, { username })
+        return this.http.put(`${this.projectsUrl}/${id}`, { username })
             .map(response => {
                 let data = response.json();
                 return data;
@@ -55,7 +56,16 @@ export class ProjectService {
     }
 
     saveProject(body: Project): Observable<any> {
-        return this.http.post(this.projectUrl, body)
+        return this.http.post(this.projectsUrl, body)
+            .map(response => {
+                let data = response.json();
+                return data;
+            });
+    }
+
+
+    getProjectByProjectName(projectName: string) {
+        return this.http.get(`${this.projectUrl}/${projectName}`)
             .map(response => {
                 let data = response.json();
                 return data;

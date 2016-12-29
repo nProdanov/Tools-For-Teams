@@ -1,6 +1,7 @@
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
 import * as io from 'socket.io-client';
+import { Message } from '../../models/message.model/message.model';
 
 export class ChatService {
   private url = 'http://localhost:3001';
@@ -20,8 +21,8 @@ export class ChatService {
     return observable;
   }
 
-  sendMessage(projectName: string, message: string, userName: string) {
-    this.socket.emit(projectName, message, userName);
+  sendMessage(projectName: string, message: Message) {
+    this.socket.emit(projectName, message);
   }
 
   createEvent(projectName: string) {

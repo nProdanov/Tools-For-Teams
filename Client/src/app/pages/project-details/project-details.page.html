@@ -1,4 +1,4 @@
-<div id="wrapper" infinite-scroll (scrolledUp)="onScrollUp()">
+<div id="wrapper">
     <div id="sidebar-wrapper">
         <ul class="sidebar-nav">
             <li class="sidebar-brand">
@@ -14,6 +14,9 @@
 </li>
 <li class="sidebar-brand">
     <a (click)="showChildModal()">New Task</a>
+</li>
+<li class="sidebar-brand">
+    <a (click)="showChat = !showChat">Project messages</a>
 </li>
 <li class="sidebar-brand">
     <a (click)="addUser = !addUser">Add user to project</a>
@@ -61,7 +64,7 @@
     <button class="close btn btn-danger" data-dismiss="modal" aria-hidden="true" (click)="visible = !visible">×</button>
     <h4 class="modal-title">New Task</h4>
 </div>-->
-<!--<div class="modal-body">
+                    <!--<div class="modal-body">
     <form #newTaskForm="ngForm" (ngSubmit)="addNewTask(); newTaskForm.reset(); visible = !visible" data-validate="true" class="form-group edit-task-form"
         novalidate="novalidate" id="new_task" accept-charset="UTF-8" data-remote="true">
         <input name="utf8" type="hidden" value="✓">
@@ -142,34 +145,35 @@
         </div>
     </form>
 </div>-->
-<!--</div>-->
+                    <!--</div>-->
+                </div>
+
+
+                <div id="main-chat" class="container col-xs-4" [hidden]="!showChat">
+                    <div class="row">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">{{project.name}}</div>
+                            <div class="panel-body">
+                                <div id="message-container" #chatContent class="container scrollable-chat-menu">
+                                    <div class="row message-bubble" *ngFor="let message of messages">
+                                        <p class="text-muted">
+                                            <img style="width: 30px; height: 25px;" src={{message.picture}}/> {{message.from}}
+</p>
+<p>{{message.message}}</p>
+<div>sent {{message.created | date}}</div>
 </div>
-
-
-<div id="main-chat" class="container col-xs-4">
-    <h4>Message board for: {{project.name}}</h4>
-    <div class="row">
-        <div class="panel panel-default">
-            <div class="panel-heading">Chat</div>
-            <div class="panel-body">
-                <div id="message-container" #chatContent class="container scrollable-chat-menu">
-                    <div class="row message-bubble" *ngFor="let message of messages">
-                        <p class="text-muted">{{message.from}}</p>
-                        <span>{{message.message}}</span>
-                        <!--<div>sent </div>-->
-                    </div>
-                </div>
-                <div class="chat-message-botom">
-                    <div class="input-group">
-                        <input id="m" type="text" class="form-control" [(ngModel)]="message" />
-                        <span class="input-group-btn">
-                            <button id="sendMsg" type="button" class="btn btn-success" (click)="messageBoardUpdate()">Send</button>
+</div>
+<div class="chat-message-botom">
+    <div class="input-group">
+        <input id="m" type="text" class="form-control" (keyup.enter)="messageBoardUpdate()" [(ngModel)]="message" />
+        <span class="input-group-btn">
+                            <button id="sendMsg" type="submit" class="btn btn-success" (click)="messageBoardUpdate()">Send</button>
                         </span>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
+</div>
+</div>
+</div>
+</div>
 </div>
 </div>
 </div>

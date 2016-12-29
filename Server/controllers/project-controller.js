@@ -1,6 +1,6 @@
 /* globals module */
 
-module.exports = function (params) {
+module.exports = function(params) {
     let { data, validator } = params;
     return {
         createProject(req, res) {
@@ -50,7 +50,7 @@ module.exports = function (params) {
                 });
         },
         addMessageToProject(req, res) {
-            data.addMessageToProject(req.body.projectName, req.body.created, req.body.from, req.body.message)
+            data.addMessageToProject(req.body.projectName, req.body.created, req.body.from, req.body.message, req.body.picture)
                 .then(() => {
                     res.json({});
                 })
@@ -66,6 +66,15 @@ module.exports = function (params) {
                 .catch((err) => {
                     res.json(err);
                 });
+        },
+        getProjectByProjectName(req, res) {
+            data.getProjectByProjectName(req.params.projectName)
+                .then((project) => {
+                    res.json(project);
+                })
+                .catch((err) => {
+                    res.json(err);
+                })
         }
     };
 };

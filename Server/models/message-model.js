@@ -9,5 +9,6 @@ module.exports = modelRegistrator.register("Message", {
     },
     created: Date,
     from: String,
-    message: String
+    message: String,
+    picture: String
 });

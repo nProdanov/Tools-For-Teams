@@ -1,12 +1,12 @@
 /* globals module Promise */
 
-module.exports = function (models) {
+module.exports = function(models) {
     let { Project, User, Message } = models;
 
     return {
         createProject(creator, name, description) {
             return new
-                Promise((resolve, reject) => {
+            Promise((resolve, reject) => {
                     Project.findOne({ name }, (err, project) => {
                         if (err) {
                             return reject(err);
@@ -36,22 +36,22 @@ module.exports = function (models) {
                     return Promise.resolve(project);
                 });
         },
-        getTenMessages(name, start, end) {
+        getTenMessages(name) {
             return new Promise((resolve, reject) => {
-                Project.findOne({ name }, (err, project) => {
-                    if (err) {
-                        return reject(err);
-                    }
+                    Project.findOne({ name }, (err, project) => {
+                        if (err) {
+                            return reject(err);
+                        }
 
-                    return resolve(project);
+                        return resolve(project);
+                    })
                 })
-            })
                 .then((project) => {
                     let messages = project.messages
                         .sort((a, b) => {
                             return new Date(a.created) - new Date(b.created);
                         })
-                        .slice(start, end);
+                        .slice(0);
 
                     return Promise.resolve(messages);
                 });
@@ -69,14 +69,14 @@ module.exports = function (models) {
         },
         getProjectById(id) {
             return new Promise((resolve, reject) => {
-                Project.findOne({ _id: id }, (err, project) => {
-                    if (err) {
-                        return reject(err);
-                    }
+                    Project.findOne({ _id: id }, (err, project) => {
+                        if (err) {
+                            return reject(err);
+                        }
 
-                    return resolve(project);
+                        return resolve(project);
+                    })
                 })
-            })
                 .then((project) => {
                     return new Promise((resolve, reject) => {
                         let messages = project.messages
@@ -84,7 +84,7 @@ module.exports = function (models) {
                                 return new Date(a.created) - new Date(b.created);
                             })
                             .slice(project.messages.length - 10);
-                            
+
                         return resolve(project);
                     });
                 });
@@ -105,23 +105,24 @@ module.exports = function (models) {
                 })
             });
         },
-        addMessageToProject(projectName, created, from, message) {
+        addMessageToProject(projectName, created, from, message, picture) {
             return new Promise((resolve, reject) => {
-                Project.findOne({ name: projectName }, (err, project) => {
-                    if (err) {
-                        return reject(err);
-                    }
+                    Project.findOne({ name: projectName }, (err, project) => {
+                        if (err) {
+                            return reject(err);
+                        }
 
-                    return resolve(project);
-                });
-            })
+                        return resolve(project);
+                    });
+                })
                 .then((project) => {
                     return new Promise((resolve, reject) => {
                         let messageToAdd = new Message({
                             projectName,
                             created,
                             from,
-                            message
+                            message,
+                            picture
                         });
 
                         project.messages.push(messageToAdd);
@@ -137,24 +138,24 @@ module.exports = function (models) {
         },
         addUserToProject(id, username) {
             return new Promise((resolve, reject) => {
-                Project.findOne({ _id: id }, (err, project) => {
-                    if (err) {
-                        return reject(err);
-                    }
-
-                    if (project !== null) {
-                        project.projectMembers.push(username);
-                    }
-
-                    project.save((err) => {
+                    Project.findOne({ _id: id }, (err, project) => {
                         if (err) {
                             return reject(err);
                         }
 
-                        return resolve(project);
+                        if (project !== null) {
+                            project.projectMembers.push(username);
+                        }
+
+                        project.save((err) => {
+                            if (err) {
+                                return reject(err);
+                            }
+
+                            return resolve(project);
+                        });
                     });
-                });
-            })
+                })
                 .then(project => {
                     User.findOne({ username }, (err, user) => {
                         if (err) {
@@ -173,6 +174,17 @@ module.exports = function (models) {
                         }
                     });
                 });
+        },
+        getProjectByProjectName(projectName) {
+            return new Promise((resolve, reject) => {
+                Project.findOne({ name: projectName }, (err, project) => {
+                    if (err) {
+                        return reject(err);
+                    }
+
+                    return resolve(project);
+                })
+            });
         }
     };
 };

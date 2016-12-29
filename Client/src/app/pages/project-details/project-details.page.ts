@@ -11,13 +11,11 @@ import { ChatService } from '../../services/socket.service/socket.service';
 import { ToastsManager } from 'ng2-toastr';
 import { Ng2AutoComplete } from 'ng2-auto-complete';
 import { StorageService } from '../../services/storage.service/storage.service';
-import { InfiniteScroll } from 'angular2-infinite-scroll';
 import { NewTaskModalComponent } from '../../components/new-task.component/new-task.component';
 
 @Component({
     templateUrl: './project-details.page.html',
-    styleUrls: ['./project-datils.page.css', './message-board.css'],
-    providers: [InfiniteScroll]
+    styleUrls: ['./project-datils.page.css', './message-board.css']
 })
 export class ProjectDetailsPage implements PageComponent, OnInit, OnDestroy, AfterViewChecked {
     @ViewChild(NewTaskModalComponent) childModal: NewTaskModalComponent;
@@ -34,7 +32,6 @@ export class ProjectDetailsPage implements PageComponent, OnInit, OnDestroy, Aft
     public message;
     public currentUser;
 
-
     constructor(
         private StorageService: StorageService,
         private toastr: ToastsManager,
@@ -47,7 +44,6 @@ export class ProjectDetailsPage implements PageComponent, OnInit, OnDestroy, Aft
         this.project = { creator: '', name: '', description: '', tasks: [], projectMembers: [] };
         this.StorageService.getProfileItem().subscribe(res => this.currentUser = res.username);
     }
-
     showChildModal() {
         console.log(this.childModal);
         this.childModal.showChildModal();
@@ -96,11 +92,12 @@ export class ProjectDetailsPage implements PageComponent, OnInit, OnDestroy, Aft
             projectName: this.project.name,
             created: new Date(Date.now()),
             from: this.currentUser,
-            message: this.message
+            message: this.message,
+            picture: this.profile.picture
         };
 
         this.projectService.saveMessage(messageToSend).subscribe(() => { });
-        this.chatService.sendMessage(this.project.name, this.message, this.currentUser);
+        this.chatService.sendMessage(this.project.name, messageToSend);
         this.message = '';
     }
 

@@ -3,4 +3,5 @@ export interface Message {
     created: Date;
     from: string;
     message: {};
+    picture: string;
 }
