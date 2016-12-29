@@ -4,7 +4,10 @@ import { PageComponent } from '../../components/page.component/page.component';
 import { ProjectService } from './../../services/project.service/project.service';
 
 @Component({
-    templateUrl: './project-charts.page.html'
+    templateUrl: './project-charts.page.html',
+    styleUrls: [
+        './project-charts.page.css'
+    ]
 })
 export class ProjectCharts implements PageComponent, OnInit {
     private project: any;
@@ -13,6 +16,8 @@ export class ProjectCharts implements PageComponent, OnInit {
     private cost: any[];
     private totalCost: number;
     private totalHours: number;
+    private costScale: number;
+    private hoursScale: number;
 
 
     constructor(private projectService: ProjectService, private route: ActivatedRoute,) {
@@ -22,6 +27,8 @@ export class ProjectCharts implements PageComponent, OnInit {
         this.hours = [];
         this.totalCost = 0;
         this.totalHours = 0;
+        this.costScale = 0;
+        this.hoursScale = 0;
     }
 
     ngOnInit() {
@@ -45,6 +52,9 @@ export class ProjectCharts implements PageComponent, OnInit {
                     this.totalCost = this.totalCost + currentCost;
                     this.totalHours = this.totalHours + currentHours;
                 }
+
+                this.costScale = Math.floor(this.totalCost / 100) + 1;
+                this.hoursScale = this.totalHours + 1;
 
                 console.log(this.cost);
                 console.log(this.hours);
