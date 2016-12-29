@@ -22,6 +22,7 @@ import { HomePage } from '../../pages/home/home.page';
 import { MyProjectsPage } from '../../pages/my-projects/my-projects.page';
 import { ProjectDetailsPage } from '../../pages/project-details/project-details.page';
 import { ToolboxPage } from './../../pages/my-toolbox/my-toolbox.page';
+import { ProjectCharts } from './../../pages/project-charts/project-charts.page';
 
 //  Services
 import { AuthGuard } from '../../services/auth-guard.service/auth.guard.service';
@@ -58,7 +59,8 @@ import { FormatDatePipe } from './../../pipes/date.pipe'
     MyProjectsPage,
     ProjectDetailsPage,
     FormatDatePipe,
-    ToolboxPage
+    ToolboxPage,
+    ProjectCharts
   ],
   bootstrap: [AppComponent],
   providers: [
