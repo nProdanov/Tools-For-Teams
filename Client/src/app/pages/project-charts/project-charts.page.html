@@ -1,43 +1,14 @@
 <div class="container">
     <h2 class="text-center">Charts for project: {{project.name}}</h2>
 
-    <dl class="csslinegraph">
-
-        <dt>Day 1</dt>
-        <dd class="first"><span class="pi0 i1"><em>3</em></span></dd>
-
-        <dt>Day 2</dt>
-        <dd><span class="pi1 i10"><em>36</em></span></dd>
-
-        <dt>Day 3</dt>
-        <dd><span class="pd11 d d4"><em>23</em></span></dd>
-
-        <dt>Day 4</dt>
-        <dd><span class="pi7 i10"><em>56</em></span></dd>
-
-        <dt>Day 5</dt>
-        <dd><span class="pd17 d d0"><em>55</em></span></dd>
-
-        <dt>Day 6</dt>
-        <dd><span class="pd17 d d7"><em>32</em></span></dd>
-
-        <dt>Day 7</dt>
-        <dd><span class="pi10 i14"><em>79</em></span></dd>
-
-        <dt>Day 8</dt>
-        <dd><span class="pd24 d d2"><em>74</em></span></dd>
-
-        <dt>Day 9</dt>
-        <dd><span class="pi22 i1"><em>77</em></span></dd>
-
-        <dt>Day 10</dt>
-        <dd><span class="pi23 i2"><em>83</em></span></dd>
-
-        <dt>Day 11</dt>
-        <dd><span class="pd25 d d15"><em>34</em></span></dd>
-
-        <dt>Day 12</dt>
-        <dd><span class="pi10 i2"><em>39</em></span></dd>
-
-    </dl>
+    <kendo-chart [title]="chartTitle" (seriesClick)="onSeriesClick($event)">
+        <kendo-chart-tooltip background="green" format="Cost: {0}, Hours: {1}">
+        </kendo-chart-tooltip>
+        <kendo-chart-legend position="bottom" orientation="horizontal">
+        </kendo-chart-legend>
+        <kendo-chart-series>
+            <kendo-chart-series-item type="scatterLine" name="Tasks" [data]="tasksValues">
+            </kendo-chart-series-item>
+        </kendo-chart-series>
+    </kendo-chart>
 </div>
