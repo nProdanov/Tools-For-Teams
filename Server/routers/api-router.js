@@ -10,6 +10,7 @@ module.exports = function({ app, controllers }) {
         .get("/users/:id", controllers.getUserById)
         .get("/users", controllers.getAllUsers)
         .get("/messages/:name", controllers.getTenMessages)
+        .get("/project/:projectName", controllers.getProjectByProjectName)
         .get("/projects", controllers.getAllProjects)
         .get("/projects/:id", controllers.getProjectById)
         .get("/projects/:id/filtered", controllers.getProjectByIdMapped)

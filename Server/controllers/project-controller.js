@@ -1,6 +1,6 @@
 /* globals module */
 
-module.exports = function (params) {
+module.exports = function(params) {
     let { data, validator } = params;
     return {
         createProject(req, res) {
@@ -66,6 +66,15 @@ module.exports = function (params) {
                 .catch((err) => {
                     res.json(err);
                 });
+        },
+        getProjectByProjectName(req, res) {
+            data.getProjectByProjectName(req.params.projectName)
+                .then((project) => {
+                    res.json(project);
+                })
+                .catch((err) => {
+                    res.json(err);
+                })
         }
     };
 };
