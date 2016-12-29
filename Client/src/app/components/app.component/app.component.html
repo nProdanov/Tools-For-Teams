@@ -16,7 +16,7 @@
                 </li>
             </ul>
             <div class="nav navbar-nav navbar-right">
-                <a class="btn btn-default" (click)="newProjectVisible = !newProjectVisible" *ngIf="service.authenticated()">New Project</a>
+                <a class="btn btn-default" type="button" class="btn btn-primary" (click)="showChildModal()" *ngIf="service.authenticated()">New Project</a>
                 <a class="btn btn-default" routerLink="/login" *ngIf="!service.authenticated()">Login</a>
                 <a class="btn btn-default" routerLink="/register" *ngIf="!service.authenticated()">Register</a>
                 <a class="btn btn-default" (click)="service.logout()" *ngIf="service.authenticated()">Logout</a>
@@ -26,5 +26,5 @@
 </nav>
 <router-outlet>
 </router-outlet>
-<new-project [hidden]="!newProjectVisible || !service.authenticated()"></new-project>
+<new-project></new-project>
 <footer>App footer</footer>

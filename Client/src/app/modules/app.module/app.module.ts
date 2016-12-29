@@ -10,7 +10,11 @@ import { ToastModule } from 'ng2-toastr';
 import { ButtonsModule } from '@progress/kendo-angular-buttons';
 import { GridModule } from '@progress/kendo-angular-grid';
 import { Ng2AutoCompleteModule } from 'ng2-auto-complete';
+<<<<<<< HEAD
 import { InfiniteScrollModule } from 'angular2-infinite-scroll';
+=======
+import { ModalModule } from 'ng2-bootstrap';
+>>>>>>> 65386f1c3ef950030d9afe2ac1111bed276cd94d
 
 //  Pages
 import { ProfilePage } from '../../pages/profile/profile.page';
@@ -44,7 +48,11 @@ import { FormatDatePipe } from './../../pipes/date.pipe'
     ButtonsModule,
     GridModule,
     Ng2AutoCompleteModule,
+<<<<<<< HEAD
     InfiniteScrollModule
+=======
+    ModalModule.forRoot()
+>>>>>>> 65386f1c3ef950030d9afe2ac1111bed276cd94d
   ],
   declarations: [
     AppComponent,
