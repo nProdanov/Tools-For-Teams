@@ -7,6 +7,7 @@ import { GridDataResult, PageChangeEvent } from '@progress/kendo-angular-grid';
 import { SortDescriptor, orderBy } from '@progress/kendo-data-query';
 import { StorageService } from '../../services/storage.service/storage.service';
 import { UserService } from '../../services/user.service/user.service';
+import { NotificationService } from '../../services/notification.service/notification.service';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -20,7 +21,12 @@ export class MyProjectsPage implements PageComponent, OnInit {
     private pageSize: number = 10;
     private skip: number = 0;
 
-    constructor(private userService: UserService, private storageService: StorageService, private router: Router, private projectService: ProjectService) {
+    constructor(
+        private userService: UserService,
+        private storageService: StorageService, 
+        private router: Router, 
+        private projectService: ProjectService,
+        private notificationService: NotificationService) {
         this.profile = {};
     }
     

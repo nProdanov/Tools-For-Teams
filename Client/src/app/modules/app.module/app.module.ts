@@ -19,6 +19,7 @@ import { GeneralStatsChartComponent } from './../../components/general-stats-cha
 import { DeadlineStatsChartComponent } from './../../components/deadline-stats-chart.component/deadline-stats-chart.component';
 
 //  Pages
+import { NavbarComponent } from '../../components/navbar.component/navbar.component';
 import { ProfilePage } from '../../pages/profile/profile.page';
 import { NewProjectPage } from '../../pages/new-project/new-project.page';
 import { LoginPage } from '../../pages/login/login.page';
@@ -62,6 +63,7 @@ import { CompanyPipe } from './../../pipes/company.pipe';
   ],
   declarations: [
     AppComponent,
+    NavbarComponent,
     ProfilePage,
     NewProjectPage,
     LoginPage,
