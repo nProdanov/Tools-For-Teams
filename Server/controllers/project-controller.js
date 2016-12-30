@@ -75,6 +75,15 @@ module.exports = function(params) {
                 .catch((err) => {
                     res.json(err);
                 })
+        },
+        getProjects(req, res) {
+            data.getProjects()
+                .then(projects => {
+                    res.json(projects);
+                })
+                .catch(err => {
+                    res.json(err);
+                });
         }
     };
 };

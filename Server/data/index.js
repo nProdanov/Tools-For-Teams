@@ -14,8 +14,9 @@ module.exports = function(connectionString, validator) {
     let Project = require("../models/project-model");
     let Task = require("../models/task-model");
     let Message = require("../models/message-model");
+    let Notification = require("../models/notification-model");
 
-    let models = { User, Project, Task, Message };
+    let models = { User, Project, Task, Message, Notification };
 
     let data = {};
 

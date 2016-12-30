@@ -58,8 +58,17 @@ import { GridDataResult, PageChangeEvent } from '@progress/kendo-angular-grid';
                     style({ opacity: 0, transform: 'translateX(-200px)', offset: 1 }),
                 ]))
             ])
-
-        ])
+        ]),
+        trigger('slideInOut', [
+            state('in', style({
+                transform: 'translate3d(0, 0, 0)'
+            })),
+            state('out', style({
+                transform: 'translate3d(100%, 0, 0)'
+            })),
+            transition('in => out', animate('400ms ease-in-out')),
+            transition('out => in', animate('400ms ease-in-out'))
+        ]),
     ]
 })
 export class ProjectDetailsPage implements PageComponent, OnInit, OnDestroy, AfterViewChecked {
@@ -81,6 +90,7 @@ export class ProjectDetailsPage implements PageComponent, OnInit, OnDestroy, Aft
     private skip: number = 0;
     public dataItem: Task;
     public state: string = 'inactive';
+    public menuState: string = 'out';
 
     constructor(
         private StorageService: StorageService,
@@ -95,16 +105,7 @@ export class ProjectDetailsPage implements PageComponent, OnInit, OnDestroy, Aft
         this.project = { creator: '', name: '', description: '', tasks: [], projectMembers: [] };
         this.StorageService.getProfileItem().subscribe(res => this.currentUser = res.username);
     }
-
-    toggleMove() {
-        this.state = (this.state === 'inactive' ? 'active' : 'inactive');
-    }
-
-    showChildModal() {
-        console.log(this.childModal);
-        this.childModal.showChildModal();
-    }
-
+    
     ngOnInit() {
         this.StorageService
             .getProfileItem()
@@ -138,6 +139,21 @@ export class ProjectDetailsPage implements PageComponent, OnInit, OnDestroy, Aft
                 });
             });
     }
+
+    toggleMenu() {
+        this.menuState = this.menuState === 'out' ? 'in' : 'out';
+    }
+
+    toggleMove() {
+        this.state = (this.state === 'inactive' ? 'active' : 'inactive');
+    }
+
+    showChildModal() {
+        console.log(this.childModal);
+        this.childModal.showChildModal();
+    }
+
+
 
     ngAfterViewChecked() {
         this.el.nativeElement.scrollTop = this.el.nativeElement.scrollHeight;
@@ -191,12 +207,14 @@ export class ProjectDetailsPage implements PageComponent, OnInit, OnDestroy, Aft
                 .subscribe((res: any) => {
                     this.project.projectMembers.push(this.userToAdd);
                     this.toastr.success('User added to project!');
-                    this.notificationService.sendNotification({
+                });
+
+            this.notificationService.sendNotification(this.project.name, {
+                        projectName: this.project.name,
                         content: `${this.userToAdd} has been added to project ${this.project.name}.`,
                         created: new Date(Date.now())
                     });
                     this.userToAdd = '';
-                });
         }
         else {
             this.toastr.error('User already works on this project');

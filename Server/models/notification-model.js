@@ -2,7 +2,8 @@
 
 const modelRegistrator = require("./utils/model-registrator");
 
-module.exports = modelRegistrator.register("ProjectChat", {
+module.exports = modelRegistrator.register("Notification", {
     projectName: String,
-    messages: []
+    content: String,
+    created: Date
 });

@@ -49,6 +49,15 @@ module.exports = function(params) {
                 .catch(err => {
                     res.json(err);
                 })
+        },
+        editUser(req, res) {
+            data.editUser(req.params.id, req.body)
+                .then((response) => {
+                    res.json(response);
+                })
+                .catch(err => {
+                    res.json({ err });
+                });
         }
     };
 };
