@@ -6,6 +6,7 @@
                     <span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu" style="position: absolute; top:45px; left: 80px;">
+                    <li><span (click)="deleteAllNotifications()">Remove all notifications</span></li>
                     <li *ngFor="let notification of notifications; let i = index">
                         <div>
                             <span class="btn btn-danger" (click)="deleteNotification(i)">x</span>

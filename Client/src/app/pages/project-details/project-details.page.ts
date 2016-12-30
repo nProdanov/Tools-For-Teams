@@ -149,11 +149,8 @@ export class ProjectDetailsPage implements PageComponent, OnInit, OnDestroy, Aft
     }
 
     showChildModal() {
-        console.log(this.childModal);
         this.childModal.showChildModal();
     }
-
-
 
     ngAfterViewChecked() {
         this.el.nativeElement.scrollTop = this.el.nativeElement.scrollHeight;
@@ -212,7 +209,8 @@ export class ProjectDetailsPage implements PageComponent, OnInit, OnDestroy, Aft
             this.notificationService.sendNotification(this.project.name, {
                         projectName: this.project.name,
                         content: `${this.userToAdd} has been added to project ${this.project.name}.`,
-                        created: new Date(Date.now())
+                        created: new Date(Date.now()),
+                        deleted: false
                     });
                     this.userToAdd = '';
         }

@@ -7,7 +7,7 @@
   <span class="caret"></span></button>
                     <ul class="dropdown-menu" style="position: absolute; top:45px; left: 80px;">
                         <li *ngFor="let user of project.projectMembers">
-                            <a routerLink="#">{{user}}</a>
+                            <a>{{user}}</a>
                         </li>
                     </ul>
                 </div>
@@ -51,7 +51,7 @@
                             <kendo-grid-column width="120" title="#Edit">
                                 <template kendoCellTemplate let-dataItem>
                                 <button (click)="onEdit(dataItem)" class="btn btn-warning k-button-icontext k-grid-edit">Edit</button>
-                                <button (click)="onDelete(dataItem)" class="k-button k-button-icontext k-grid-delete">Delete</button>
+                                <button (click)="onDelete(dataItem)" class="btn btn-danger k-button-icontext k-grid-delete">Delete</button>
                             </template>
                             </kendo-grid-column>
                         </kendo-grid>
