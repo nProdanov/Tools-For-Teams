@@ -1,7 +1,32 @@
 <div class="container">
     <div class="row">
         <h3>Notifications
-            <span class="btn btn-warning glyphicon glyphicon-bell"> 1</span>
+            <span class="dropdown" *ngIf="notificationCount > 0">
+                <button class="btn btn-warning dropdown-toggle glyphicon glyphicon-bell" type="button" data-toggle="dropdown"> {{notificationCount}}
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" style="position: absolute; top:45px; left: 80px;">
+                    <li *ngFor="let notification of notifications; let i = index">
+                        <div>
+                            <span class="btn btn-danger" (click)="deleteNotification(i)">x</span>
+                            <p>{{notification.content}}</p>
+                            <div>sent {{notification.created | date}}</div>
+                        </div>
+                    </li>
+                </ul>
+            </span>
+            <span class="dropdown" *ngIf="notificationCount === 0">
+                <button class="btn btn-warning dropdown-toggle glyphicon glyphicon-bell" type="button" data-toggle="dropdown">
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" style="position: absolute; top:45px; left: 80px;">
+                    <li>
+                        <span>No notifications!</span>
+                    </li>
+                </ul>
+            </span>
+            <!--<span class="btn btn-warning glyphicon glyphicon-bell" *ngIf="notificationCount === 0" (click)="noNotifications()"></span>
+            <span class="btn btn-warning glyphicon glyphicon-bell" *ngIf="notificationCount > 0"> {{notificationCount}}</span>-->
         </h3>
     </div>
     <div class="row">

@@ -59,4 +59,12 @@ export class NotificationService {
           return data;
       });
   }
+
+  getUserProjectsNotifications(username: string): Observable<any> {
+    return this.http.get(`${this.saveUrl}/${username}`)
+      .map((response: any) => {
+          let data = response.json();
+          return data;
+      });
+  }
 }

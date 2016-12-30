@@ -14,6 +14,8 @@ import { Observable } from 'rxjs';
     templateUrl: './my-projects.page.html'
 })
 export class MyProjectsPage implements PageComponent, OnInit {
+    public notificationCount = 0;
+    public notifications: any[];
     public profile: any;
     public projects: any[];
     private sort: SortDescriptor[] = [];
@@ -23,13 +25,13 @@ export class MyProjectsPage implements PageComponent, OnInit {
 
     constructor(
         private userService: UserService,
-        private storageService: StorageService, 
-        private router: Router, 
+        private storageService: StorageService,
+        private router: Router,
         private projectService: ProjectService,
         private notificationService: NotificationService) {
         this.profile = {};
     }
-    
+
     ngOnInit() {
         this.storageService
             .getProfileItem()
@@ -53,6 +55,13 @@ export class MyProjectsPage implements PageComponent, OnInit {
                                 }
                             });
                     });
+            });
+
+        this.notificationService.getUserProjectsNotifications(this.profile.username)
+            .subscribe((notifications: any) => {
+                this.notificationCount = notifications.length;
+                this.notifications = notifications;
+                console.log(notifications);
             });
     }
 
@@ -82,5 +91,9 @@ export class MyProjectsPage implements PageComponent, OnInit {
             data: orderBy(this.projects, this.sort),
             total: this.projects.length
         };
+    }
+
+    private deleteNotification(index: any) {
+        console.log(index);
     }
 }
