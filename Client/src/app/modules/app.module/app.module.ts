@@ -15,6 +15,8 @@ import { InfiniteScrollModule } from 'angular2-infinite-scroll';
 import { ModalModule } from 'ng2-bootstrap';
 import { EditTaskComponent } from '../../components/edit-task.component/edit-task.component';
 import { ChartsModule } from '@progress/kendo-angular-charts';
+import { GeneralStatsChartComponent } from './../../components/general-stats-chart.componenet/general-stats-chart.componenet';
+import { DeadlineStatsChartComponent } from './../../components/deadline-stats-chart.component/deadline-stats-chart.component';
 
 //  Pages
 import { ProfilePage } from '../../pages/profile/profile.page';
@@ -39,6 +41,8 @@ import { NotificationService } from '../../services/notification.service/notific
 
 //  Pipes
 import { FormatDatePipe } from './../../pipes/date.pipe'
+import { GetTasksValuesPipe } from './../../pipes/get-tasks-values.pipe';
+import { GetPieDataPipe } from './../../pipes/get-pie-data.pipe';
 
 @NgModule({
   imports: [
@@ -67,7 +71,11 @@ import { FormatDatePipe } from './../../pipes/date.pipe'
     ToolboxPage,
     NewTaskModalComponent,
     EditTaskComponent,
-    ProjectCharts
+    ProjectCharts,
+    GeneralStatsChartComponent,
+    DeadlineStatsChartComponent,
+    GetTasksValuesPipe,
+    GetPieDataPipe
   ],
   bootstrap: [AppComponent],
   providers: [
