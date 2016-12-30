@@ -37,10 +37,12 @@ import { GridDataResult, PageChangeEvent } from '@progress/kendo-angular-grid';
     animations: [
         trigger('movePanel', [
             state('inactive', style({
-                opacity: 0
+                opacity: 0,
+                zIndex: -1
             })),
             state('active', style({
-                opacity: 1
+                opacity: 1,
+                zIndex: 999
             })),
             transition('inactive => active', [
                 animate(600, keyframes([
@@ -193,6 +195,7 @@ export class ProjectDetailsPage implements PageComponent, OnInit, OnDestroy, Aft
                         content: `${this.userToAdd} has been added to project ${this.project.name}.`,
                         created: new Date(Date.now())
                     });
+                    this.userToAdd = '';
                 });
         }
         else {

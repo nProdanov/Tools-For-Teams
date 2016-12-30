@@ -6,62 +6,74 @@
                     <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Project members
   <span class="caret"></span></button>
                     <ul class="dropdown-menu" style="position: absolute; top:45px; left: 80px;">
-<li *ngFor="let user of project.projectMembers">
-    <a routerLink="#">{{user}}</a>
-</li>
-</ul>
-</div>
-</li>
-<li class="sidebar-brand">
-    <a (click)="showChildModal()">New Task</a>
-</li>
-<li class="sidebar-brand">
-    <a (click)="showChat = !showChat">Project messages</a>
-</li>
-<li class="sidebar-brand">
-    <a (click)="addUser = !addUser">Add user to project</a>
-</li>
-<div *ngIf="project.tasks.length === 0">
-    <li>
-        <span>No tasks yet</span>
-    </li>
-</div>
-<div *ngIf="project.tasks.length > 0">
-    <li *ngFor="let task of project.tasks">
-        <a>{{task.title}}</a>
-    </li>
-</div>
-</ul>
-</div>
+                        <li *ngFor="let user of project.projectMembers">
+                            <a routerLink="#">{{user}}</a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            <li class="sidebar-brand">
+                <a (click)="showChildModal()">New Task</a>
+            </li>
+            <li class="sidebar-brand">
+                <a (click)="showChat = !showChat">Project messages</a>
+            </li>
+            <li class="sidebar-brand">
+                <a (click)="toggleMove()">Add user to project</a>
+            </li>
+            <div *ngIf="project.tasks.length === 0">
+                <li>
+                    <span>No tasks yet</span>
+                </li>
+            </div>
+            <div *ngIf="project.tasks.length > 0">
+                <li *ngFor="let task of project.tasks">
+                    <a>{{task.title}}</a>
+                </li>
+            </div>
+        </ul>
+    </div>
 
-<!-- Page Content -->
-<div id="page-content-wrapper">
-    <div class="container-fluid">
-        <div class="container">
-            <div class="row">
-                <div class="col-xs-10">
-                    <h4>Project tasks</h4>
-                    <kendo-grid [data]="gridView" [pageSize]="pageSize" [skip]="skip" [pageable]="true" [height]="auto" (pageChange)="pageChange($event)">
-                        <kendo-grid-column field="title" width="150" title="Task">
-                        </kendo-grid-column>
-                        <kendo-grid-column field="users" width="250" title="Task Members">
-                        </kendo-grid-column>
-                        <kendo-grid-column field="status" width="120" title="Status">
-                        </kendo-grid-column>
-                        <kendo-grid-column width="120" title="#Edit">
-                            <template kendoCellTemplate let-dataItem>
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+        <div class="container-fluid">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-10">
+                        <h4>Project tasks</h4>
+                        <kendo-grid [data]="gridView" [pageSize]="pageSize" [skip]="skip" [pageable]="true" [height]="auto" (pageChange)="pageChange($event)">
+                            <kendo-grid-column field="title" width="150" title="Task">
+                            </kendo-grid-column>
+                            <kendo-grid-column field="users" width="250" title="Task Members">
+                            </kendo-grid-column>
+                            <kendo-grid-column field="status" width="120" title="Status">
+                            </kendo-grid-column>
+                            <kendo-grid-column width="120" title="#Edit">
+                                <template kendoCellTemplate let-dataItem>
                                 <button (click)="onEdit(dataItem)" class="btn btn-warning k-button-icontext k-grid-edit">Edit</button>
                                 <button (click)="onDelete(dataItem)" class="k-button k-button-icontext k-grid-delete">Delete</button>
                             </template>
                             </kendo-grid-column>
                         </kendo-grid>
                         <edit-task [model]="dataItem" [projectMembers]="project.projectMembers" (save)="onSave($event)"></edit-task>
-                        <div class="form-group">
-                            <div [@movePanel]='state' class="add-users-wrapper">
-                                <input class="form-control" auto-complete [source]="users" name="userToAdd" [(ngModel)]="userToAdd" type="text" />
-                                <button class="btn btn-info" (click)="addUserToProject(); !addUser">Add user to project</button>
+                        <div [@movePanel]='state' class="modal-dialog modal-md box">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" aria-label="Close" (click)="toggleMove()">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                    <h4 class="modal-title">Add user to project</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="form-group">
+                                        <label for="userField">Username</label>
+                                        <input class="form-control" auto-complete [source]="users" id="userField" name="userToAdd" [(ngModel)]="userToAdd" type="text" />
+                                        <button class="btn btn-info" (click)="addUserToProject(); !addUser">Add</button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
+
                         <new-task [users]="project.projectMembers" [projectId]="projectId"></new-task>
                     </div>
                 </div>
