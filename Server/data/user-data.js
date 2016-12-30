@@ -96,6 +96,35 @@ module.exports = function(models, validator) {
                     return resolve(projects || null);
                 });
             });
+        },
+        editUser(userId, { firstName, lastName, company }) {
+            return new Promise((resolve, reject) => {
+                    User.findOne({ id: userId }, (err, user) => {
+                        if (err) {
+                            return reject(err);
+                        }
+
+                        if (user) {
+                            return resolve(user);
+                        } else {
+                            return reject("User not found");
+                        }
+                    });
+                })
+                .then(user => {
+                    user.firstName = firstName;
+                    user.lastName = lastName;
+                    user.company = company;
+
+                    user.save(err => {
+                        if (err) {
+                            return Promise.reject(err);
+                        }
+                    });
+
+                    return Promise.resolve(user);
+
+                });
         }
     };
 };

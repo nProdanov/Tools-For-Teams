@@ -24,6 +24,18 @@ export class UserService {
         });
     }
 
+    editUser(propsToEdit: any): Observable<any> {
+        let { firstName, lastName, company } = propsToEdit;
+        let body = { firstName, lastName, company };
+        return this
+            .http
+            .put(`${this.projectUrl}/${propsToEdit.id}`, body)
+            .map(response => {
+                let data = response.json();
+                return data;
+            });
+    }
+
     getUserById(id: string): Observable<any> {
         let url = `${this.projectUrl}/${id}`;
         return this
@@ -47,8 +59,6 @@ export class UserService {
     addProject(userId: string, projectId: string, projectName: string) {
         let url = `${this.projectUrl}/${userId}/projects`;
         let body = { projectId, projectName };
-        console.log(url);
-        console.log(body);
         return this
             .http
             .post(url, body)
