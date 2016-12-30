@@ -13,6 +13,7 @@ export class AppComponent {
         this.toastr.setRootViewContainerRef(vRef);
         this.projectService.getAllProjects()
             .subscribe((projects: any) => {
+                console.log(projects);
                 projects.forEach((project: any) => {
                     this.notificationService.createNotificationEvent(project.name);
                     this.notificationService.getNotification(project.name).subscribe((notification: any) => {

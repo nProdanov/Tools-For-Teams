@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
     selector: 'deadline-stats-chart',
@@ -7,8 +7,10 @@ import { Component, Input } from '@angular/core';
 export class DeadlineStatsChartComponent {
     @Input() pieData: any[];
 
-    // this.pieData = [
-    //     { category: 'Time spent', value: 3 },
-    //     { category: 'Time left', value: 7 }
-    // ]
+    constructor () {
+    }
+
+    ngOnInit() {
+        // console.log(this.pieData);
+    }
 }
