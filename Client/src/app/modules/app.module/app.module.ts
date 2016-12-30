@@ -38,7 +38,9 @@ import { ChatService } from '../../services/chat.service/chat.service';
 import { NotificationService } from '../../services/notification.service/notification.service';
 
 //  Pipes
-import { FormatDatePipe } from './../../pipes/date.pipe'
+import { FormatDatePipe } from './../../pipes/date.pipe';
+import { GenderPipe } from './../../pipes/gender.pipe';
+import { CompanyPipe } from './../../pipes/company.pipe';
 
 @NgModule({
   imports: [
@@ -64,6 +66,8 @@ import { FormatDatePipe } from './../../pipes/date.pipe'
     MyProjectsPage,
     ProjectDetailsPage,
     FormatDatePipe,
+    GenderPipe,
+    CompanyPipe,
     ToolboxPage,
     NewTaskModalComponent,
     EditTaskComponent,
