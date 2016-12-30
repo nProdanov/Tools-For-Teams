@@ -5,5 +5,6 @@ const modelRegistrator = require("./utils/model-registrator");
 module.exports = modelRegistrator.register("Notification", {
     projectName: String,
     content: String,
-    created: Date
+    created: Date,
+    deleted: Boolean
 });
