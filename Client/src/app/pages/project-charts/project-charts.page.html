@@ -5,14 +5,13 @@
     <div class="well well-sm">Total cost: {{totalCost}}</div>
     <div class="well well-sm"># of tasks: {{numberOfTasks}}</div>
 
-    <kendo-chart (seriesClick)="onSeriesClick($event)">
-        <kendo-chart-tooltip background="green" format="Cost: {0}, Hours: {1}">
-        </kendo-chart-tooltip>
-        <kendo-chart-legend position="bottom" orientation="horizontal">
-        </kendo-chart-legend>
-        <kendo-chart-series>
-            <kendo-chart-series-item type="scatterLine" name="Tasks" [data]="tasksValues">
-            </kendo-chart-series-item>
-        </kendo-chart-series>
-    </kendo-chart>
+
+    <div class="well well-sm text-center">General stats for project {{project.name}}</div>
+    <general-stats-chart [tasksValues]="tasks | getTasksValuesPipe"></general-stats-chart>
+
+
+    <div *ngFor="let task of tasks">
+        <div class="well well-sm text-center">{{task.title}} deadline</div>
+        <deadline-stats-chart [pieData]="task | getPieDataPipe"></deadline-stats-chart>
+    </div>
 </div>
