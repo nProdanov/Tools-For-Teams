@@ -1,0 +1,10 @@
+<kendo-chart (seriesClick)="onSeriesClick($event)">
+    <kendo-chart-tooltip background="green" format="Cost: {0}, Hours: {1}">
+    </kendo-chart-tooltip>
+    <kendo-chart-legend position="bottom" orientation="horizontal">
+    </kendo-chart-legend>
+    <kendo-chart-series>
+        <kendo-chart-series-item type="scatterLine" name="Tasks" [data]="tasksValues">
+        </kendo-chart-series-item>
+    </kendo-chart-series>
+</kendo-chart>

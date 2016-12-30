@@ -24,8 +24,8 @@ export class RegisterPage implements OnInit {
         this.arePasswordsSame = false;
         this.passwordType = 'password';
         this.genders = [
-            { value: 'female', display: 'Female' },
-            { value: 'male', display: 'Male' }
+            { value: 'f', display: 'Female' },
+            { value: 'm', display: 'Male' }
         ];
     }
 

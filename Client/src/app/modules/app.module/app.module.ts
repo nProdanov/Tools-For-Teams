@@ -15,6 +15,8 @@ import { InfiniteScrollModule } from 'angular2-infinite-scroll';
 import { ModalModule } from 'ng2-bootstrap';
 import { EditTaskComponent } from '../../components/edit-task.component/edit-task.component';
 import { ChartsModule } from '@progress/kendo-angular-charts';
+import { GeneralStatsChartComponent } from './../../components/general-stats-chart.componenet/general-stats-chart.componenet';
+import { DeadlineStatsChartComponent } from './../../components/deadline-stats-chart.component/deadline-stats-chart.component';
 
 //  Pages
 import { NavbarComponent } from '../../components/navbar.component/navbar.component';
@@ -39,7 +41,11 @@ import { ChatService } from '../../services/chat.service/chat.service';
 import { NotificationService } from '../../services/notification.service/notification.service';
 
 //  Pipes
-import { FormatDatePipe } from './../../pipes/date.pipe'
+import { GetTasksValuesPipe } from './../../pipes/get-tasks-values.pipe';
+import { GetPieDataPipe } from './../../pipes/get-pie-data.pipe';
+import { FormatDatePipe } from './../../pipes/date.pipe';
+import { GenderPipe } from './../../pipes/gender.pipe';
+import { CompanyPipe } from './../../pipes/company.pipe';
 
 @NgModule({
   imports: [
@@ -66,10 +72,16 @@ import { FormatDatePipe } from './../../pipes/date.pipe'
     MyProjectsPage,
     ProjectDetailsPage,
     FormatDatePipe,
+    GenderPipe,
+    CompanyPipe,
     ToolboxPage,
     NewTaskModalComponent,
     EditTaskComponent,
-    ProjectCharts
+    ProjectCharts,
+    GeneralStatsChartComponent,
+    DeadlineStatsChartComponent,
+    GetTasksValuesPipe,
+    GetPieDataPipe
   ],
   bootstrap: [AppComponent],
   providers: [

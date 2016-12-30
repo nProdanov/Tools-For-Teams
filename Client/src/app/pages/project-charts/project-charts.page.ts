@@ -4,7 +4,7 @@ import { PageComponent } from '../../components/page.component/page.component';
 import { ProjectService } from './../../services/project.service/project.service';
 
 @Component({
-    templateUrl: './project-charts.page.html'
+    templateUrl: './project-charts.page.html',
 })
 export class ProjectCharts implements PageComponent, OnInit {
     private project: any;
@@ -13,9 +13,6 @@ export class ProjectCharts implements PageComponent, OnInit {
     private cost: any[];
     private totalCost: number;
     private totalHours: number;
-    private costScale: number;
-    private hoursScale: number;
-    private tasksValues: any[];
     private numberOfTasks: number;
 
     constructor(private projectService: ProjectService, private route: ActivatedRoute,) {
@@ -25,9 +22,6 @@ export class ProjectCharts implements PageComponent, OnInit {
         this.hours = [0];
         this.totalCost = 0;
         this.totalHours = 0;
-        this.costScale = 0;
-        this.hoursScale = 0;
-        this.tasksValues = [];
         this.numberOfTasks = 0;
     }
 
@@ -39,8 +33,6 @@ export class ProjectCharts implements PageComponent, OnInit {
             .subscribe(project => {
                 this.project = project;
                 this.tasks = project.tasks;
-
-                this.tasksValues.push([0,0]);
 
                 for (let task of this.tasks) {
                     let previousCost = 0;
@@ -58,30 +50,9 @@ export class ProjectCharts implements PageComponent, OnInit {
                     let currentHours = +task.timeForExecution;                    
                     this.hours.push(currentHours + previousHours);
                     this.totalHours = this.totalHours + currentHours;
-
-                    this.tasksValues.push([currentCost + previousCost, currentHours + previousHours])
                 }
 
                 this.numberOfTasks = this.tasks.length;
             });
-    }
-
-    private onSeriesClick(e): void {
-        let counter = 0;
-        for(let j = 0; j < this.tasksValues.length; j++){
-            if(this.tasksValues[j][0] == e.value.x && this.tasksValues[j][1] == e.value.y){
-                break;
-            }
-            counter++;
-        }
-
-        counter--;
-        if(counter < 0) {
-            return;
-        }
-
-        let selectedTask = this.tasks[counter];
-        console.log(this.tasks[counter]);
-        console.log("TODO: make modal for task page " + this.tasks[counter].title);    
     }
 }

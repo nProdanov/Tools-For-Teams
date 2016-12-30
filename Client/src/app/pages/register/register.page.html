@@ -1,90 +1,84 @@
 <div class="modal-dialog">
-  <div class="modal-content">
-    <div class="modal-header">
-      <button type="button" class="close" data-dismiss="modal">&times;</button>
-      <h4 class="modal-title">Register</h4>
-    </div>
-    <div class="modal-body">
-      <form #registerForm="ngForm" (ngSubmit)="register(); registerForm.reset()">
-        <div class="form-group">
-          <label for="email">Email</label>
-          <input type="email/text" class="form-control" #email="ngModel" [(ngModel)]="userToRegister.email" id="email" name="email"
-            placeholder="yours@example.com" required pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" />
-          <small [hidden]="email.valid || email.pristine" class="text-danger">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Register</h4>
+        </div>
+        <div class="modal-body">
+            <form #registerForm="ngForm" (ngSubmit)="register(); registerForm.reset()">
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email/text" class="form-control" #email="ngModel" [(ngModel)]="userToRegister.email" id="email" name="email" placeholder="yours@example.com" required pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" />
+                    <small [hidden]="email.valid || email.pristine" class="text-danger">
             Invalid email address
           </small>
-        </div>
-        <div class="form-group">
-          <label for="username">Username</label>
-          <input type="text" class="form-control" placeholder="some" id="username" name="username" [(ngModel)]="userToRegister.username"
-            required pattern="^[a-z0-9._]+" minlength="5" #usernameField="ngModel" (input)="checkForUsername()" />
-          <small [hidden]="usernameField.valid || usernameField.pristine" class="text-danger">
+                </div>
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" class="form-control" placeholder="some" id="username" name="username" [(ngModel)]="userToRegister.username" required pattern="^[a-zA-Z0-9._]+" minlength="5" #usernameField="ngModel" (input)="checkForUsername()" />
+                    <small [hidden]="usernameField.valid || usernameField.pristine" class="text-danger">
             Invalid username: Username must be atleast 5 symbols and can contains only alphanumerical characters "_" and "."
           </small>
-          <small [hidden]="isUsernameValid || usernameField.pristine" class="text-danger">
+                    <small [hidden]="isUsernameValid || usernameField.pristine" class="text-danger">
             Username exists
           </small>
-        </div>
-        <div class="form-group">
-          <label for="password">Password</label>
-          <a class="glyphicon glyphicon-eye-open" (click)="togglePassVisibility()"></a>
-          <input name="password" id="password" [type]="passwordType" class="form-control" #password="ngModel" [(ngModel)]="userToRegister.password"
-            placeholder="your password" required pattern="^[a-z0-9.^%_]+" minlength="6" (input)="checkPasswords()" />
-          <small [hidden]="password.valid || password.pristine" class="text-danger">
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <a class="glyphicon glyphicon-eye-open" (click)="togglePassVisibility()"></a>
+                    <input name="password" id="password" [type]="passwordType" class="form-control" #password="ngModel" [(ngModel)]="userToRegister.password" placeholder="your password" required pattern="^[a-z0-9.^%_]+" minlength="6" (input)="checkPasswords()" />
+                    <small [hidden]="password.valid || password.pristine" class="text-danger">
             Invalid password: Password must be 6 symbols and can contains only alphanumerical characters "_", "%", "^", and "."
           </small>
-        </div>
-        <div class="form-group">
-          <label for="password-confrim">Confirm Password</label>
-          <input name="password-confirm" id="password-confirm" [type]="passwordType" class="form-control" #passwordConfirm="ngModel"
-            [(ngModel)]="confirmPassword" placeholder="confirm password " required pattern="^[a-z0-9.^%_]+" minlength="6" (input)="checkPasswords()"
-          />
-          <small [hidden]="passwordConfirm.valid || passwordConfirm.pristine" class="text-danger">
+                </div>
+                <div class="form-group">
+                    <label for="password-confrim">Confirm Password</label>
+                    <input name="password-confirm" id="password-confirm" [type]="passwordType" class="form-control" #passwordConfirm="ngModel" [(ngModel)]="confirmPassword" placeholder="confirm password " required pattern="^[a-z0-9.^%_]+" minlength="6" (input)="checkPasswords()"
+                    />
+                    <small [hidden]="passwordConfirm.valid || passwordConfirm.pristine" class="text-danger">
             Invalid password: Password must be 6 symbols and can contains only alphanumerical characters "_", "%", "^", and "."
         </small>
-          <span *ngIf="arePasswordsSame && (passwordConfirm.valid || passwordConfirm.pristine)" class="text-success">
+                    <span *ngIf="arePasswordsSame && (passwordConfirm.valid || passwordConfirm.pristine)" class="text-success">
           Passwords match.
         </span>
-          <small [hidden]="arePasswordsSame || passwordConfirm.pristine" class="text-danger">
+                    <small [hidden]="arePasswordsSame || passwordConfirm.pristine" class="text-danger">
           Passwords does not match.
         </small>
-        </div>
-        <div class="form-group">
-          <label for="firstName">First name</label>
-          <input type="name" class="form-control" #firstName="ngModel" placeholder="your name" [(ngModel)]="userToRegister.firstName"
-            name="firstName" id="firstName" required minlength="2" maxlength="10" pattern="^[a-zA-Z]+">
-          <small [hidden]="firstName.valid || firstName.pristine" class="text-danger">
+                </div>
+                <div class="form-group">
+                    <label for="firstName">First name</label>
+                    <input type="name" class="form-control" #firstName="ngModel" placeholder="your name" [(ngModel)]="userToRegister.firstName" name="firstName" id="firstName" required minlength="2" maxlength="10" pattern="^[a-zA-Z]+">
+                    <small [hidden]="firstName.valid || firstName.pristine" class="text-danger">
             Invalid name: Names must be atleast 2 symbols and can contains only letters
           </small>
-        </div>
-        <div class="form-group">
-          <label for="lastName">Last name</label>
-          <input type="name" class="form-control" #lastName="ngModel" placeholder="your last name" [(ngModel)]="userToRegister.lastName"
-            name="lastName" id="lastName" required minlength="2" maxlength="10" pattern="^[a-zA-Z]+">
-          <small [hidden]="lastName.valid || lastName.pristine" class="text-danger">
+                </div>
+                <div class="form-group">
+                    <label for="lastName">Last name</label>
+                    <input type="name" class="form-control" #lastName="ngModel" placeholder="your last name" [(ngModel)]="userToRegister.lastName" name="lastName" id="lastName" required minlength="2" maxlength="10" pattern="^[a-zA-Z]+">
+                    <small [hidden]="lastName.valid || lastName.pristine" class="text-danger">
             Invalid name: Names must be atleast 2 symbols and can contains only letters
           </small>
-        </div>
-        <div class="form-group">
-          <label>Gender</label>
-          <div *ngFor="let gender of genders">
-            <label>
+                </div>
+                <div class="form-group">
+                    <label>Gender</label>
+                    <div *ngFor="let gender of genders">
+                        <label>
               <input required type="radio" name="gender" [(ngModel)]="userToRegister.gender" 
               [value]="gender.value">
               {{gender.display}}
             </label>
-          </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="picture">Picture url</label>
+                    <input type="picture" id="picture" name="picture" [(ngModel)]="userToRegister.picture" class="form-control" #picture placeholder="link to your picture">
+                </div>
+                <div class="form-group">
+                    <label for="company">Company</label>
+                    <input type="company" id="company" name="company" [(ngModel)]="userToRegister.company" class="form-control" #company placeholder="your company">
+                </div>
+                <button [disabled]="!registerForm.form.valid" type="submit" class="btn btn-default">Sign Up</button>
+            </form>
         </div>
-        <div class="form-group">
-          <label for="picture">Picture url</label>
-          <input type="picture" class="form-control" #picture placeholder="link to your picture">
-        </div>
-        <div class="form-group">
-          <label for="company">Company</label>
-          <input type="company" class="form-control" #company placeholder="your company">
-        </div>
-        <button [disabled]="!registerForm.form.valid" type="submit" class="btn btn-default">Sign Up</button>
-      </form>
     </div>
-  </div>
 </div>
