@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { UserService } from '../user.service/user.service';
 import { ToastsManager } from 'ng2-toastr';
 import { StorageService } from '../storage.service/storage.service';
+import { NotificationService } from '../notification.service/notification.service';
 
 declare var Auth0: any;
 
@@ -19,7 +20,7 @@ export class Auth {
   private router: Router;
   private userService: UserService;
 
-  constructor(private storageService: StorageService, private toastr: ToastsManager, router: Router, userService: UserService) {
+  constructor(private storageService: StorageService, private notificationService: NotificationService, private toastr: ToastsManager, router: Router, userService: UserService) {
     this.router = router;
     this.userService = userService;
 
@@ -34,6 +35,7 @@ export class Auth {
         }
 
         let id = profile.user_id;
+
 
         this.userService
           .getUserById(id)

@@ -10,14 +10,33 @@ module.exports = function({ server, data }) {
         });
 
         socket.on('notification', (notification) => {
-            console.log(notification);
             io.emit('notification', notification);
+        });
+
+        socket.on('create user-notification', (username) => {
+            attachUserNotification(socket, username);
+        });
+
+        socket.on('create notification', (projectName) => {
+            attachNotification(socket, projectName);
         });
 
         socket.on('create event', (projectName) => {
             attachEvent(socket, projectName);
         });
     });
+
+    function attachUserNotification(socket, username) {
+        socket.on(`${username} notification`, (notification) => {
+            socket.emit(`${username} notification`, notification);
+        });
+    }
+
+    function attachNotification(socket, projectName) {
+        socket.on(`${projectName} notification`, (notification) => {
+            io.emit(`${projectName} notification`, notification);
+        });
+    } 
 
     function attachEvent(socket, projectName) {
         socket.on(projectName, (message) => {

@@ -13,6 +13,14 @@ export class ProjectService {
 
     constructor(private http: Http) { }
 
+    getAllProjects(): Observable<any> {
+        return this.http.get(`${this.projectsUrl}/all`)
+            .map((response: any) => {
+                let data = response.json();
+                return data;
+            });
+    }
+
     getProjectById(id: string): Observable<any> {
         return this.http.get(`${this.projectsUrl}/${id}`).map(response => {
             let data = response.json();

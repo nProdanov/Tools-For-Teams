@@ -17,6 +17,7 @@ import { EditTaskComponent } from '../../components/edit-task.component/edit-tas
 import { ChartsModule } from '@progress/kendo-angular-charts';
 
 //  Pages
+import { NavbarComponent } from '../../components/navbar.component/navbar.component';
 import { ProfilePage } from '../../pages/profile/profile.page';
 import { NewProjectPage } from '../../pages/new-project/new-project.page';
 import { LoginPage } from '../../pages/login/login.page';
@@ -56,6 +57,7 @@ import { FormatDatePipe } from './../../pipes/date.pipe'
   ],
   declarations: [
     AppComponent,
+    NavbarComponent,
     ProfilePage,
     NewProjectPage,
     LoginPage,

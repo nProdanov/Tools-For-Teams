@@ -101,10 +101,10 @@ export class ProjectDetailsPage implements PageComponent, OnInit, OnDestroy, Aft
     }
 
     showChildModal() {
-        console.log(this.childModal);
         this.childModal.showChildModal();
     }
 
+    // when adding task must be added to kendo table
     ngOnInit() {
         this.StorageService
             .getProfileItem()
@@ -191,12 +191,14 @@ export class ProjectDetailsPage implements PageComponent, OnInit, OnDestroy, Aft
                 .subscribe((res: any) => {
                     this.project.projectMembers.push(this.userToAdd);
                     this.toastr.success('User added to project!');
-                    this.notificationService.sendNotification({
+                });
+
+            this.notificationService.sendNotification(this.project.name, {
+                        projectName: this.project.name,
                         content: `${this.userToAdd} has been added to project ${this.project.name}.`,
                         created: new Date(Date.now())
                     });
                     this.userToAdd = '';
-                });
         }
         else {
             this.toastr.error('User already works on this project');

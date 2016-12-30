@@ -15,6 +15,8 @@ export class ProfilePage implements PageComponent, OnInit {
     ngOnInit() {
         this.storageService
             .getProfileItem()
-            .subscribe(resProfile => this.profile = resProfile);
+            .subscribe((resProfile: any) => {
+                this.profile = resProfile;
+        });
     }
 }
