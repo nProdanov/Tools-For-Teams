@@ -13,13 +13,13 @@
                 </div>
             </li>
             <li class="sidebar-brand">
-                <a (click)="showChildModal()">New Task</a>
+                <a role="button" (click)="showChildModal()">New Task</a>
             </li>
             <li class="sidebar-brand">
-                <a (click)="toggleMenu()">Project messages</a>
+                <a role="button" (click)="toggleMenu()">Project messages</a>
             </li>
             <li class="sidebar-brand">
-                <a (click)="toggleMove()">Add user to project</a>
+                <a role="button" (click)="toggleMove()">Add user to project</a>
             </li>
             <div *ngIf="project.tasks.length === 0">
                 <li>
