@@ -9,8 +9,10 @@ import { ProjectDetailsPage } from './project-details/project-details.page';
 import { ToolboxPage } from './my-toolbox/my-toolbox.page';
 import { ProjectCharts } from './project-charts/project-charts.page';
 import { ProjectNotesPage } from './project-notes/project-notes.page';
+import { AboutPage } from './about/about.page';
 
 export const pages = {
+    about: AboutPage,
     profile: ProfilePage,
     otherProfile: OtherProfilePage,
     newProject: NewProjectPage,

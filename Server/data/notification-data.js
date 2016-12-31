@@ -6,47 +6,32 @@ module.exports = function (models) {
     return {
         saveNotification(notification) {
             return new Promise((resolve, reject) => {
-                let notificationToAdd = new Notification({
-                    projectName: notification.projectName,
-                    content: notification.content,
-                    created: notification.created,
-                    deleted: notification.deleted
-                });
-
-                notificationToAdd.save((err) => {
+                Project.findOne({ name: notification.projectName }, (err, project) => {
                     if (err) {
                         return reject(err);
                     }
 
-                    return resolve(notificationToAdd);
-                });
-            });
-        },
-        getUserProjectsNotifications(username) {
-            return new Promise((resolve, reject) => {
-                User.findOne({ username }, (err, user) => {
-                    if (err) {
-                        return reject(err);
-                    }
-
-                    return resolve(user);
+                    let projectMembers = project.projectMembers;
+                    return resolve({ projectMembers, notification });
                 });
             })
-                .then(user => {
-                    let projectNames = user.projects.map(project => {
-                        return project.name;
-                    });
-
-                    return Promise.resolve(projectNames);
-                })
-                .then(projectNames => {
+                .then(({ projectMembers, notification }) => {
                     return new Promise((resolve, reject) => {
-                        Notification.find({
-                            'projectName': {
-                                $in: projectNames
-                            },
-                            'deleted': false
-                        }, function (err, notifications) {
+                        let notificationsToAdd = [];
+
+                        projectMembers.forEach(member => {
+                            let notificationToAdd = new Notification({
+                                projectName: notification.projectName,
+                                username: member,
+                                content: notification.content,
+                                created: notification.created,
+                                deleted: notification.deleted
+                            });
+
+                            notificationsToAdd.push(notificationToAdd);
+                        });
+
+                        Notification.insertMany(notificationsToAdd, (err, notifications) => {
                             if (err) {
                                 return reject(err);
                             }
@@ -55,6 +40,20 @@ module.exports = function (models) {
                         });
                     });
                 });
+        },
+        getUserProjectsNotifications(username) {
+            return new Promise((resolve, reject) => {
+                Notification.find({
+                    'username': username,
+                    'deleted': false
+                }, function (err, notifications) {
+                    if (err) {
+                        return reject(err);
+                    }
+                    console.log(notifications);
+                    return resolve(notifications);
+                });
+            });
         },
         updateNotification(id) {
             return new Promise((resolve, reject) => {

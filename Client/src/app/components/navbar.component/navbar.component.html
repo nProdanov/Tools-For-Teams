@@ -8,6 +8,7 @@
                 <li><a routerLink="/profile" routerLinkActive="active" *ngIf="service.authenticated()">Profile</a></li>
                 <li><a routerLink="/my-projects" routerLinkActive="active" *ngIf="service.authenticated()">My Projects</a></li>
                 <li><a routerLink="/my-toolbox" routerLinkActive="active" *ngIf="service.authenticated()">My Toolbox</a></li>
+                <li><a routerLink="/about">About</a></li>
             </ul>
             <div class="nav navbar-form navbar-right">
                 <a class="btn btn-default" type="button" class="btn btn-primary" (click)="showChildModal()" *ngIf="service.authenticated()">New Project</a>

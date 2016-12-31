@@ -107,6 +107,6 @@ export class MyProjectsPage implements PageComponent, OnInit {
             .subscribe(() => {
                 this.notifications.splice(index, 1);
                 this.notificationCount -= 1;
-            })
+            });
     }
 }
