@@ -144,3 +144,17 @@ ul li div textarea {
 .container {
     width: 100%;
 }
+
+.glyphicon {
+    display: none;
+}
+
+
+/*li:hover .glyphicon {
+    display: inline-block;
+}*/
+
+ul li div:hover .glyphicon,
+ul li div:focus .glyphicon {
+    display: inline-block;
+}

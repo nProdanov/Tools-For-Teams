@@ -15,7 +15,7 @@
         </li>
         <li *ngFor="let note of notes">
             <div>
-                <span class="glyphicon glyphicon-remove pull-right" role="button"></span>
+                <span class="glyphicon glyphicon-remove pull-right" role="button" (click)="removeNote(note)"></span>
                 <h6>{{note.title}}</h6>
                 <p>{{note.text}}</p>
             </div>

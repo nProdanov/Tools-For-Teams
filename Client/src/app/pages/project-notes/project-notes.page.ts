@@ -17,7 +17,6 @@ export class ProjectNotesPage implements PageComponent, OnInit {
 
     constructor(private projectService: ProjectService, private route: ActivatedRoute,) {
         this.project = {};
-        this.tasks = [];
         this.notes = [];
     }
 
@@ -27,9 +26,7 @@ export class ProjectNotesPage implements PageComponent, OnInit {
                 return this.projectService.getProjectByProjectName(params['projectName'])
             })
             .subscribe(project => {
-                this.project = project;
-                this.tasks = project.tasks;
-                
+                this.project = project;                
                 this.notes = project.notes;
             });
     }
@@ -42,5 +39,12 @@ export class ProjectNotesPage implements PageComponent, OnInit {
         let note = {title: title, text: text};
         
         this.notes.push(note);
+    }
+
+    removeNote(note: {}) {
+        let index = this.notes.indexOf(note);
+        if (index > -1) {
+            this.notes.splice(index, 1);
+        }
     }
 }
