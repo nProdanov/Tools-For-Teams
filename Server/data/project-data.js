@@ -202,6 +202,29 @@ module.exports = function (models) {
                     return resolve(project);
                 })
             });
+        },
+        addNotesToProject(projectName, notes) {
+            return new Promise((resolve, reject) => {
+                Project.findOne({ name: projectName }, (err, project) => {
+                    if (err) {
+                        return reject(err);
+                    }
+
+                    project.notes = [];
+
+                    for (let note of notes) {
+                        project.notes.push(note);
+                    }
+
+                    project.save((err) => {
+                        if (err) {
+                            return reject(err);
+                        }
+
+                        return resolve(project);
+                    });
+                })
+            });
         }
     };
 };

@@ -8,6 +8,7 @@ module.exports = function({ app, controllers }) {
 
     router
         .get("/users/:id", controllers.getUserById)
+        .get("/users/:username/details", controllers.getUserByUsername)
         .get("/users", controllers.getAllUsers)
         .get("/messages/:name", controllers.getTenMessages)
         .get("/project/:projectName", controllers.getProjectByProjectName)
@@ -19,6 +20,7 @@ module.exports = function({ app, controllers }) {
         .get("/notifications/:username", controllers.getUserProjectsNotifications)
         .put("/notifications/:id", controllers.updateNotification)
         .put("/projects/:id", controllers.addUserToProject)
+        .put("/project/:projectName/notes", controllers.addNotesToProject)
         .post("/notifications", controllers.saveNotification)
         .put("/users/:id", controllers.editUser)
         .put("/tasks/:id/delete", controllers.deleteTask)

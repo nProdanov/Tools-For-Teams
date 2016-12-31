@@ -8,6 +8,6 @@ export class GeneralStatsChartComponent {
     @Input() tasksValues: any[];
 
     private onSeriesClick(e): void {
-        console.log("TODO: make modal for task page");    
+        console.log(this.tasksValues);
     }
 }

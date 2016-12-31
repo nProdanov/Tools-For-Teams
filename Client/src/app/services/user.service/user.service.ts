@@ -8,7 +8,7 @@ import { StorageService } from '../storage.service/storage.service';
 
 @Injectable()
 export class UserService {
-    private projectUrl = 'http://localhost:3001/api/users';
+    private usersUrl = 'http://localhost:3001/api/users';
     public profile: any;
 
     constructor(private storageService: StorageService, private http: Http) {
@@ -18,7 +18,7 @@ export class UserService {
     }
 
     saveUser(body: User): Observable<any> {
-        return this.http.post(this.projectUrl, body).map(response => {
+        return this.http.post(this.usersUrl, body).map(response => {
             let data = response.json();
             return data;
         });
@@ -29,7 +29,7 @@ export class UserService {
         let body = { firstName, lastName, company };
         return this
             .http
-            .put(`${this.projectUrl}/${propsToEdit.id}`, body)
+            .put(`${this.usersUrl}/${propsToEdit.id}`, body)
             .map(response => {
                 let data = response.json();
                 return data;
@@ -37,7 +37,7 @@ export class UserService {
     }
 
     getUserById(id: string): Observable<any> {
-        let url = `${this.projectUrl}/${id}`;
+        let url = `${this.usersUrl}/${id}`;
         return this
             .http
             .get(url)
@@ -47,8 +47,16 @@ export class UserService {
             });
     }
 
+    getUserByUsername(username: string): Observable<any> {
+        return this.http.get(`${this.usersUrl}/${username}/details`)
+            .map((response: any) => {
+                let data = response.json();
+                return data;
+            });
+    }
+
     getAllUsers() {
-        return this.http.get(this.projectUrl)
+        return this.http.get(this.usersUrl)
             .map(res => {
                 let resJson = res.json();
                 let users = resJson.map(u => u.username);
@@ -57,7 +65,7 @@ export class UserService {
     }
 
     addProject(userId: string, projectId: string, projectName: string) {
-        let url = `${this.projectUrl}/${userId}/projects`;
+        let url = `${this.usersUrl}/${userId}/projects`;
         let body = { projectId, projectName };
         return this
             .http

@@ -7,7 +7,7 @@
   <span class="caret"></span></button>
                     <ul class="dropdown-menu" style="position: absolute; top:45px; left: 80px;">
                         <li *ngFor="let user of project.projectMembers">
-                            <a>{{user}}</a>
+                            <a routerLink="/profile/{{user}}">{{user}}</a>
                         </li>
                     </ul>
                 </div>
@@ -55,7 +55,7 @@
                             </template>
                             </kendo-grid-column>
                         </kendo-grid>
-                        <edit-task [modelTask]="dataItem" [users]="project.projectMembers | availableUsers : dataItem.users"></edit-task>
+                        <edit-task [modelTask]="dataItem" [projectName]="project.name" [users]="project.projectMembers | availableUsers : dataItem.users"></edit-task>
                         <div [@movePanel]='state' class="modal-dialog modal-md box">
                             <div class="modal-content">
                                 <div class="modal-header">

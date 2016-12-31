@@ -11,7 +11,8 @@ import { NotificationService } from '../../services/notification.service/notific
 import { Observable } from 'rxjs';
 
 @Component({
-    templateUrl: './my-projects.page.html'
+    templateUrl: './my-projects.page.html',
+    styleUrls: ['./my-projects.page.css']
 })
 export class MyProjectsPage implements PageComponent, OnInit {
     public notificationCount = 0;
