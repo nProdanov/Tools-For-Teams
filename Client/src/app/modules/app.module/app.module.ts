@@ -29,8 +29,8 @@ import { MyProjectsPage } from '../../pages/my-projects/my-projects.page';
 import { ProjectDetailsPage } from '../../pages/project-details/project-details.page';
 import { ToolboxPage } from './../../pages/my-toolbox/my-toolbox.page';
 import { ProjectCharts } from './../../pages/project-charts/project-charts.page';
-import { ProjectDocumentsPage } from './../../pages/projeect-documents/project-documents.page';
 import { OtherProfilePage } from '../../pages/other-profile/other-profile.page'
+import { ProjectNotesPage } from './../../pages/project-notes/project-notes.page';
 
 //  Services
 import { AuthGuard } from '../../services/auth-guard.service/auth.guard.service';
@@ -86,8 +86,8 @@ import { AvailableUsersPipe } from './../../pipes/available-users-for-add.pipe';
     GetPieDataPipe,
     AvailableUsersPipe,
     EditTaskModalComponent,
-    ProjectDocumentsPage,
-    OtherProfilePage
+    OtherProfilePage,
+    ProjectNotesPage
   ],
   bootstrap: [AppComponent],
   providers: [

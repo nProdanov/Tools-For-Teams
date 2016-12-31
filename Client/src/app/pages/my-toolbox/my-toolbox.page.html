@@ -17,13 +17,13 @@
             </div>
             <div class="col-xs-4">
                 <button id="btn-two" #btnTwo (click)="toggleMove(btnTwo.id)" class="btn btn-success btn-block" data-toggle="tooltip" title="Create and manage documents">
-                    <h3>Documents</h3>
+                    <h3>Notes</h3>
                 </button>
                 <div id="content" [@flyInOut]='stateTwo' class="list-group">
                     <div class="list-group-item">
                         <h4>Choose the project</h4>
                     </div>
-                    <a routerLink="/documents/{{project.name}}" class="list-group-item" *ngFor="let project of projects">
+                    <a routerLink="/notes/{{project.name}}" class="list-group-item" *ngFor="let project of projects">
                         <h4>Project name: {{project.name}}</h4>
                     </a>
                 </div>

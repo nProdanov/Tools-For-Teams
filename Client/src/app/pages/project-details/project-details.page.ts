@@ -103,7 +103,7 @@ export class ProjectDetailsPage implements PageComponent, OnInit, OnDestroy, Aft
         private chatService: ChatService,
         private notificationService: NotificationService) {
         this.profile = {};
-        this.project = { creator: '', name: '', description: '', tasks: [], projectMembers: [] };
+        this.project = { creator: '', name: '', description: '', tasks: [], projectMembers: [], notes: [] };
         this.dataItem = {
             _id: '',
             projectId: '',
