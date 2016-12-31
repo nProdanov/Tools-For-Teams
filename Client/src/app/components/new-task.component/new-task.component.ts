@@ -24,6 +24,7 @@ export class NewTaskModalComponent {
 
     constructor(private taskService: TaskService, private toastr: ToastsManager) {
         this.newTask = {
+            _id: '',
             projectId: '',
             title: '',
             description: '',

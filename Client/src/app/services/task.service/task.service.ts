@@ -17,4 +17,15 @@ export class TaskService {
                 return data;
             });
     }
+
+    editTask(task: Task): Observable<any> {
+        let body = { task };
+        return this
+            .http
+            .put(`${this.taskUrl}/${task._id}`, body)
+            .map(response => {
+                let data = response.json();
+                return data;
+            });
+    }
 };

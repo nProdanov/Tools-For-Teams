@@ -26,8 +26,8 @@ import { ToastsManager } from 'ng2-toastr';
 import { Ng2AutoComplete } from 'ng2-auto-complete';
 import { StorageService } from '../../services/storage.service/storage.service';
 import { NewTaskModalComponent } from '../../components/new-task.component/new-task.component';
-import { EditTaskComponent } from '../../components/edit-task.component/edit-task.component';
 import { GridDataResult, PageChangeEvent } from '@progress/kendo-angular-grid';
+import { EditTaskModalComponent } from '../../components/edit-task.component/edit-task.component';
 
 @Component({
     templateUrl: './project-details.page.html',
@@ -74,6 +74,7 @@ import { GridDataResult, PageChangeEvent } from '@progress/kendo-angular-grid';
 export class ProjectDetailsPage implements PageComponent, OnInit, OnDestroy, AfterViewChecked {
     @ViewChild(NewTaskModalComponent) childModal: NewTaskModalComponent;
     @ViewChild('chatContent') private el: ElementRef;
+    @ViewChild(EditTaskModalComponent) editModal: EditTaskModalComponent;
 
     public profile: any;
     public project: Project;
@@ -103,9 +104,19 @@ export class ProjectDetailsPage implements PageComponent, OnInit, OnDestroy, Aft
         private notificationService: NotificationService) {
         this.profile = {};
         this.project = { creator: '', name: '', description: '', tasks: [], projectMembers: [] };
+        this.dataItem = {
+            _id: '',
+            projectId: '',
+            title: '',
+            description: '',
+            timeForExecution: '1',
+            cost: 1,
+            status: 'started',
+            users: []
+        };
         this.StorageService.getProfileItem().subscribe(res => this.currentUser = res.username);
     }
-    
+
     ngOnInit() {
         this.StorageService
             .getProfileItem()
@@ -149,11 +160,13 @@ export class ProjectDetailsPage implements PageComponent, OnInit, OnDestroy, Aft
     }
 
     showChildModal() {
-        console.log(this.childModal);
         this.childModal.showChildModal();
     }
 
-
+    showTestModal(data: Task) {
+        this.dataItem = data;
+        this.editModal.showChildModal();
+    }
 
     ngAfterViewChecked() {
         this.el.nativeElement.scrollTop = this.el.nativeElement.scrollHeight;
@@ -169,22 +182,6 @@ export class ProjectDetailsPage implements PageComponent, OnInit, OnDestroy, Aft
             data: this.project.tasks.slice(this.skip, this.skip + this.pageSize),
             total: this.project.tasks.length
         };
-    }
-
-    public onEdit(dataItem: any): void {
-        // still not working
-        console.log(dataItem);
-        this.dataItem = dataItem;
-    }
-
-    public onSave(editedTask: Task): void {
-        // still not working
-        console.log(editedTask);
-
-        // operation.switchMap(x => this.getProducts())
-        //     .subscribe((response: Product[]) => {
-        //         this.view = response;
-        //     });
     }
 
     messageBoardUpdate() {
@@ -210,11 +207,11 @@ export class ProjectDetailsPage implements PageComponent, OnInit, OnDestroy, Aft
                 });
 
             this.notificationService.sendNotification(this.project.name, {
-                        projectName: this.project.name,
-                        content: `${this.userToAdd} has been added to project ${this.project.name}.`,
-                        created: new Date(Date.now())
-                    });
-                    this.userToAdd = '';
+                projectName: this.project.name,
+                content: `${this.userToAdd} has been added to project ${this.project.name}.`,
+                created: new Date(Date.now())
+            });
+            this.userToAdd = '';
         }
         else {
             this.toastr.error('User already works on this project');

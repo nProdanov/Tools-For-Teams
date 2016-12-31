@@ -13,10 +13,10 @@ import { GridModule } from '@progress/kendo-angular-grid';
 import { Ng2AutoCompleteModule } from 'ng2-auto-complete';
 import { InfiniteScrollModule } from 'angular2-infinite-scroll';
 import { ModalModule } from 'ng2-bootstrap';
-import { EditTaskComponent } from '../../components/edit-task.component/edit-task.component';
 import { ChartsModule } from '@progress/kendo-angular-charts';
 import { GeneralStatsChartComponent } from './../../components/general-stats-chart.componenet/general-stats-chart.componenet';
 import { DeadlineStatsChartComponent } from './../../components/deadline-stats-chart.component/deadline-stats-chart.component';
+import { EditTaskModalComponent } from '../../components/edit-task.component/edit-task.component';
 
 //  Pages
 import { NavbarComponent } from '../../components/navbar.component/navbar.component';
@@ -76,12 +76,12 @@ import { CompanyPipe } from './../../pipes/company.pipe';
     CompanyPipe,
     ToolboxPage,
     NewTaskModalComponent,
-    EditTaskComponent,
     ProjectCharts,
     GeneralStatsChartComponent,
     DeadlineStatsChartComponent,
     GetTasksValuesPipe,
-    GetPieDataPipe
+    GetPieDataPipe,
+    EditTaskModalComponent
   ],
   bootstrap: [AppComponent],
   providers: [

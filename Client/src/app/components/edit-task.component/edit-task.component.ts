@@ -1,45 +1,43 @@
-import { Component, Input, Output, EventEmitter, ViewChild } from '@angular/core';
-import { Validators, FormGroup, FormControl } from '@angular/forms';
+import { Component, ViewChild, Input, Output, EventEmitter } from '@angular/core';
+import { TaskService } from '../../services/task.service/task.service';
+import { ToastsManager } from 'ng2-toastr';
 import { Task } from '../../models/task.model/task.model';
-import { Ng2AutoComplete } from 'ng2-auto-complete';
+import { ModalDirective } from 'ng2-bootstrap';
 
 @Component({
     selector: 'edit-task',
     templateUrl: './edit-task.component.html'
 })
-export class EditTaskComponent {
-    public dataItem;
+export class EditTaskModalComponent {
+    @ViewChild('childModal') childModal: ModalDirective;
+    @Input() modelTask: Task;
+    @Input() users: string[];
+    @Output() saveEvent: EventEmitter<any> = new EventEmitter();
     public selectedUser: string;
-    public members;
 
-    @Input() public set model(task: Task) {
-        this.dataItem = task;
-        task === undefined ? this.active = false : this.active = true;
-        console.log(this.active);
-    }
-    @Input() public set projectMembers(users: any){
-        this.members = users;
-    }
-    @Output() cancel: EventEmitter<any> = new EventEmitter();
-    @Output() save: EventEmitter<any> = new EventEmitter();
-
-    constructor() {
-    }
-
-    public active: boolean = false;
-
-    public onSave(): void {
-        this.save.emit(this.dataItem);
-        this.active = false;
-        console.log(this.active);
-    }
-    public onCancel(): void {
-        this.active = false;
-        this.cancel.emit(undefined);
-    }
-
-    addUserToTask() {
-        this.dataItem.users.push(this.selectedUser);
+    constructor(private taskService: TaskService, private toastr: ToastsManager) {
         this.selectedUser = '';
+    }
+
+    save() {
+        this.taskService.editTask(this.modelTask)
+            .subscribe(res => {
+                if (res.err) {
+                    this.toastr.error(res.err);
+                }
+                else {
+                    this.saveEvent.next(res);
+                    this.toastr.success('Changes saved.');
+                    this.childModal.hide();
+                }
+            });
+    }
+
+    public showChildModal(): void {
+        this.childModal.show();
+    }
+
+    public hideChildModal(): void {
+        this.childModal.hide();
     }
 }

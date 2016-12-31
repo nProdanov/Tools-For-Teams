@@ -50,12 +50,12 @@
                             </kendo-grid-column>
                             <kendo-grid-column width="120" title="#Edit">
                                 <template kendoCellTemplate let-dataItem>
-                                <button (click)="onEdit(dataItem)" class="btn btn-warning k-button-icontext k-grid-edit">Edit</button>
+                                <button (click)="showTestModal(dataItem)" class="btn btn-warning k-button-icontext k-grid-edit">Edit</button>
                                 <button (click)="onDelete(dataItem)" class="k-button k-button-icontext k-grid-delete">Delete</button>
                             </template>
                             </kendo-grid-column>
                         </kendo-grid>
-                        <edit-task [model]="dataItem" [projectMembers]="project.projectMembers" (save)="onSave($event)"></edit-task>
+                        <edit-task [modelTask]="dataItem" [users]="project.projectMembers"></edit-task>
                         <div [@movePanel]='state' class="modal-dialog modal-md box">
                             <div class="modal-content">
                                 <div class="modal-header">

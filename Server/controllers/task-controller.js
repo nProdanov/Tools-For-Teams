@@ -13,6 +13,18 @@ module.exports = function(params) {
                 .catch(err => {
                     res.json({ err });
                 });
+        },
+        editTask(req, res) {
+            let task = req.body.task;
+
+            data.editTask(task)
+                .then(resTask => {
+                    res.json(resTask);
+                })
+                .catch(err => {
+                    console.log(err);
+                    res.json({ err });
+                });
         }
     };
 };
