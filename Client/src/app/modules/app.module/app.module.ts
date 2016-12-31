@@ -47,6 +47,7 @@ import { GetPieDataPipe } from './../../pipes/get-pie-data.pipe';
 import { FormatDatePipe } from './../../pipes/date.pipe';
 import { GenderPipe } from './../../pipes/gender.pipe';
 import { CompanyPipe } from './../../pipes/company.pipe';
+import { AvailableUsersPipe } from './../../pipes/available-users-for-add.pipe';
 
 @NgModule({
   imports: [
@@ -82,6 +83,7 @@ import { CompanyPipe } from './../../pipes/company.pipe';
     DeadlineStatsChartComponent,
     GetTasksValuesPipe,
     GetPieDataPipe,
+    AvailableUsersPipe,
     EditTaskModalComponent,
     ProjectDocumentsPage
   ],
