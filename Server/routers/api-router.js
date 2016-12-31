@@ -23,6 +23,7 @@ module.exports = function({ app, controllers }) {
         .put("/project/:projectName/notes", controllers.addNotesToProject)
         .post("/notifications", controllers.saveNotification)
         .put("/users/:id", controllers.editUser)
+        .put("/tasks/:id/delete", controllers.deleteTask)
         .put("/tasks/:id", controllers.editTask)
         .post("/notifications/all", controllers.updateAllNotifications)
         .post("/tasks", controllers.createTask)

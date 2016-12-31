@@ -51,7 +51,7 @@
                             <kendo-grid-column width="120" title="#Edit">
                                 <template kendoCellTemplate let-dataItem>
                                 <button (click)="showTestModal(dataItem)" class="btn btn-warning k-button-icontext k-grid-edit">Edit</button>
-                                <button (click)="onDelete(dataItem)" class="btn-danger btn k-button-icontext k-grid-delete">Delete</button>
+                                <button (click)="delete(dataItem)" class="btn-danger btn k-button-icontext k-grid-delete">Delete</button>
                             </template>
                             </kendo-grid-column>
                         </kendo-grid>

@@ -22,7 +22,17 @@ module.exports = function(params) {
                     res.json(resTask);
                 })
                 .catch(err => {
-                    console.log(err);
+                    res.json({ err });
+                });
+        },
+        deleteTask(req, res) {
+            let taskId = req.params.id;
+            let projectId = req.body.projectId;
+            data.deleteTask(taskId, projectId)
+                .then(resTask => {
+                    res.json(resTask);
+                })
+                .catch(err => {
                     res.json({ err });
                 });
         }
