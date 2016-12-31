@@ -18,8 +18,8 @@ export class GetPieDataPipe implements PipeTransform {
             timeLeft = 0;
         }
 
-        let hoursLeft = ((timeLeft / 60000) / 60).toFixed(1);
-        let hoursSpent = ((timeSpent / 60000) / 60).toFixed(1);
+        let hoursLeft = ((timeLeft / 60000) / 60).toFixed();
+        let hoursSpent = ((timeSpent / 60000) / 60).toFixed();
            
         pieData.push({category: 'Time left', value: hoursLeft});
         pieData.push({category: 'Time spent', value: hoursSpent});
