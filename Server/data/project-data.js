@@ -1,12 +1,12 @@
 /* globals module Promise */
 
-module.exports = function(models) {
+module.exports = function (models) {
     let { Project, User, Message } = models;
 
     return {
         createProject(creator, name, description) {
             return new
-            Promise((resolve, reject) => {
+                Promise((resolve, reject) => {
                     Project.findOne({ name }, (err, project) => {
                         if (err) {
                             return reject(err);
@@ -49,14 +49,14 @@ module.exports = function(models) {
         },
         getTenMessages(name) {
             return new Promise((resolve, reject) => {
-                    Project.findOne({ name }, (err, project) => {
-                        if (err) {
-                            return reject(err);
-                        }
+                Project.findOne({ name }, (err, project) => {
+                    if (err) {
+                        return reject(err);
+                    }
 
-                        return resolve(project);
-                    })
+                    return resolve(project);
                 })
+            })
                 .then((project) => {
                     let messages = project.messages
                         .sort((a, b) => {
@@ -79,17 +79,23 @@ module.exports = function(models) {
             });
         },
         getProjectById(id) {
-            return new Promise((resolve, reject) => {
+            return new
+                Promise((resolve, reject) => {
                     Project.findOne({ _id: id }, (err, project) => {
                         if (err) {
                             return reject(err);
                         }
 
-                        return resolve(project);
+                        if (project) {
+                            return resolve(project);
+                        }
                     })
                 })
                 .then((project) => {
                     return new Promise((resolve, reject) => {
+                        project.tasks = project.tasks.filter(tas =>{
+                            return !tas.deleted;
+                        });
                         let messages = project.messages
                             .sort((a, b) => {
                                 return new Date(a.created) - new Date(b.created);
@@ -118,14 +124,14 @@ module.exports = function(models) {
         },
         addMessageToProject(projectName, created, from, message, picture) {
             return new Promise((resolve, reject) => {
-                    Project.findOne({ name: projectName }, (err, project) => {
-                        if (err) {
-                            return reject(err);
-                        }
+                Project.findOne({ name: projectName }, (err, project) => {
+                    if (err) {
+                        return reject(err);
+                    }
 
-                        return resolve(project);
-                    });
-                })
+                    return resolve(project);
+                });
+            })
                 .then((project) => {
                     return new Promise((resolve, reject) => {
                         let messageToAdd = new Message({
@@ -149,24 +155,24 @@ module.exports = function(models) {
         },
         addUserToProject(id, username) {
             return new Promise((resolve, reject) => {
-                    Project.findOne({ _id: id }, (err, project) => {
+                Project.findOne({ _id: id }, (err, project) => {
+                    if (err) {
+                        return reject(err);
+                    }
+
+                    if (project !== null) {
+                        project.projectMembers.push(username);
+                    }
+
+                    project.save((err) => {
                         if (err) {
                             return reject(err);
                         }
 
-                        if (project !== null) {
-                            project.projectMembers.push(username);
-                        }
-
-                        project.save((err) => {
-                            if (err) {
-                                return reject(err);
-                            }
-
-                            return resolve(project);
-                        });
+                        return resolve(project);
                     });
-                })
+                });
+            })
                 .then(project => {
                     User.findOne({ username }, (err, user) => {
                         if (err) {
