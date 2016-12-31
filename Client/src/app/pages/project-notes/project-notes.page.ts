@@ -4,9 +4,9 @@ import { PageComponent } from '../../components/page.component/page.component';
 import { ProjectService } from './../../services/project.service/project.service';
 
 @Component({
-    templateUrl: './project-documents.page.html',
+    templateUrl: './project-notes.page.html',
 })
-export class ProjectDocumentsPage implements PageComponent, OnInit {
+export class ProjectNotesPage implements PageComponent, OnInit {
     private project: any;
     private tasks: any[];
 
