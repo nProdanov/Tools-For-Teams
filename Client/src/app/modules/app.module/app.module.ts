@@ -22,6 +22,7 @@ import { EditTaskModalComponent } from '../../components/edit-task.component/edi
 import { NavbarComponent } from '../../components/navbar.component/navbar.component';
 import { ProfilePage } from '../../pages/profile/profile.page';
 import { NewProjectPage } from '../../pages/new-project/new-project.page';
+import { AboutPage } from '../../pages/about/about.page';
 import { LoginPage } from '../../pages/login/login.page';
 import { RegisterPage } from '../../pages/register/register.page';
 import { HomePage } from '../../pages/home/home.page';
@@ -87,7 +88,8 @@ import { AvailableUsersPipe } from './../../pipes/available-users-for-add.pipe';
     AvailableUsersPipe,
     EditTaskModalComponent,
     OtherProfilePage,
-    ProjectNotesPage
+    ProjectNotesPage,
+    AboutPage
   ],
   bootstrap: [AppComponent],
   providers: [
