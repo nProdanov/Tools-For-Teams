@@ -20,6 +20,24 @@ module.exports = function(params) {
                 .catch(err => {
                     res.json(err);
                 });
+        },
+        updateNotification(req, res) {
+            data.updateNotification(req.params.id)
+                .then(res => {
+                    res.json(res);
+                })
+                .catch(err => {
+                    res.json(err);
+                });
+        },
+        updateAllNotifications(req, res) {
+            data.updateAllNotifications(req.body)
+                .then(res => {
+                    res.json(res);
+                })
+                .catch(err => {
+                    res.json(err);
+                });
         }
     };
 };

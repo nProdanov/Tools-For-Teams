@@ -25,27 +25,8 @@ export class NotificationService {
     return observable;
   }
 
-  getUserNotification(username: string) {
-    let observable = new Observable(observer => {
-      this.socket.on(`${username} notification`, (data) => {
-        observer.next(data);
-      });
-    });
-    return observable;
-  }
-
-  sendAddToProjectNotification(username: string, notification: Notification) {
-    console.log("User " + username);
-    this.socket.emit(`${username} notification`, notification);
-  }
-
   sendNotification(projectName: string, notification: Notification) {
-      console.log("Project " + projectName);
       this.socket.emit(`${projectName} notification`, notification);
-  }
-
-  createUserNotificationEvent(username: string) {
-    this.socket.emit('create user-notification', username);
   }
 
   createNotificationEvent(projectName: string) {
@@ -65,6 +46,22 @@ export class NotificationService {
       .map((response: any) => {
           let data = response.json();
           return data;
+      });
+  }
+
+  updateNotification(notification: any) {
+    return this.http.put(`${this.saveUrl}/${notification._id}`, {})
+      .map((response: any) => {
+        let data = response.json();
+        return data;
+      });
+  }
+
+  updateAllNotifications(notifications: any) {
+    return this.http.post(`${this.saveUrl}/all`, notifications)
+      .map((response: any) => {
+        let data = response.json();
+        return data;
       });
   }
 }

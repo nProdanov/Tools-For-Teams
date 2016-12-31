@@ -61,7 +61,6 @@ export class MyProjectsPage implements PageComponent, OnInit {
             .subscribe((notifications: any) => {
                 this.notificationCount = notifications.length;
                 this.notifications = notifications;
-                console.log(notifications);
             });
     }
 
@@ -93,7 +92,20 @@ export class MyProjectsPage implements PageComponent, OnInit {
         };
     }
 
+    private deleteAllNotifications() {
+        this.notificationService.updateAllNotifications(this.notifications)
+            .subscribe(() => {
+                this.notifications = [];
+                this.notificationCount = 0;
+            });
+    }
+
     private deleteNotification(index: any) {
-        console.log(index);
+        let notification = this.notifications[index];
+        this.notificationService.updateNotification(notification)
+            .subscribe(() => {
+                this.notifications.splice(index, 1);
+                this.notificationCount -= 1;
+            })
     }
 }
