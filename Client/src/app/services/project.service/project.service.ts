@@ -79,4 +79,8 @@ export class ProjectService {
                 return data;
             });
     }
+
+    addNotesToProject(projectName: string, notes: any[]) {
+        return this.http.put(`${this.projectUrl}/${projectName}/notes`, { notes })
+    }
 };

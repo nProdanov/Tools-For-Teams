@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { PageComponent } from '../../components/page.component/page.component';
 import { ProjectService } from './../../services/project.service/project.service';
@@ -10,9 +10,7 @@ import { ProjectService } from './../../services/project.service/project.service
     ]
 })
 export class ProjectNotesPage implements PageComponent, OnInit {
-    private numberOfStickies: number = 12;
     private project: any;
-    private tasks: any[];
     private notes: any[];
 
     constructor(private projectService: ProjectService, private route: ActivatedRoute,) {
@@ -31,13 +29,17 @@ export class ProjectNotesPage implements PageComponent, OnInit {
             });
     }
 
+    ngOnDestroy() {
+        this.projectService.addNotesToProject(this.project.name, this.notes)
+            .subscribe();
+    }
+
     addNote(title: string, text: string) {
         if (title === '' || text === '') {
             return;
         }
 
         let note = {title: title, text: text};
-        
         this.notes.push(note);
     }
 

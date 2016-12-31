@@ -84,6 +84,15 @@ module.exports = function(params) {
                 .catch(err => {
                     res.json(err);
                 });
+        },
+        addNotesToProject(req, res) {
+            data.addNotesToProject(req.params.projectName, req.body.notes)
+                .then(projedt => {
+                    res.json(project);
+                })
+                .catch(err => {
+                    res.json(err);
+                })
         }
     };
 };
