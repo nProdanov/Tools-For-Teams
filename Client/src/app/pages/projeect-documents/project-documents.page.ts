@@ -7,40 +7,28 @@ import { ProjectService } from './../../services/project.service/project.service
     templateUrl: './project-documents.page.html',
 })
 export class ProjectDocumentsPage implements PageComponent, OnInit {
-    
+    private project: any;
+    private tasks: any[];
 
     constructor(private projectService: ProjectService, private route: ActivatedRoute,) {
-        
+        this.project = {};
+        this.tasks = [];
     }
 
     ngOnInit() {
-        // this.route.params
-        //     .switchMap((params: Params) => {
-        //         return this.projectService.getProjectByProjectName(params['projectName'])
-        //     })
-        //     .subscribe(project => {
-        //         this.project = project;
-        //         this.tasks = project.tasks;
+        this.route.params
+            .switchMap((params: Params) => {
+                return this.projectService.getProjectByProjectName(params['projectName'])
+            })
+            .subscribe(project => {
+                this.project = project;
+                this.tasks = project.tasks;
 
-        //         for (let task of this.tasks) {
-        //             let previousCost = 0;
-        //             if(this.cost.length > 0) {
-        //                 previousCost = this.cost[this.cost.length - 1];
-        //             }
-        //             let currentCost = task.cost;
-        //             this.cost.push(currentCost + previousCost);
-        //             this.totalCost = this.totalCost + currentCost;
+                for (let task of this.tasks) {
+                    
+                }
 
-        //             let previousHours = 0;
-        //             if (this.hours.length > 0) {
-        //                 previousHours = this.hours[this.hours.length - 1];
-        //             }
-        //             let currentHours = +task.timeForExecution;                    
-        //             this.hours.push(currentHours + previousHours);
-        //             this.totalHours = this.totalHours + currentHours;
-        //         }
 
-        //         this.numberOfTasks = this.tasks.length;
-        //     });
+            });
     }
 }
