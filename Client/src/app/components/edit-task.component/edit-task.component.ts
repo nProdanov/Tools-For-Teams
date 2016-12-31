@@ -1,5 +1,6 @@
 import { Component, ViewChild, Input, Output, EventEmitter } from '@angular/core';
 import { TaskService } from '../../services/task.service/task.service';
+import { NotificationService } from '../../services/notification.service/notification.service';
 import { ToastsManager } from 'ng2-toastr';
 import { Task } from '../../models/task.model/task.model';
 import { ModalDirective } from 'ng2-bootstrap';
@@ -12,13 +13,14 @@ export class EditTaskModalComponent {
     @ViewChild('childModal') childModal: ModalDirective;
     @Input() modelTask: Task;
     @Input() users: string[];
+    @Input() projectName: string;
     @Output() saveEvent: EventEmitter<any> = new EventEmitter();
     public selectedUser: string;
     public hours: number[];
     public isCostValid: boolean;
 
 
-    constructor(private taskService: TaskService, private toastr: ToastsManager) {
+    constructor(private taskService: TaskService, private toastr: ToastsManager, private notificationService: NotificationService) {
         this.selectedUser = '';
         this.isCostValid = true;
         this.hours = [];
@@ -28,6 +30,8 @@ export class EditTaskModalComponent {
     }
 
     save() {
+        let initialTaskTitle = this.modelTask.title;
+        let currentProjectName = this.projectName;
         this.taskService.editTask(this.modelTask)
             .subscribe(res => {
                 if (res.err) {
@@ -36,6 +40,12 @@ export class EditTaskModalComponent {
                 else {
                     this.saveEvent.next(res);
                     this.toastr.success('Changes saved.');
+                    this.notificationService.sendNotification(currentProjectName, {
+                        projectName: currentProjectName,
+                        content: `Task ${initialTaskTitle} has been changed to ${res.title}`,
+                        created: new Date(Date.now()),
+                        deleted: false
+                    });
                     this.childModal.hide();
                 }
             });

@@ -8,6 +8,7 @@ module.exports = function({ app, controllers }) {
 
     router
         .get("/users/:id", controllers.getUserById)
+        .get("/users/:username/details", controllers.getUserByUsername)
         .get("/users", controllers.getAllUsers)
         .get("/messages/:name", controllers.getTenMessages)
         .get("/project/:projectName", controllers.getProjectByProjectName)

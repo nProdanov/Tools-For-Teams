@@ -1,4 +1,5 @@
 import { ProfilePage } from './profile/profile.page';
+import { OtherProfilePage } from './other-profile/other-profile.page';
 import { NewProjectPage } from './new-project/new-project.page';
 import { LoginPage } from './login/login.page';
 import { RegisterPage } from './register/register.page';
@@ -11,6 +12,7 @@ import { ProjectNotesPage } from './project-notes/project-notes.page';
 
 export const pages = {
     profile: ProfilePage,
+    otherProfile: OtherProfilePage,
     newProject: NewProjectPage,
     login: LoginPage,
     register: RegisterPage,

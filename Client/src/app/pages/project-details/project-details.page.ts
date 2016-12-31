@@ -122,7 +122,7 @@ export class ProjectDetailsPage implements PageComponent, OnInit, OnDestroy, Aft
             .getProfileItem()
             .subscribe(resProfile => {
                 this.profile = resProfile;
-                // user profiles
+                
                 this.route.params
                     .switchMap((params: Params) => {
                         this.projectId = params['id'];

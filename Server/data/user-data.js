@@ -84,16 +84,14 @@ module.exports = function(models, validator) {
                     return Promise.resolve(user);
                 });
         },
-        getAllProjectsByUserId(userId) {
+        getUserByUsername(username) {
             return new Promise((resolve, reject) => {
-                User.findOne({ userId }, (err, user) => {
+                User.findOne({username}, (err, user) => {
                     if (err) {
                         return reject(err);
                     }
 
-                    let projects = user.projects;
-
-                    return resolve(projects || null);
+                    return resolve(user);
                 });
             });
         },
