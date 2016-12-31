@@ -11,5 +11,9 @@ module.exports = modelRegistrator.register("Task", {
     timeForExecution: String,
     cost: Number,
     status: String,
-    users: []
+    users: [],
+    deleted: {
+        type: Boolean,
+        default: false
+    }
 });

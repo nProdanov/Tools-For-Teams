@@ -184,6 +184,26 @@ export class ProjectDetailsPage implements PageComponent, OnInit, OnDestroy, Aft
         };
     }
 
+    delete(task: Task) {
+        this.taskService.deleteTask(task).subscribe(res => {
+            if (res.err) {
+                this.toastr.error(res.err);
+            }
+            else {
+                this.project.tasks.splice(this.project.tasks.indexOf(task), 1);
+                this.gridView.data.splice(this.gridView.data.indexOf(task), 1);
+                this.gridView.total -= 1;
+                this.toastr.success("Deleted successfully!");
+                this.notificationService.sendNotification(this.project.name, {
+                    projectName: this.project.name,
+                    content: `Task ${task.title} has been deleted`,
+                    created: new Date(Date.now()),
+                    deleted: false
+                });
+            }
+        });
+    }
+
     messageBoardUpdate() {
         let messageToSend = {
             projectName: this.project.name,

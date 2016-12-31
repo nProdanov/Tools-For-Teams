@@ -28,4 +28,16 @@ export class TaskService {
                 return data;
             });
     }
+
+    deleteTask(task: Task): Observable<any> {
+        let url = `${this.taskUrl}/${task._id}/delete`;
+        let body = { projectId: task.projectId };
+        return this
+            .http
+            .put(url, body)
+            .map(response => {
+                let data = response.json();
+                return data;
+            });
+    }
 };

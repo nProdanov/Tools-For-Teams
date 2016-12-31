@@ -9,8 +9,4 @@ export class DeadlineStatsChartComponent {
 
     constructor () {
     }
-
-    ngOnInit() {
-        // console.log(this.pieData);
-    }
 }

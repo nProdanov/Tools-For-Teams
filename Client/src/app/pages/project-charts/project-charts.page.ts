@@ -14,6 +14,7 @@ export class ProjectCharts implements PageComponent, OnInit {
     private totalCost: number;
     private totalHours: number;
     private numberOfTasks: number;
+    private numberOfProjectMembers: number;
 
     constructor(private projectService: ProjectService, private route: ActivatedRoute,) {
         this.project = {};
@@ -23,6 +24,7 @@ export class ProjectCharts implements PageComponent, OnInit {
         this.totalCost = 0;
         this.totalHours = 0;
         this.numberOfTasks = 0;
+        this.numberOfProjectMembers = 0;
     }
 
     ngOnInit() {
@@ -53,6 +55,7 @@ export class ProjectCharts implements PageComponent, OnInit {
                 }
 
                 this.numberOfTasks = this.tasks.length;
+                this.numberOfProjectMembers = this.project.projectMembers.length;
             });
     }
 }
