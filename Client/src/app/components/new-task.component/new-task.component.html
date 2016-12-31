@@ -66,7 +66,6 @@
                         <input auto-complete class="form-control" [source]="users" name="selectedUser" [(ngModel)]="selectedUser" type="text" />
                         <a class="btn btn-warning" (click)="addUserToTask()">Add user</a>
                     </div>
-                    <input class="form-control" type="hidden" value="1290" name="task[project_id]" id="task_project_id">
                     <div class="form-group">
                         <button [disabled]="!(isCostValid && newTaskForm.form.valid && newTask.users.length)" type="submit" class="btn btn-success">Save Task</button>
                     </div>

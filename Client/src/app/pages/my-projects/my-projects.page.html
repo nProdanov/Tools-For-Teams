@@ -40,8 +40,7 @@
         </h3>
     </div>
     <div class="row">
-        <kendo-grid [data]="gridView" [selectable]="true" (selectionChange)="onSelect($event)" [sortable]="{ mode: 'multiple' }"
-            [sort]="sort" (sortChange)="sortChange($event)" [pageSize]="pageSize" [skip]="skip" [pageable]="true" [height]="auto"
+        <kendo-grid role="button" [data]="gridView" [selectable]="true" (selectionChange)="onSelect($event)" [sortable]="{ mode: 'multiple' }" [sort]="sort" (sortChange)="sortChange($event)" [pageSize]="pageSize" [skip]="skip" [pageable]="true" [height]="auto"
             (pageChange)="pageChange($event)">
             <kendo-grid-column field="name" width="150" title="Project name">
             </kendo-grid-column>

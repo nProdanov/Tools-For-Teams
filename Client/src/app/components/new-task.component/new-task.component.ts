@@ -59,10 +59,6 @@ export class NewTaskModalComponent {
         this.childModal.hide();
     }
 
-    changeHour(hour) {
-        this.newTask.timeForExecution = hour;
-    }
-
     validateCost() {
         if (+this.newTask.cost <= 0) {
             this.isCostValid = false;

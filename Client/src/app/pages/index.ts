@@ -7,6 +7,7 @@ import { MyProjectsPage } from './my-projects/my-projects.page';
 import { ProjectDetailsPage } from './project-details/project-details.page';
 import { ToolboxPage } from './my-toolbox/my-toolbox.page';
 import { ProjectCharts } from './project-charts/project-charts.page';
+import { ProjectDocumentsPage } from './projeect-documents/project-documents.page';
 
 export const pages = {
     profile: ProfilePage,
@@ -17,5 +18,6 @@ export const pages = {
     myProjects: MyProjectsPage,
     projectDetails: ProjectDetailsPage,
     myToolbox: ToolboxPage,
-    projectCharts: ProjectCharts
+    projectCharts: ProjectCharts,
+    projectDocuments: ProjectDocumentsPage
 };
