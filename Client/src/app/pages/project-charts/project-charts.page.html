@@ -10,11 +10,9 @@
     <general-stats-chart [tasksValues]="tasks | getTasksValuesPipe"></general-stats-chart>
 
     <div class="row ">
-        <!--<div class="col-md-4" *ngFor="let task of tasks">
-            <div class="well well-sm text-center">Task {{task.title}} time to deadline</div>
-            <deadline-stats-chart [pieData]="task | getPieDataPipe | orderBy : 'timeLeft'"></deadline-stats-chart>
-        </div>-->
-        <!--<deadline-stats-chart [pieData]="task | getPieDataPipe"></deadline-stats-chart>
-        </div>-->
+        <div class="col-md-4" *ngFor="let task of tasks">
+            <div class="well well-sm text-center">Task "{{task.title}}" time to deadline</div>
+            <deadline-stats-chart [pieData]="task | getPieDataPipe"></deadline-stats-chart>
+        </div>
     </div>
 </div>
