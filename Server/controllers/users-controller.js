@@ -23,6 +23,15 @@ module.exports = function(params) {
                     res.json(err);
                 });
         },
+        getUserByUsername(req, res) {
+            data.getUserByUsername(req.params.username)
+                .then(user => {
+                    res.json(user);
+                })
+                .catch(err => {
+                    res.json(err);
+                });
+        },
         getAllUsers(req, res) {
             data.getAllUsers()
                 .then((users) => {
@@ -40,15 +49,6 @@ module.exports = function(params) {
                 .catch(err => {
                     res.json(err);
                 });
-        },
-        getAllProjectsByUserId(req, res) {
-            data.getAllProjectsByUserId(req.params.userId)
-                .then((response) => {
-                    res.json(response);
-                })
-                .catch(err => {
-                    res.json(err);
-                })
         },
         editUser(req, res) {
             data.editUser(req.params.id, req.body)

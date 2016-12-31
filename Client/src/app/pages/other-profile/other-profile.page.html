@@ -1,0 +1,25 @@
+<div class="container">
+    <div class="col-md-10 col-md-offset-1">
+        <div class="well form-horizontal">
+            <img [src]="profile.picture" alt="Profile image" class="img-thumbnail" width="150px" height="150px">
+            <h2 class="text-danger">{{profile.username}}</h2>
+            <div class="text-center">
+            </div>
+            <div class="text-left">
+                <h4>Email:
+                    <span class="text-success"> {{profile.email}}</span>
+                </h4>
+                <h4>First name:
+                    <span class="text-success"> {{profile.firstName}}</span>
+                </h4>
+                <h4>Last name:
+                    <span class="text-success"> {{profile.lastName}}</span>
+                </h4>
+                <h4>Gender: <span class="text-success"> {{profile.gender | genderPipe}}</span></h4>
+                <h4>Company:
+                    <span class="text-success"> {{profile.company | companyPipe}}</span>
+                </h4>
+            </div>
+        </div>
+    </div>
+</div>
