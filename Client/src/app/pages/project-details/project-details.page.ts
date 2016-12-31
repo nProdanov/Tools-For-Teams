@@ -122,7 +122,7 @@ export class ProjectDetailsPage implements PageComponent, OnInit, OnDestroy, Aft
             .getProfileItem()
             .subscribe(resProfile => {
                 this.profile = resProfile;
-                
+
                 this.route.params
                     .switchMap((params: Params) => {
                         this.projectId = params['id'];
@@ -243,7 +243,9 @@ export class ProjectDetailsPage implements PageComponent, OnInit, OnDestroy, Aft
         this.connection.unsubscribe();
     }
 
-    addToTasks(task) {
+    onAddTask(task) {
         this.project.tasks.push(task);
+        this.gridView.data.push(task);
+        this.gridView.total += 1;
     }
 }

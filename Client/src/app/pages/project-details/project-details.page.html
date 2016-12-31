@@ -74,7 +74,7 @@
                             </div>
                         </div>
 
-                        <new-task [users]="project.projectMembers" [projectId]="projectId"></new-task>
+                        <new-task (onSaveTask)="onAddTask($event)" [users]="project.projectMembers | availableUsers : []" [projectId]="projectId"></new-task>
                     </div>
                 </div>
             </div>
