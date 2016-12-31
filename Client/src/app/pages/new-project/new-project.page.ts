@@ -32,7 +32,8 @@ export class NewProjectPage implements PageComponent, OnInit {
             name: '',
             description: '',
             tasks: [],
-            projectMembers: []
+            projectMembers: [],
+            notes: []
         };
     }
 
