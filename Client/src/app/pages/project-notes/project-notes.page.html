@@ -1,1 +1,24 @@
-<h4>Docs for project {{project.name}}</h4>
+<div class="container">
+    <h2 class="text-center">Sticky Notes for project {{project.name}}</h2>
+
+    <ul>
+        <li>
+            <div class="form-group">
+                <h6 label class="text-center">Add note</h6>
+                <br>
+                <label for="title" class="text-center">title:</label>
+                <input type="title" class="form-control" id="title" #titleInput>
+                <label for="text" class="text-center">text:</label>
+                <textarea id="text" class="form-control" #textInput></textarea>
+                <button type="submit" class="btn btn-warning btn-block" (click)="addNote(titleInput.value, textInput.value)">Add</button>
+            </div>
+        </li>
+        <li *ngFor="let note of notes">
+            <div>
+                <span class="glyphicon glyphicon-remove pull-right" role="button"></span>
+                <h6>{{note.title}}</h6>
+                <p>{{note.text}}</p>
+            </div>
+        </li>
+    </ul>
+</div>

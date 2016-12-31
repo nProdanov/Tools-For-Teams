@@ -5,14 +5,20 @@ import { ProjectService } from './../../services/project.service/project.service
 
 @Component({
     templateUrl: './project-notes.page.html',
+    styleUrls: [
+        './project-project-notes.page.css'
+    ]
 })
 export class ProjectNotesPage implements PageComponent, OnInit {
+    private numberOfStickies: number = 12;
     private project: any;
     private tasks: any[];
+    private notes: any[];
 
     constructor(private projectService: ProjectService, private route: ActivatedRoute,) {
         this.project = {};
         this.tasks = [];
+        this.notes = [];
     }
 
     ngOnInit() {
@@ -23,12 +29,18 @@ export class ProjectNotesPage implements PageComponent, OnInit {
             .subscribe(project => {
                 this.project = project;
                 this.tasks = project.tasks;
-
-                for (let task of this.tasks) {
-                    
-                }
-
-
+                
+                this.notes = project.notes;
             });
+    }
+
+    addNote(title: string, text: string) {
+        if (title === '' || text === '') {
+            return;
+        }
+
+        let note = {title: title, text: text};
+        
+        this.notes.push(note);
     }
 }
