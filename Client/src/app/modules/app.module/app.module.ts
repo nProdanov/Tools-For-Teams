@@ -42,6 +42,7 @@ import { TaskService } from '../../services/task.service/task.service';
 import { StorageService } from '../../services/storage.service/storage.service';
 import { ChatService } from '../../services/chat.service/chat.service';
 import { NotificationService } from '../../services/notification.service/notification.service';
+import { AboutDataService } from './../../services/about-data.service/about-data.service';
 
 //  Pipes
 import { GetTasksValuesPipe } from './../../pipes/get-tasks-values.pipe';
@@ -100,7 +101,8 @@ import { AvailableUsersPipe } from './../../pipes/available-users-for-add.pipe';
     TaskService,
     StorageService,
     ChatService,
-    NotificationService
+    NotificationService,
+    AboutDataService
   ]
 })
 export class AppModule { }
