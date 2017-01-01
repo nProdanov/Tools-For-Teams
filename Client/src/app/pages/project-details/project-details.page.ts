@@ -46,7 +46,7 @@ import { EditTaskModalComponent } from '../../components/edit-task.component/edi
             })),
             transition('inactive => active', [
                 animate(600, keyframes([
-                    style({ opacity: 0, transform: 'translateX(-200px)', offset: 1 }),
+                    style({ opacity: 1, transform: 'translateX(-200px)', offset: 1 }),
                     style({ opacity: 1, transform: 'translateX(200px)', offset: .75 }),
                     style({ opacity: 1, transform: 'translateX(0)', offset: 0 }),
                 ]))
@@ -54,7 +54,7 @@ import { EditTaskModalComponent } from '../../components/edit-task.component/edi
             transition('active => inactive', [
                 animate(600, keyframes([
                     style({ opacity: 1, transform: 'translateX(0)', offset: 0 }),
-                    style({ opacity: 1, transform: 'translateX(25px)', offset: .75 }),
+                    style({ opacity: 1, transform: 'translateX(200px)', offset: .75 }),
                     style({ opacity: 0, transform: 'translateX(-200px)', offset: 1 }),
                 ]))
             ])
@@ -146,7 +146,12 @@ export class ProjectDetailsPage implements PageComponent, OnInit, OnDestroy, Aft
                     });
 
                 this.userService.getAllUsers().subscribe((users: any) => {
-                    this.users = users;
+                    this.users = [];
+                    users.forEach(u => {
+                        if (this.project.projectMembers.indexOf(u) < 0) {
+                            this.users.push(u);
+                        }
+                    });
                 });
             });
     }
@@ -219,10 +224,14 @@ export class ProjectDetailsPage implements PageComponent, OnInit, OnDestroy, Aft
     }
 
     addUserToProject() {
-        if (this.project.projectMembers.indexOf(this.userToAdd) < 0) {
+        if (this.project.projectMembers.indexOf(this.userToAdd) < 0 &&
+            this.users.indexOf(this.userToAdd) >= 0) {
+            this.users.splice(this.users.indexOf(this.userToAdd), 1);
+            this.project.projectMembers.push(this.userToAdd);
+            
             this.projectService.addUserToProject(this.projectId, this.userToAdd)
                 .subscribe((res: any) => {
-                    this.project.projectMembers.push(this.userToAdd);
+
                     this.toastr.success('User added to project!');
                 });
 
@@ -235,7 +244,7 @@ export class ProjectDetailsPage implements PageComponent, OnInit, OnDestroy, Aft
             this.userToAdd = '';
         }
         else {
-            this.toastr.error('User already works on this project');
+            this.toastr.error('User doesn\'t exist or already works on this project');
         }
     }
 
