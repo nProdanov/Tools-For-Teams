@@ -8,10 +8,8 @@ import { appRoutes } from '../../config/routes';
 import { AppComponent } from '../../components/app.component/app.component';
 import { NewTaskModalComponent } from '../../components/new-task.component/new-task.component';
 import { ToastModule } from 'ng2-toastr';
-import { ButtonsModule } from '@progress/kendo-angular-buttons';
 import { GridModule } from '@progress/kendo-angular-grid';
 import { Ng2AutoCompleteModule } from 'ng2-auto-complete';
-import { InfiniteScrollModule } from 'angular2-infinite-scroll';
 import { ModalModule } from 'ng2-bootstrap';
 import { ChartsModule } from '@progress/kendo-angular-charts';
 import { GeneralStatsChartComponent } from './../../components/general-stats-chart.componenet/general-stats-chart.componenet';
@@ -58,10 +56,8 @@ import { AvailableUsersPipe } from './../../pipes/available-users-for-add.pipe';
     RouterModule.forRoot(appRoutes, { useHash: false }),
     FormsModule,
     ToastModule,
-    ButtonsModule,
     GridModule,
     Ng2AutoCompleteModule,
-    InfiniteScrollModule,
     ModalModule.forRoot(),
     ChartsModule
   ],
