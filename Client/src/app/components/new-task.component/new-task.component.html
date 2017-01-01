@@ -63,7 +63,7 @@
                                 {{selected}}
                             </li>
                         </ul>
-                        <input auto-complete class="form-control" [source]="users" name="selectedUser" [(ngModel)]="selectedUser" type="text" />
+                        <input auto-complete class="form-control" [source]="availableUsers" name="selectedUser" [(ngModel)]="selectedUser" type="text" />
                         <a class="btn btn-warning" (click)="addUserToTask()">Add user</a>
                     </div>
                     <div class="form-group">
