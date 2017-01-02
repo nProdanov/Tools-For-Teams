@@ -4,6 +4,7 @@ import { ProjectService } from '../../shared/services/project.service';
 import { UserService } from '../../shared/services/user.service';
 import { ToastsManager } from 'ng2-toastr';
 import { StorageService } from '../../shared/services/storage.service';
+import { NotificationService } from '../../shared/services/notification.service';
 import { ModalDirective } from 'ng2-bootstrap';
 
 @Component({
@@ -21,7 +22,8 @@ export class NewProjectComponent implements OnInit {
         private storageService: StorageService,
         private toastr: ToastsManager,
         private projectService: ProjectService,
-        private userService: UserService) {
+        private userService: UserService,
+        private notificationService: NotificationService) {
         this.profile = {};
     }
 
@@ -54,6 +56,12 @@ export class NewProjectComponent implements OnInit {
                 this.projectService
                     .saveProject(this.project)
                     .subscribe((resProject) => {
+                        this.notificationService.createNotificationEvent(resProject.name);
+                        this.notificationService.getNotification(resProject.name).subscribe((notification: any) => {
+                            this.toastr.info(notification.content);
+                            this.notificationService.saveProjectNotification(notification).subscribe();
+                        });
+                        
                         this.userService
                             .addProject(this.profile.id, resProject._id, resProject.name)
                             .subscribe(res => {

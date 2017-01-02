@@ -134,7 +134,7 @@ export class Auth {
       password: password,
     }, (err: any, signUpObj: any) => {
       if (err) {
-        alert('something went wrong: ' + err.message);
+        this.toastr.error('something went wrong: ' + err.message);
       } else {
         this.auth0.getProfile(signUpObj.idToken, (error: any, profile: any) => {
           if (err) {
