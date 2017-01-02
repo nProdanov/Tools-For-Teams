@@ -1,0 +1,25 @@
+<div class="container">
+    <h2 class="text-center">Stats for project: {{project.name}}</h2>
+
+    <ul class="list-group">
+        <li class="list-group-item">Total hours: {{totalHours}}</li>
+        <li class="list-group-item">Total cost: {{totalCost}}</li>
+        <li class="list-group-item"># of tasks: {{numberOfTasks}}</li>
+        <li class="list-group-item">Project members: {{numberOfProjectMembers}}</li>
+    </ul>
+
+    <div class="well well-sm text-center">General stats for project {{project.name}}</div>
+    <general-stats-chart [tasksValues]="tasks | getTasksValuesPipe"></general-stats-chart>
+
+    <div class="row">
+        <div class="col-md-4" *ngFor="let task of tasks">
+            <div class="well well-sm text-center">Task "{{task.title}}" time to deadline</div>
+
+            <ul class="list-group text-center">Users
+                <li class="list-group-item text-center" *ngFor="let user of task.users">{{user}}</li>
+            </ul>
+
+            <deadline-stats-chart [pieData]="task | getPieDataPipe"></deadline-stats-chart>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,18 @@
+<kendo-chart >
+    <kendo-chart-tooltip background="green" format="Cost: {0}, Hours: {1}">
+    </kendo-chart-tooltip>
+    <kendo-chart-legend position="bottom" orientation="horizontal">
+    </kendo-chart-legend>
+    <kendo-chart-x-axis>
+        <kendo-chart-x-axis-item [title]="{ text: 'Money' }">
+        </kendo-chart-x-axis-item>
+    </kendo-chart-x-axis>
+    <kendo-chart-y-axis>
+        <kendo-chart-y-axis-item [title]="{ text: 'Hours' }">
+        </kendo-chart-y-axis-item>
+    </kendo-chart-y-axis>
+    <kendo-chart-series>
+        <kendo-chart-series-item type="scatterLine" name="Tasks" [data]="tasksValues">
+        </kendo-chart-series-item>
+    </kendo-chart-series>
+</kendo-chart>

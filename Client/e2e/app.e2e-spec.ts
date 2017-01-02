@@ -1,10 +1,10 @@
-import { ProjectCliPage } from './app.po';
+import { TteamsPage } from './app.po';
 
-describe('project-cli App', function() {
-  let page: ProjectCliPage;
+describe('tteams App', function() {
+  let page: TteamsPage;
 
   beforeEach(() => {
-    page = new ProjectCliPage();
+    page = new TteamsPage();
   });
 
   it('should display message saying app works', () => {
