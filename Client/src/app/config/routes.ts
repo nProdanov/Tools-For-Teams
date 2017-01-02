@@ -15,5 +15,6 @@ export const appRoutes: Routes = [
     { path: 'project-details/:id', component: pages.projectDetails, canActivate: [AuthGuard] },
     { path: 'my-toolbox', component: pages.myToolbox, canActivate: [AuthGuard] },
     { path: 'charts/:projectName', component: pages.projectCharts, canActivate: [AuthGuard] },
-    { path: 'notes/:projectName', component: pages.projectNotes, canActivate: [AuthGuard] }
+    { path: 'notes/:projectName', component: pages.projectNotes, canActivate: [AuthGuard] },
+    { path: 'our-stats', component: pages.ourStats }
 ];

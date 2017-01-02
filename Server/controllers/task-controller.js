@@ -35,6 +35,15 @@ module.exports = function(params) {
                 .catch(err => {
                     res.json({ err });
                 });
+        },
+        getAllTasks(req, res) {
+            data.getAllTasks()
+                .then(tasks => {
+                    res.json(tasks);
+                })
+                .catch(err => {
+                    res.json(err);
+                })
         }
     };
 };

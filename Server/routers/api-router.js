@@ -19,6 +19,7 @@ module.exports = function({ app, controllers }) {
         .get("/users/:userId/projects", controllers.getUserById)
         .get("/notifications/:username", controllers.getUserProjectsNotifications)
         .get("/about", controllers.getAllAboutData)
+        .get("/tasks", controllers.getAllTasks)
         .put("/notifications/:id", controllers.updateNotification)
         .put("/projects/:id", controllers.addUserToProject)
         .put("/project/:projectName/notes", controllers.addNotesToProject)

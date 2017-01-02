@@ -30,6 +30,7 @@ import { ToolboxPage } from './../../pages/my-toolbox/my-toolbox.page';
 import { ProjectCharts } from './../../pages/project-charts/project-charts.page';
 import { OtherProfilePage } from '../../pages/other-profile/other-profile.page'
 import { ProjectNotesPage } from './../../pages/project-notes/project-notes.page';
+import { OurStatsPage } from './../../pages/our-stats/our-stats.page';
 
 //  Services
 import { AuthGuard } from '../../services/auth-guard.service/auth.guard.service';
@@ -86,7 +87,8 @@ import { AvailableUsersPipe } from './../../pipes/available-users-for-add.pipe';
     EditTaskModalComponent,
     OtherProfilePage,
     ProjectNotesPage,
-    AboutPage
+    AboutPage,
+    OurStatsPage
   ],
   bootstrap: [AppComponent],
   providers: [

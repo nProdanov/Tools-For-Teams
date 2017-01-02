@@ -40,4 +40,14 @@ export class TaskService {
                 return data;
             });
     }
+
+    getAllTasks(): Observable<any> {
+        return this
+            .http
+            .get(this.taskUrl)
+            .map(response => {
+                let data = response.json();
+                return data;
+            });
+    }
 };
