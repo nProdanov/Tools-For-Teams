@@ -5,7 +5,8 @@ import { UserService } from './../../services/user.service/user.service';
 import { TaskService } from './../../services/task.service/task.service';
 
 @Component({
-    templateUrl: './our-stats.page.html'
+    templateUrl: './our-stats.page.html',
+    styles: ['.img-responsive { margin: 0 auto; }']
 })
 export class OurStatsPage {
     private allProjects: number;
