@@ -31,6 +31,7 @@ import { ProjectCharts } from './../../pages/project-charts/project-charts.page'
 import { OtherProfilePage } from '../../pages/other-profile/other-profile.page'
 import { ProjectNotesPage } from './../../pages/project-notes/project-notes.page';
 import { OurStatsPage } from './../../pages/our-stats/our-stats.page';
+import { GetStartedPage } from './../../pages/get-started/get-started.page';
 
 //  Services
 import { AuthGuard } from '../../services/auth-guard.service/auth.guard.service';
@@ -88,7 +89,8 @@ import { AvailableUsersPipe } from './../../pipes/available-users-for-add.pipe';
     OtherProfilePage,
     ProjectNotesPage,
     AboutPage,
-    OurStatsPage
+    OurStatsPage,
+    GetStartedPage
   ],
   bootstrap: [AppComponent],
   providers: [

@@ -11,6 +11,7 @@ import { ProjectCharts } from './project-charts/project-charts.page';
 import { ProjectNotesPage } from './project-notes/project-notes.page';
 import { AboutPage } from './about/about.page';
 import { OurStatsPage } from './our-stats/our-stats.page';
+import { GetStartedPage } from './get-started/get-started.page';
 
 export const pages = {
     about: AboutPage,
@@ -25,5 +26,6 @@ export const pages = {
     myToolbox: ToolboxPage,
     projectCharts: ProjectCharts,
     projectNotes: ProjectNotesPage,
-    ourStats: OurStatsPage
+    ourStats: OurStatsPage,
+    getStarted: GetStartedPage
 };
