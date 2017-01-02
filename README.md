@@ -29,6 +29,16 @@ Team Tools is an application which gives you functionality to manage teams:
 ###Private (authenticated) dynamic web pages:###
 
 - **GET**
+- **/profile** - get profile of authenticated user with option for edit
+- **/profile/:username** - get profile of some user without option for edit
+- **/my-projects** - get paged list of all projects where authenticated user is assigned for
+- **/project-details/:projectId** - get detailed info for current project - adding editting deleting tasks,adding and listing colaborating users, message board, notifications 
+- **/my-toolbox** - some tools for monitoring of projects
+- **/charts/:projectName** - get chart for time and cost for current project and some additional tasks info
+- **/notes/:projectName** - sticky notes for current project
+
+###Server API:###
+- **GET**
 - **/api/users** - get all users
 - **/api/users/:id** - get user by id
 - **/api/projects** - get all projects
