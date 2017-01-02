@@ -22,9 +22,9 @@ Team Tools is an application which gives you functionality to manage teams:
 ###Public (accessible without authentication) dynamic web pages:###
 
 - **/home** - home page
-- **/anout** - shows more info about Team Tools
-- **/auth/register** - Registration form
-- **/auth/login** - LogIn form
+- **/about** - shows more info about Team Tools
+- **/register** - Registration form
+- **/login** - LogIn form
 
 ###Private (authenticated) dynamic web pages:###
 
