@@ -43,20 +43,51 @@ export class Auth {
 
         let id = profile.user_id;
 
-
         this.userService
           .getUserById(id)
           .subscribe(resUser => {
-            let userToShow = {
-              username: resUser.username,
-              id: resUser.id,
-              email: resUser.email,
-              company: resUser.company,
-              picture: resUser.picture,
-              name: resUser.name
+            let userToShow = {};
+            if (resUser) {
+              userToShow = {
+                username: resUser.username,
+                id: resUser.id,
+                email: resUser.email,
+                company: resUser.company,
+                picture: resUser.picture,
+                name: resUser.name
+              }
+              this.storageService.setProfileItem(userToShow).subscribe();
             }
+            else {
+              let user = {
+                id: profile.user_id,
+                username: profile.nickname,
+                firstName: profile.given_name,
+                lastName: profile.family_name,
+                gender: profile.gender === 'male' ? 'm' : 'f',
+                picture: profile.picture,
+                email: profile.email,
+                company: ''
+              }
 
-            this.storageService.setProfileItem(userToShow).subscribe();
+              this.userService.saveUser(user).subscribe(res => {
+                if (res.error) {
+                  this.toastr.error(res.error);
+                  this.router.navigateByUrl('/home');
+                }
+                else {
+                  userToShow = {
+                    username: user.username,
+                    id: user.id,
+                    email: user.email,
+                    company: user.company,
+                    picture: user.picture,
+                    name: user.firstName
+                  };
+                  this.storageService.setProfileItem(userToShow).subscribe();
+                }
+              })
+            }
           });
 
 
@@ -83,9 +114,16 @@ export class Auth {
   public googleLogin() {
     this.auth0.login({
       connection: 'google-oauth2'
-    }, function (err: any) {
+    }, function (err: any, signObj: any) {
       if (err) {
         alert('something went wrong: ' + err.message);
+      }
+      else {
+        this.auth0.getProfile(signObj.idToken, (error: any, profile: any) => {
+          if (err) {
+            console.log(err);
+          }
+        });
       }
     });
   }
@@ -116,12 +154,12 @@ export class Auth {
             company: company
           };
 
-          this.userService.saveUser(user).subscribe((err) => {
-            if (err.error) {
-              this.toastr.error(err.error);
+          this.userService.saveUser(user).subscribe((res) => {
+            if (res.error) {
+              this.toastr.error(res.error);
             }
             else {
-              this.toastr.success('User registered');
+              this.toastr.success(res);
 
             }
             this.router.navigateByUrl('/login');
