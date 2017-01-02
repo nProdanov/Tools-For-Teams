@@ -25,10 +25,12 @@ Team Tools is an application which gives you functionality to manage teams:
 - **/about** - shows more info about Team Tools
 - **/register** - Registration form
 - **/login** - LogIn form
+- **/get-started** - getting started page
+- **/our-stats** - shows stats for the app usage
+- **/not-found** - not found page
 
 ###Private (authenticated) dynamic web pages:###
 
-- **GET**
 - **/profile** - get profile of authenticated user with option for edit
 - **/profile/:username** - get profile of some user without option for edit
 - **/my-projects** - get paged list of all projects where authenticated user is assigned for
@@ -64,6 +66,8 @@ Team Tools is an application which gives you functionality to manage teams:
 
 - Sign in with Google
 - Update personal profile information
+- Chat messages
+- Chart visuzlization
 - Error handling and data validation
 - Git source code link
 - Watch project youTube video link
