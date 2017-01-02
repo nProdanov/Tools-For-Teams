@@ -17,5 +17,7 @@ export const appRoutes: Routes = [
     { path: 'charts/:projectName', component: pages.projectCharts, canActivate: [AuthGuard] },
     { path: 'notes/:projectName', component: pages.projectNotes, canActivate: [AuthGuard] },
     { path: 'our-stats', component: pages.ourStats },
-    { path: 'get-started', component: pages.getStarted }
+    { path: 'get-started', component: pages.getStarted },
+    { path: '404', component: pages.notFound },
+    { path: '**', redirectTo: '/404' }
 ];

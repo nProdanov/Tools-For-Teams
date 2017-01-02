@@ -12,6 +12,7 @@ import { ProjectNotesPage } from './project-notes/project-notes.page';
 import { AboutPage } from './about/about.page';
 import { OurStatsPage } from './our-stats/our-stats.page';
 import { GetStartedPage } from './get-started/get-started.page';
+import { NotFoundPage } from './../pages/not-found/not-found.page';
 
 export const pages = {
     about: AboutPage,
@@ -27,5 +28,6 @@ export const pages = {
     projectCharts: ProjectCharts,
     projectNotes: ProjectNotesPage,
     ourStats: OurStatsPage,
-    getStarted: GetStartedPage
+    getStarted: GetStartedPage,
+    notFound: NotFoundPage
 };
