@@ -89,11 +89,9 @@ export class Auth {
               })
             }
           });
-
-
       });
     } else if (result && result.error) {
-      alert('error: ' + result.error);
+      this.toastr.error('error: ' + result.error);
     }
   }
 
