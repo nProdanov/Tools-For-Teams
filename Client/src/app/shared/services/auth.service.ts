@@ -100,7 +100,7 @@ export class Auth {
       connection: 'Username-Password-Authentication',
       responseType: 'token',
       email,
-      password,
+      password
     }, (err: any) => {
       if (err) {
         this.toastr.error(err.message);
@@ -132,6 +132,8 @@ export class Auth {
       responseType: 'token',
       email: email,
       password: password,
+      sso: false,
+      popup: false
     }, (err: any, signUpObj: any) => {
       if (err) {
         this.toastr.error('something went wrong: ' + err.message);
